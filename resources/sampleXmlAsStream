@@ -1,0 +1,18 @@
+START_TAG:a
+    START_TAG:b
+        START_TAG:c
+            TEXT:foo
+        END_TAG:c
+
+        START_TAG:c
+            TEXT:foo1
+        END_TAG:c
+    
+    END_TAG:b
+    
+    START_TAG:d
+        TEXT:bar
+    END_TAG:d
+    
+END_TAG:a
+END_OF_FILE
