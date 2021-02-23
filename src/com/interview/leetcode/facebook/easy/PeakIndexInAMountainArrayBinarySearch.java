@@ -26,6 +26,19 @@ from 4 increasing and never decreased
 
 public class PeakIndexInAMountainArrayBinarySearch {
 
+  public int peakIndexInMountainArraySimple(int[] arr) {
+      int low=0, high=arr.length-1;
+      while(low<=high) {
+          int mid = low+(high-low)/2;
+          if(arr[mid+1] < arr[mid]) {// lowering slope... So go up from right
+               high = mid-1;
+          }else { // slope increasing... so go up from left
+              low = mid+1;
+          }
+      }
+      return low;//high... low and high both has answer
+  }
+  
   public int peakIndexInMountainArray(int[] nums) {
     return binSearch(0, nums.length - 1, nums);
   }
