@@ -40,6 +40,24 @@ With respect to 40 left side condition passed. So right side.
  */
 public class FindPeakElement {
 
+  public int findPeakElementSimple(int[] arr) {
+      int n = arr.length - 1;
+      int low = 0, high = n;
+      while (low <= high) {
+          int mid = low + (high - low) / 2;
+
+          if (mid == n) return mid; // reached end. end must be the answer.
+
+          if (arr[mid + 1] < arr[mid]) {// lowering slope... So go up from right
+              high = mid - 1;
+          } else { // slope increasing... so go up from left
+              low = mid + 1;
+          }
+      }
+      return low;
+
+  }
+  
   public int findPeakElement(int[] nums) {
     return binSearch(nums, nums.length - 1, 0, nums.length - 1);
   }
