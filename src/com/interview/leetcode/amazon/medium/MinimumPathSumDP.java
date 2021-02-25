@@ -15,8 +15,15 @@ Input:
 ]
 Output: 7
 Explanation: Because the path 1→3→1→1→1 minimizes the sum.
-
-=========================================================Solution Approach=========================================================
+========================================================Logical Thinking=========================================================
+1) If there is only 1 row. Answer is sum of left to right.
+2) If there is only 1 col. Answer is sum of top to bottom.
+3) If I eagerly, move by selecting best path. Then answer may go wrong. Ex:
+        1,1,100
+        2,3,1
+4) BruteForce Solution is recurse all possible combination path(leftToRight and bottomToTop only).
+5) Memoize the
+=========================================================Solution Approach=======================================================
 1) fill first row by adding prev
 2) fill first col by adding top
 3) Rest Math.min(left, top) + current
@@ -32,17 +39,21 @@ See DP Matrix below:
 */
 public class MinimumPathSumDP {
 
-  public int minPathSum(int[][] grid) {
-    int maxRow = grid.length, maxCol = grid[0].length;
-    int[][] dp = new int[maxRow][maxCol];
-    dp[0][0] = grid[0][0];
-    for (int i = 1; i < maxCol; i++) dp[0][i] = dp[0][i - 1] + grid[0][i];
+    public int minPathSum(int[][] grid) {
+        int maxRow = grid.length, maxCol = grid[0].length;
+        int[][] dp = new int[maxRow][maxCol];
+        dp[0][0] = grid[0][0];
+        // fill first row
+        for (int row = 1; row < maxRow; row++) dp[row][0] = dp[row - 1][0] + grid[row][0];
 
-    for (int i = 1; i < maxRow; i++) dp[i][0] = dp[i - 1][0] + grid[i][0];
+        // fill first col
+        for (int col = 1; col < maxCol; col++) dp[0][col] = dp[0][col - 1] + grid[0][col];
 
-    for (int i = 1; i < maxRow; i++) {
-      for (int j = 1; j < maxCol; j++) dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + grid[i][j];
+        for (int row = 1; row < maxRow; row++) {
+            for (int col = 1; col < maxCol; col++) {
+                dp[row][col] = Math.min(dp[row - 1][col], dp[row][col - 1]) + grid[row][col];
+            }
+        }
+        return dp[maxRow - 1][maxCol - 1];
     }
-    return dp[maxRow - 1][maxCol - 1];
-  }
 }
