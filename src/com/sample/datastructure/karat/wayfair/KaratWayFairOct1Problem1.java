@@ -9,10 +9,21 @@ import java.util.Set;
 
 /*
 
-Given a parentChild relationship in a array [i,j] where i represents parent and j represent child.
+===========================================================Requirement===========================================================
+Given a below tree of parentChild relationship in a array [i,j] where i represents parent and j represent child.
 Print all nodes with 0 parent.
 Print all nodes with 1 parent.
-
+                                      14         13
+                                       \        /
+                            2     1     4      12
+                             \   /   /  \  \  /
+                               3    5    8  9
+                               \  /  \       \
+                                6     7       11
+========================================================Solution Approach========================================================
+1) Add all the nodes to map with "key as childNode" and value as "list of parentNodes"
+2) For the availableNodes, Add all the node with 0 parent to result.
+3) For the availableNodes, Add all the node with 1 parent to result.
  */
 public class KaratWayFairOct1Problem1 {
 

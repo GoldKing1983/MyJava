@@ -9,12 +9,6 @@ If at any time a row, column,diagonal or antiDiagonal matches the size of the bo
 3) Add +1 for Player1 and -1 for Player2.
 4) Each time player places a piece we just need to update the count and check the count of
 row, column, diagonal and anti-diagonal. It (Math.abs(count) == n) then winner found. 
-
-Tricky Point is how rows and cols are tracked. Because for 3*3 grid, 
-		1) There are 3 ways row-wise win can happen.
-		2) There are 3 ways col-wise win can happen.
-		3) Diagonally 1 way win can happen.
-		4) AntiDiagonally 1 way win can happen.
 ===========================================================Ex: for 3*3 grid======================================================
 Player1 places on 0,0
 		|1| | |

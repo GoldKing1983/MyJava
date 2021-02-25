@@ -21,18 +21,18 @@ Explanation: there are four ways to make up the amount:
 
  */
 public class CoinChange2RecursiveForLoop {
-  public int change(int amount, int[] coins) {
-    return coinPermutationCount(coins, amount, 0, coins.length);
-  }
-
-  public int coinPermutationCount(int[] coins, int sum, int index, int n) {
-    if (sum == 0) return 1;
-    if (sum < 0 || index == coins.length) return 0;
-    int count = 0;
-    while (index < n) {
-      count += coinPermutationCount(coins, sum - coins[index], index, n);
-      index++;
+    public int change(int amount, int[] coins) {
+        return coinPermutationCount(coins, amount, 0, coins.length);
     }
-    return count;
-  }
+
+    public int coinPermutationCount(int[] coins, int sum, int index, int n) {
+        if (sum == 0) return 1;
+        if (sum < 0 || index == n) return 0;
+        int count = 0;
+        while (index < n) {
+            count += coinPermutationCount(coins, sum - coins[index], index, n);
+            index++;
+        }
+        return count;
+    }
 }

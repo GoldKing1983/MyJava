@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /*
-
+===========================================================Requirement===========================================================
 We have some clickstream data that we gathered on our client's website. Using cookies,
 we collected snippets of users' anonymized URL histories while they browsed the site.
 The histories are in chronological order, and no URL was visited more than once per person.
@@ -32,7 +32,10 @@ findContiguousHistory(user4, user3) => ["plum", "blue", "tan", "red"]
 
 n: length of the first user's browsing history
 m: length of the second user's browsing history
-
+========================================================Solution Approach========================================================
+1) Below solution is purely bruteforce.
+2) See better algorithm LongestCommonSubStringReturnLongestString.
+3) Do Sliding Window, by adjusting word1List and word2List.
 */
 public class LongestCommonSubString {
   public static void main(String[] argv) {

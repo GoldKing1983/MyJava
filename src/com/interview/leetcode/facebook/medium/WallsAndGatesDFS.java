@@ -2,21 +2,12 @@ package com.interview.leetcode.facebook.medium;
 
 /*
 https://leetcode.com/problems/walls-and-gates/
-===========================================================Requirement===========================================================
-0 is gate and ∞ is empty room. From empty room find shortest distance to any gate.
 
+Question:
 1) Fill the matrix from 0 to all INF with shortest value.
 2) -1 is obstacle, 0 is source, INF is walk-through
 
-Ex:
-Input: [[0,∞,∞,∞,∞,0]]
-
-Output: [[0,1,2,2,1,0]]
-========================================================Logical Thinking=========================================================
-Instead of searching from an empty room to the gates, how about searching the other way round? In other words,
-we initiate breadth-first search (BFS) from all gates to empty room.
-
-========================================================Solution Approach========================================================
+======================================Solution Approach======================================
 1) Go to the "nextPoint" in 4 direction, add currentDistance+1 to the "newPoint"
 2) If the "existingNextPoint" distance is less than "currentNextPoint" distance. Then ignore setting it.
 No Further traversal needed for that point.

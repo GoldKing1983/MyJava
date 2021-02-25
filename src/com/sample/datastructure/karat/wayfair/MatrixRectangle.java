@@ -11,7 +11,7 @@ import java.util.List;
 Ex: below case are invalid
 Ex1:
 	{{0, 0}
-	 {0,1}}
+	 {0, 1}}
 Ex2:
 	{{0, 0, 0}
 	 {0, 1, 0}}

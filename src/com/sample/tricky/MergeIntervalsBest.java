@@ -1,8 +1,6 @@
 package com.sample.tricky;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /*
 https://leetcode.com/problems/merge-intervals
@@ -38,30 +36,35 @@ Case4)		previous    ===>    1====2
  */
 public class MergeIntervalsBest {
 
-  /*
-  Time Complexity : O(NlogN) --> Because of sorting. It should be N+O(NlogN)
-  Space Complexity : O(N)
-   */
-  public int[][] merge(int[][] intervals) {
-    if (intervals.length == 0) return intervals;
-    Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
-    int previousStart = intervals[0][0];
-    int previousEnd = intervals[0][1];
-    List<int[]> tempResult = new ArrayList<>();
-    for (int i = 1; i < intervals.length; i++) {
-      int currentStart = intervals[i][0];
-      int currentEnd = intervals[i][1];
-      if (currentStart > previousEnd) { // disjoint intervals or no-merge
-        tempResult.add(new int[] {previousStart, previousEnd});
-        previousStart = currentStart;
-        previousEnd = currentEnd;
-      } else { // Merge...currentStart <= previousEnd
-        previousEnd = Math.max(previousEnd, currentEnd); // Need for Math.max --> Ex: [[1,4],[2,3]].. previousEnd = 4 and not 3
-      }
+    /*
+    Time Complexity : O(NlogN) --> Because of sorting. It should be N+O(NlogN)
+    Space Complexity : O(N)
+     */
+    public int[][] merge(int[][] intervals) {
+        // Sort input in ascending
+        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+
+        int n = intervals.length;
+        int[][] result = new int[n][2];
+        result[0] = intervals[0];
+        int resultIndex = 0;
+        for (int i = 1; i < n; i++) {
+            int pStart = result[resultIndex][0];
+            int pEnd = result[resultIndex][1];
+
+            int cStart = intervals[i][0];
+            int cEnd = intervals[i][1];
+
+            if (cStart <= pEnd) {//merge
+                // Need for Math.max --> Ex: [[1,4],[2,3]].. previousEnd = 4 and not 3
+                result[resultIndex][1] = Math.max(cEnd, result[resultIndex][1]);
+            } else { // no merge or  disjoint intervals
+                resultIndex++;
+                result[resultIndex][0] = cStart;
+                result[resultIndex][1] = cEnd;
+            }
+        }
+
+        return Arrays.copyOf(result, resultIndex + 1);
     }
-    tempResult.add(new int[] {previousStart, previousEnd});
-    int[][] result = new int[tempResult.size()][2];
-    for (int i = 0; i < tempResult.size(); i++) result[i] = tempResult.get(i);
-    return result;
-  }
 }

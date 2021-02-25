@@ -1,10 +1,10 @@
 package com.interview.leetcode.facebook.easy;
 
 /*
- * https://leetcode.com/problems/monotonic-array/description/
- * 
-Array has to either in increasing order or decreasing order. 
-So create a flag increasing, decreasing and set it to false.
+https://leetcode.com/problems/monotonic-array/description/
+===========================================================Requirement===========================================================
+========================================================Solution Approach========================================================
+Array has to either in increasing order or decreasing order. So create a flag increasing, decreasing and set it to false.
 Set the flag during iteration for increasing or decreasing.
 
 Return is trick: Either 1 flag has to be false. 

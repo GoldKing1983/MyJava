@@ -1,10 +1,11 @@
 package com.home.parser;
 
-import java.util.List;
-import java.util.Map;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class JSONNullDataType {
 
@@ -20,7 +21,8 @@ public class JSONNullDataType {
     name.put("lastName", "Prabhu");
     customer.put("name", name);
 
-    List<String> list = List.of("A", "B");
+    List<String> list = new ArrayList<>();//List.of("A", "B");
+    list.add("A"); list.add("B");
     customer.put("list", list);
 
     JSONArray jList = new JSONArray();

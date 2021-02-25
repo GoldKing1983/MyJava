@@ -6,7 +6,7 @@ https://leetcode.com/problems/missing-number/
 input : [3,0,1,4,5,2] output: 6
 Input: [3,0,1] Output: 2
  */
-public class  {
+public class MissingNumber {
   /*
    1) XOR all the numbers from 0 to n, let’s call it x1.
    2) XOR all the numbers in the input array, let’s call it x2.
