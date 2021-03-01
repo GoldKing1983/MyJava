@@ -1,9 +1,16 @@
 package com.sample.datastructure.recursion;
 
-/*
+/**
  * http://codingbat.com/prob/p145416
- *
- * This is an basic example of recursion and DFS.
+
+===========================================================Requirement===========================================================
+ Given an array of elements, find the given target
+========================================================Solution Approach========================================================
+1) Do the binary recursion by
+         a) including the currentElement to sum and
+         b) skipping  the currentElement to sum.
+2) Result can be found either in include or skip. So result is either one.
+=================================================================================================================================
  */
 public class GroupSumImportant {
 
@@ -20,13 +27,13 @@ public class GroupSumImportant {
   }
 
   // This takes an additional variable sum...
-  public boolean groupSum(int start, int[] nums, int target, int sum) {
-    if (target == sum) return true;
+  public boolean groupSum(int index, int[] nums, int target, int currentSum) {
+    if (target == currentSum) return true;
 
-    if (start == nums.length) return false;
+    if (index == nums.length) return false;
 
-    boolean left = groupSum(start + 1, nums, target, sum + nums[start]);
-    boolean right = groupSum(start + 1, nums, target, sum);
+    boolean left = groupSum(index + 1, nums, target, currentSum + nums[index]);
+    boolean right = groupSum(index + 1, nums, target, currentSum);
 
     return left || right;
   }

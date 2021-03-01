@@ -1,10 +1,10 @@
-package com.interview.leetcode.linkedin.easy;
+package com.interview.leetcode.topic.recursion;
 
 /*
 Requirement: Out of "N" houses, thief cannot stole from two adjacent houses.
 
 As compared to HouseRobberRecursion, this is bottomUp. 
-
+f(n) = Math.max(f(n-2)+f(n),f(n-1))
  */
 
 public class HouseRobberFibStyleRecursion {

@@ -4,9 +4,14 @@ package com.sample.datastructure.algorithm.interview;
 
 1) Single Recursion - linkedlist, Find in UnionFind, binary-search or any loops.
 2) Binary Recursion - All Tree Code.
+    GroupSum, HouseRobberRecursion
 3) For Loop - Single Recursion - FactorCombinations, WordBreak, NQueensII
 4) For Loop - Binary Recursion - GuessNumberHigherOrLowerIIMiniMax
+
 ================================Must See Recursion Problems==================================
+GroupSumImportant
+GroupSum6
+HouseRobberRecursion
 MergeTwoSortedListsInPlace
 =====================Basics Binary Recursion With Memoization and BottomUp DP=====================
 FibonacciSeries/ClimbingStairs

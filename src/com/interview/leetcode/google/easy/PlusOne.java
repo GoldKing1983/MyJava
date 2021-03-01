@@ -15,9 +15,12 @@ Output: [1,2,4]
 Explanation: The array represents the integer 123.
 
 ===================Solution Approach=================
+In interview just 2 case is enough is explain 98 and 99.
+
 1) Come from last
 2) If the digit is not 9 ... Increment it send response instant.
 3) Else update that to 0. Do above step.
+4) Finally, if the loop ends then answer must be 10 or 100 or 1000 or 10000......
 
  */
 public class PlusOne {

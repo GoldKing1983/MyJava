@@ -1,8 +1,17 @@
 package com.sample.datastructure.recursion;
 
 /**
- * Note: Question is a bit tricky, if there is a 6 present in the input then sum should have 6 to
- * achieve target. If there is no 6 present in the input then grouping sum other than 6 is ok.
+===========================================================Requirement===========================================================
+ 1) Given an array of elements, find the given target.
+ 2) If the input has 6, then result must include 6
+ 3) If there is no 6 present in the input then grouping sum other than 6 is ok.
+========================================================Solution Approach========================================================
+ 1) If the currentInput is 6, then including the currentElement to sum and take that path
+ 2) Else Do the binary recursion by
+     a) including the currentElement to sum and
+     b) skipping  the currentElement to sum.
+     c) Result can be found either in include or skip. So result is either one.
+=================================================================================================================================
  */
 public class GroupSum6 {
   public static void main(String[] args) {
@@ -18,10 +27,11 @@ public class GroupSum6 {
     if (startIndex == nums.length) return target == 0;
 
     if (nums[startIndex] == 6) return groupSum6(startIndex + 1, nums, target - nums[startIndex]);
+    else {
+      boolean left = groupSum6(startIndex + 1, nums, target - nums[startIndex]);
+      boolean right = groupSum6(startIndex + 1, nums, target);
 
-    boolean left = groupSum6(startIndex + 1, nums, target - nums[startIndex]);
-    boolean right = groupSum6(startIndex + 1, nums, target);
-
-    return left || right;
+      return left || right;
+    }
   }
 }

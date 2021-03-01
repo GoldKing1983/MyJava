@@ -1,4 +1,4 @@
-package com.sample.tricky;
+package com.interview.leetcode.topic.intervals;
 
 import java.util.Arrays;
 

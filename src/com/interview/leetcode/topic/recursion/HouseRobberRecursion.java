@@ -1,18 +1,25 @@
-package com.interview.leetcode.linkedin.easy;
+package com.interview.leetcode.topic.recursion;
 
 /*
+===========================================================Requirement===========================================================
+https://leetcode.com/problems/house-robber/
 Requirement: Out of "N" houses, thief cannot stole from two adjacent houses.
-=============================================Solution Approach=============================================
-1) BottomUp Recursion works, because doing logic from 0 to n or n to 0 both results same
-2) Consider evaluating single entry at each point like Tree Problems.
-
+=========================================================Initial Thought=========================================================
+Same problem as GroupSumImportant, but here for include case jump is 2.
+========================================================Solution Approach========================================================
 For Each of Index do below operation.
-1) 		steal from current house and move on to n+2 house.
+1) steal from current house and move on to n+2 house.
 2) skip steal from current house and move on to n+1(next) house
 3) Return max of step (1, 2)
-=============================================Data Flow Analysis=============================================
-Ex1: [100,2,3,50]  	Ans:150 dp=[100,100,103,150]
-							============TopDown - for 5 house 0to4============
+
+BottomUp/TopDown both the Recursion works, because doing logic from 0 to n or n to 0 both results same
+=======================================================Data Flow Analysis========================================================
+Ex1: [100,2,3,50]  	Ans:150
+Don't confuse the below Tree, because for 4 house from 0to3, why 5 was included.
+For 4 house from 0 to 3. From 3 recursion will try go till 5. Because after steal, logic jump 2 index.
+When logic sees 4 or 5, it returns sum0.
+
+							============TopDown - for 4 house 0to3============
 											0
 										/        \
 									   2           1
@@ -88,10 +95,20 @@ public class HouseRobberRecursion {
     if (currentHouse >= totalHouse) return 0;
 
     // steal from current house and skip one to steal from the next house
-    int robCurrentHouse =
-        findMaxStealRecursive(wealth, currentHouse + 2, totalHouse) + wealth[currentHouse];
+    int robCurrentHouse = findMaxStealRecursive(wealth, currentHouse + 2, totalHouse) + wealth[currentHouse];
     // skip current house to steel from the adjacent house
     int skipCurrentHouse = findMaxStealRecursive(wealth, currentHouse + 1, totalHouse);
+
+    return Math.max(robCurrentHouse, skipCurrentHouse);
+  }
+
+  private int findMaxStealRecursiveBottomUp(int[] wealth, int currentHouse) {
+    if (currentHouse < 0 ) return 0;
+
+    // steal from current house and skip one to steal from the next house
+    int robCurrentHouse = findMaxStealRecursiveBottomUp(wealth, currentHouse - 2) + wealth[currentHouse];
+    // skip current house to steel from the adjacent house
+    int skipCurrentHouse = findMaxStealRecursiveBottomUp(wealth, currentHouse - 1);
 
     return Math.max(robCurrentHouse, skipCurrentHouse);
   }

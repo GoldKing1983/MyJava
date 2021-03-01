@@ -1,4 +1,4 @@
-package com.interview.leetcode.linkedin.medium;
+package com.interview.leetcode.topic.string;
 
 /*
 https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/
@@ -12,9 +12,6 @@ B: [3,2,1,4,7]
 Output: 3
 Explanation: The repeated subarray with maximum length is [3, 2, 1].
 =================================================================================================================================
- */
-public class MaximumLengthOfRepeatedSubarrayLongestCommonSubstring {
-
   /*
      0  1  2   3   2   1
   ======================
@@ -24,7 +21,18 @@ public class MaximumLengthOfRepeatedSubarrayLongestCommonSubstring {
   1||0  1  0   0   0   3
   4||0
   7||0
-  */
+
+ 1) The first row and first column entries, says for 0 "search string" for "input string" output is 0.
+ 2) If character matches, then pick value diagonally and add 1 to it. Else 0.
+ 				a ||
+ 				======
+ 				  || current (current = a+1 if matches, else 0
+
+ ====Logically if a column matches and next column don't matches. we put 0. Because it is discontinued.=======
+ ====But in Longest Common Sub Sequence we pick previous value. Because if discontinued, we take previous answer=========
+
+ */
+public class MaximumLengthOfRepeatedSubarrayLongestCommonSubstring {
   public int findLength(int[] str1, int[] str2) {
     int[][] dp = new int[str1.length + 1][str2.length + 1];
     int result = 0;
