@@ -39,12 +39,36 @@ input : ["ab","adc"] output: abdc or abcd or bdac or bdca
 We can say word1Char(c) is parent and word2Char(d) is child.
 3) From above we know only 1 thing "c comes before d".
 4) Derive rest of connections from topology sort.
+=====================================================Data Flow =====================================================
+input : ["abc","abd"] answer is abcd
+adjMap   = [a=b],[b=c,d],[c=EMPTY_LIST],[d=EMPTY_LIST]
+inDegree = [a=0], [b=2], [c=1], [d=1]
+sources = a
+remove(poll) a from source.
+a has b. add b to source.
+
+source = b.
+remove(poll) b from source.
+indegreeCount=2. b has c and d.
+add c and to d to source.
+
+source = c.
+remove(poll) c from source.
+indegreeCount=1. c has no child
+
+source = d.
+remove(poll) d from source.
+indegreeCount=1. d has no child
+
+ans=abcd
+
+
  */
 public class AlienDictionaryTopologicalSort {
   public String alienOrder(String[] words) {
     if (words == null || words.length == 0) return "";
 
-    // a. Initialize the graph. // count of incoming edges for every vertex
+    // a. Declare the graph(adjMap and inDegree) variable with size.
     HashMap<Character, Integer> inDegree = new HashMap<>();
     HashMap<Character, List<Character>> adjMap = new HashMap<>(); // adjacency list graph
     for (String word : words) {
@@ -54,10 +78,11 @@ public class AlienDictionaryTopologicalSort {
       }
     }
 
-    // b. Build the graph
+    // b. Build the graph or Initialize the adjMap and inDegree(count of incoming edges for every vertex)
     for (int i = 0; i < words.length - 1; i++) {
       // find ordering of characters from adjacent words
       String parentWord = words[i], childWord = words[i + 1];
+      // Corner Case Ex:["abc","ab"] then return ""......for ["abc","abd"] answer is abcd
       if (!parentWord.equals(childWord) && parentWord.startsWith(childWord)) return "";
       for (int j = 0; j < Math.min(parentWord.length(), childWord.length()); j++) {
         char parentChar = parentWord.charAt(j), childChar = childWord.charAt(j);
