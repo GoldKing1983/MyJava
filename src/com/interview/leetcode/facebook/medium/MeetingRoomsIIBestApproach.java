@@ -18,9 +18,9 @@ See Also "MyCalendarII"
 0) Separate startTime and endTime in array.
 1) Sort startTime and endTime
 2) Compare startTime and endTime.
-3) if startTime is lesser, increment minMeetingRoomCount. Move startTime index.  
-4) if endTime is lesser, decrement minMeetingRoomCount. Move endTime index.
-5) if both are same, decrement minMeetingRoomCount. Move endTime index.
+3) if startTime is lesser, add +1. Move startTime index.
+4) if endTime is lesser, add -1. Move endTime index.
+5) if both are same, add -1. Move endTime index.
 6) At each point calculate update minMeetingRoomCount by comparing with runningCount and minMeetingRoomCount
 =========================================================Data Flow Analysis======================================================
 Input = [[0, 30],[30,50]
