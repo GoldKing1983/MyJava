@@ -24,6 +24,9 @@ Find the minimum number of conference rooms required.
 treeMap = {0=1, 10=0, 15=-1}
 
 As stated in point6. For the above example, duplicates are consolidated. 
+=========================================================Ex: Without Duplicate startTime/endTime====================================
+[[0,10],[7,15]]
+treeMap = {0=1, 7=1, 10=-1, 15=-1}
 =================================================================================================================================
 */
 public class MeetingRoomsIITreeMap {
