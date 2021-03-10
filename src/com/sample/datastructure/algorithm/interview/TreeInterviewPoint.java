@@ -39,12 +39,17 @@ ShuffleTheArray/DecompressRunLengthEncodedList -->similar indexing like binaryTr
 2) SumRootToLeafNumbersBottomUp
 3) DiameterOfBinaryTreeOrLongestPath
 4) TreeDiameter
+5) BinaryTreeMaximumPathSum
+=============Max between left and right======
+1) HouseRobberIII
+2) TreeHeight / DiameterOfBinaryTreeOrLongestPath
 =============================Insertion of a node through recursion=============================
 1) InsertIntoABinarySearchTree,
 2) MergeTwoSortedListsClone / MergeTwoBinaryTreesBottomUpClone
 3) ConstructBinarySearchTreeFromPreorderTraversal
 =====================================Deletion of a Node=====================================
 1) DeleteNodesAndReturnForest
+2) TrimABinarySearchTreeRecursionMust
 =====================================Convert Tree to Graph=====================================
 AllNodesDistanceKInBinaryTree
  */

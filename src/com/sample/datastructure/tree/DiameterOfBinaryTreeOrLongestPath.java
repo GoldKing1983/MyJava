@@ -4,7 +4,9 @@ import com.interview.leetcode.TreeNode;
 
 /*
 https://leetcode.com/problems/diameter-of-binary-tree/description/
- *==========================================Solution Approach=================================================
+===========================================================Requirement===========================================================
+Given a tree, return maximum width of tree.
+========================================================Solution Approach========================================================
 1) Solution is based on TreeHeight
 2) From Bottom-Up return the heights, at any-point diameter = leftTreeHeight + rightTreeHeight
 3) Return either left or right max to get the biggest path

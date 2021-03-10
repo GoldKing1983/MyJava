@@ -5,8 +5,19 @@ import java.util.List;
 
 /*
 https://leetcode.com/problems/remove-invalid-parentheses/
+===========================================================Requirement===========================================================
+Remove the minimum number of invalid parentheses in order to make the input string valid. Return all possible results.
 
- 
+Note: The input string may contain letters other than the parentheses ( and ).
+
+Example1:
+Input: "()())()"
+Output: ["()()()", "(())()"]
+
+Example2:
+Input: "(a)())()"
+Output: ["(a)()()", "(a())()"]
+========================================================Solution Approach========================================================
 1) At each point on seeing currentChar from inputStr. 
     1a) if currentChar is "(". include "(" in currentResult. increment openParenthesesCount. do recur
                                exclude "(" in currentResult. do recur

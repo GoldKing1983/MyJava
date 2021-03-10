@@ -6,9 +6,9 @@ package com.sample.datastructure.algorithm.interview;
 2) ShuffleStringBest
 ================Hashing the String - charToInt - intToChar================
 1) GroupShiftedStrings
-=====================Parenthesis Problems=====================
+=====================Parentheses Problems=====================
 1) ValidParenthesisString
-
+2) RemoveInvalidParentheses
 =====================Recursion on Strings=====================
 1) WordBreak
 

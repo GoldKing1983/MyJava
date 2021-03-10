@@ -1,14 +1,16 @@
 package com.interview.leetcode.amazon.medium;
 
 import com.interview.leetcode.TreeNode;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 /*
- *
-https://leetcode.com/problems/path-sum-ii/
-
+===========================================================Requirement===========================================================
+Given the root of a binary tree and an integer targetSum, return all root-to-leaf paths where each path's sum
+equals targetSum. A leaf is a node with no children.
+============================================================Example1=============================================================
 Given the below binary tree and sum = 22,
 Input:
 		      5
@@ -23,8 +25,7 @@ Output:
 		   [5,4,11,2],
 		   [5,8,4,5]
 		]
-
-====================================Solution Approach=============================================
+========================================================Solution Approach========================================================
 1) Classic backtracking problem.
 2) Add current node to currentPath during forward recursion.
 When recursing back remove current node from currentPath.
@@ -51,26 +52,22 @@ So total is n(log(n))
 */
 
 public class PathSumII {
-  public List<List<Integer>> findPaths(TreeNode root, int sum) {
-    List<List<Integer>> allPaths = new ArrayList<>();
-    LinkedList<Integer> currentPath = new LinkedList<>();
-    findPathsRecursive(root, sum, currentPath, allPaths);
-    return allPaths;
-  }
-
-  private void findPathsRecursive(
-      TreeNode currentNode,
-      int sum,
-      LinkedList<Integer> currentPath,
-      List<List<Integer>> allPaths) {
-    if (currentNode == null) return;
-    currentPath.add(currentNode.val);
-    if (currentNode.left == null && currentNode.right == null) {
-      if (currentNode.val == sum) allPaths.add(new ArrayList<>(currentPath));
-    } else {
-      findPathsRecursive(currentNode.left, sum - currentNode.val, currentPath, allPaths);
-      findPathsRecursive(currentNode.right, sum - currentNode.val, currentPath, allPaths);
+    public List<List<Integer>> findPaths(TreeNode root, int sum) {
+        List<List<Integer>> allPaths = new ArrayList<>();
+        LinkedList<Integer> currentPath = new LinkedList<>();
+        findPathsRecursive(root, sum, currentPath, allPaths);
+        return allPaths;
     }
-    currentPath.removeLast();
-  }
+
+    private void findPathsRecursive(TreeNode currentNode, int sum, LinkedList<Integer> currentPath, List<List<Integer>> allPaths) {
+        if (currentNode == null) return;
+        currentPath.add(currentNode.val);
+        if (currentNode.left == null && currentNode.right == null) {
+            if (currentNode.val == sum) allPaths.add(new ArrayList<>(currentPath));
+        } else {
+            findPathsRecursive(currentNode.left, sum - currentNode.val, currentPath, allPaths);
+            findPathsRecursive(currentNode.right, sum - currentNode.val, currentPath, allPaths);
+        }
+        currentPath.removeLast();
+    }
 }

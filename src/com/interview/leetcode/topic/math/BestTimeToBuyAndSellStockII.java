@@ -1,4 +1,4 @@
-package com.interview.leetcode.uber.easy;
+package com.interview.leetcode.topic.math;
 
 /*
 https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii

@@ -12,4 +12,4 @@ Explanation: there are four ways to make up the amount:
 Refer Problem CombinationSumOrCoinChange
 
  */
-public class CoinChangePermuteAllComboRecursion {}
+public class CoinChangePermuteAllComboRecursionDuplicateAllowed {}

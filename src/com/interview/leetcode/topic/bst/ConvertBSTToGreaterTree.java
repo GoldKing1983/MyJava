@@ -1,4 +1,4 @@
-package com.interview.leetcode.topic.tree;
+package com.interview.leetcode.topic.bst;
 
 import com.interview.leetcode.TreeNode;
 
@@ -19,29 +19,28 @@ Output: The root of a Greater Tree like this:
             /   \
           16     10
 ============================================================BruteForce===========================================================
-1) Do In-order traversal, save result in list. Ex: [1,5,10]
-2) Update list with Fibonacci from last. Ex: [16,15,10] 
-3) Do In-order traversal. Update listValue with nodeValue. 
+Step1) Do In-order traversal, save result in list. Ex: [1,5,10]
+Step2) Update list like Fibonacci Series from last. Ex: [16,15,10]
+Step3) Do In-order traversal. Update listValue with nodeValue.
 =========================================================Solution Approach=======================================================
 1) If I do in-order traversal, I will be getting 
         1 --> 5 --> 10 
-                      
-2) Do Fibonacci of current and previous from last.
-        1 --> 5 --> 10 
-                      
-                    10+0=10 --> 5+10=15 --> 1+15=16 
+
+2) If I do right-First-in-order traversal, I will be getting
+        10 --> 5 --> 1
+
+3) Like Fibonacci, set currentValue = currentValue + previousValue from last.
+        10+0=10 --> 5+10=15 --> 1+15=16
         
-3) last    = last   + 0
-   last-1  = last-1 + last.
-   last-2  = last-2 + last-1.
-   
-4) Do the sum logic in "rightFirst-in-order" traversal. Because we need to do sum from right-root-left
+        last    = last   + 0
+        last-1  = last-1 + last.
+        last-2  = last-2 + last-1.
    
  */
 public class ConvertBSTToGreaterTree {
 
 
-  int sum = 0;
+  int previousSum = 0;
 
   public TreeNode convertBST(TreeNode root) {
     convert(root);
@@ -50,10 +49,12 @@ public class ConvertBSTToGreaterTree {
 
   public void convert(TreeNode cur) {
     if (cur == null) return;
+
     convert(cur.right);
 
-    cur.val += sum;
-    sum = cur.val;
+    int currentSum = cur.val + previousSum;
+    cur.val = currentSum;
+    previousSum = currentSum;
 
     convert(cur.left);
   }
