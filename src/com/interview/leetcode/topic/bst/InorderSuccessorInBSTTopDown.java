@@ -1,4 +1,4 @@
-package com.interview.leetcode.facebook.medium;
+package com.interview.leetcode.topic.bst;
 
 import com.interview.leetcode.TreeNode;
 

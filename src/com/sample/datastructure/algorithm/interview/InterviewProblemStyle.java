@@ -12,9 +12,16 @@ Some questions are simple and pretty straight-forward.
 But don't fall into trap.
 Analyze the input clearly.
 Cover all the corner cases.
+If possible try best code... Ex: TopKFrequentWords. TopKFrequentWordsWorstApproach gets output, but it is not nice approach
 Look for Time/Space Complexity
 
 Ex: CountAndSay
+====================================================Straight Forward Problems=================================================
+1) Some questions are simple and coding is pretty straight-forward.
+2) Any fresher can write or any new coder who can understand requirement(knows API) can write.
+3) Think for some-time and write optimized code
+
+Ex: TopKFrequentWords
 ====================================================Tactical Problems=========================================================
 For some problems, requirement is easy. If you code straight for the requirement, you can make it, but with "lots of code" and "lots of if conditions".
 There will be trick, if  you apply it, coding would be so easy.

@@ -7,6 +7,8 @@ package com.sample.datastructure;
 2) Reason for LinkedList is, it re-arranges when elements inserted at middle.
 3) Finally copy from LinkedList to array.
 ==========Solution Approach======
+Note: Use Binary-Search to find the rightIndex where currentNumber can be inserted.
+
 Ex: [5,20,15]
 
 1) Read 5 from array, linkedList = 5 -> null

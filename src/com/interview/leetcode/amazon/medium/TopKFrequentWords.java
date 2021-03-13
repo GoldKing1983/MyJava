@@ -10,54 +10,31 @@ import java.util.TreeMap;
 /*
 
 https://leetcode.com/problems/top-k-frequent-words/
+===========================================================Requirement===========================================================
+1) Given a non-empty list of words, return the k most frequent elements.
+2) If 2 different words have same count, return them alphabetically.
 
 Input: ["the", "the", "the", "the", "sunny", sunny, "is", "is"], k = 2
 Output: ["the", "is"]
-Explanation: "sunny" and "is" both has same size. But i is less than s. So is comes in result
+Explanation:
+"the" appears 4 times. So "the" would be the first result.
+"sunny" and "is" both appears 2 times. But "i" is less than "s". So is comes in result.
+============================================================Solution Approach =============================================
+Step1: save each word by it counts in map.
+Step2: sort the words.
+  2 things are happening in sort
+  1) for 2 words .
+  2) If both are word appears same number of time, compare candidate itself. So that they will be sorted alphabetically.
+  3) Else compare candidate count( for Descending order, make sure word2-word1).
 
-
-map = {the=4, is=2, sunny=2}
-
-resultMap = {4=[the], 2=[is, sunny]}
-
+See Also ReorderDataInLogFilesBest
  */
 public class TopKFrequentWords {
-  public List<String> topKFrequent(String[] words, int k) {
-    Map<String, Integer> map = new HashMap<>();
-    for (String word : words) {
-      map.put(word, map.getOrDefault(word, 0) + 1);
-    }
-
-    Map<Integer, List<String>> resultMap = new TreeMap<>(Collections.reverseOrder());
-    for (Map.Entry<String, Integer> entry : map.entrySet()) {
-      if (resultMap.containsKey(entry.getValue())) {
-        resultMap.get(entry.getValue()).add(entry.getKey());
-      } else {
-        List<String> list = new ArrayList<>();
-        list.add(entry.getKey());
-        resultMap.put(entry.getValue(), list);
-      }
-    }
-
-    List<String> result = new ArrayList<>();
-    for (List<String> entry : resultMap.values()) {
-      Collections.sort(entry);
-      for (String e : entry) {
-        result.add(e);
-        if (result.size() == k) return result;
-      }
-    }
-    return result;
-  }
-
   /*
-    	map = {the=4, is=2, sunny=2}
-  candidates = [the, is, sunny]
-
-  2 things are happening in sort
-  1) for 2 candidate. If both are same compare candidate itself. Else compare candidate count(Descending).
+    	 map = {the=4, is=2, sunny=2}
+  candidates = [the, is, sunny] --> after sorting
     */
-  public List<String> topKFrequentSimple(String[] words, int k) {
+  public List<String> topKFrequent(String[] words, int k) {
     Map<String, Integer> map = new HashMap<>();
     for (String word : words) {
       map.put(word, map.getOrDefault(word, 0) + 1);
@@ -65,7 +42,13 @@ public class TopKFrequentWords {
     List<String> candidates = new ArrayList<>(map.keySet());
     Collections.sort(
         candidates,
-        (w1, w2) -> map.get(w1).equals(map.get(w2)) ? w1.compareTo(w2) : map.get(w2) - map.get(w1));
+        (word1, word2) -> {
+          int word1Count = map.get(word1);
+          int word2Count = map.get(word2);
+
+          if (word1Count == word2Count) return word1.compareTo(word2);
+          return word2Count - word1Count;
+        });
 
     return candidates.subList(0, k);
   }

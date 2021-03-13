@@ -6,10 +6,11 @@ import java.util.Queue;
 
 /*
 https://leetcode.com/problems/find-median-from-data-stream/description/
-========================================================================================================================
-Requirement:
-What is Median? When the input size is odd, we take the middle element of sorted data.
-If the input size is even, we pick average of middle two elements in sorted data.
+===========================================================Requirement===========================================================
+What is Median?
+1) In an sorted data,
+2) If the input size is odd, we take the middle element/.
+3) If the input size is even, we pick two elements in middle and average the 2 numbers.
 ============================================================Solution Approach =============================================
 1) Save the data like "n" shape in to queue. Ex: below
 					3

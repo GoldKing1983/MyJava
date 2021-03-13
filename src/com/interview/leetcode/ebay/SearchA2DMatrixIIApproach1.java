@@ -3,10 +3,8 @@ package com.interview.leetcode.ebay;
 /*
 https://leetcode.com/problems/search-a-2d-matrix/
 
-Requirement:
-1) Integers in each row are sorted in ascending from left to right.
-2) Integers in each column are sorted in ascending from top to bottom.
-3) Find whether given target exists in matrix efficiently.
+1) Given an sorted input matrix from leftToRight, topToBottom but not topRightCornerToNextRowBeginning.
+2) Find whether elements exists or not.
 
 Input:
 matrix = [
@@ -26,7 +24,7 @@ Output: true
 1) Start search from bottom left corner.
 2) If currentValueInMatrix > target decrement row or move up. Ex:18>10
 3) Else increment col.
-
+====================================================Time Complexity: O(m+n)======================================================
  */
 public class SearchA2DMatrixIIApproach1 {
 
