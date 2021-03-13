@@ -1,7 +1,6 @@
 package com.interview.leetcode.facebook.easy;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.*;
 
 /*
 ===========================================================Requirement==============================================================
@@ -35,16 +34,21 @@ public class KClosestPointsToOrigin {
 
   // Elements are sorted from Ascending order. So pick 0 to k elements from beginning. O(NlogN)
   public int[][] kClosestSimple(int[][] points, int K) {
-    Arrays.sort(
-        points, (p1, p2) -> ((p2[0] * p2[0] + p2[1] * p2[1]) - (p1[0] * p1[0] + p1[1] * p1[1])));
+    Arrays.sort(points, (p1, p2) -> calculateOrigin(p1) - calculateOrigin(p2));
     return Arrays.copyOfRange(points, 0, K);
+  }
+
+  private int calculateOrigin(int[] point) {
+    int x = point[0];
+    int y = point[1];
+    return x * x + y * y;
   }
 
   // Sort the element in descending order. So that we can remove maximum element. O(NlogK)
   public int[][] kClosest(int[][] points, int K) {
+    // To do the descending order, do (p2-p1)
     PriorityQueue<int[]> q =
-        new PriorityQueue<>(
-            (p1, p2) -> ((p2[0] * p2[0] + p2[1] * p2[1]) - (p1[0] * p1[0] + p1[1] * p1[1])));
+        new PriorityQueue<>((p1, p2) -> calculateOrigin(p2) - calculateOrigin(p1));
 
     for (int i = 0; i < points.length; i++) {
       q.offer(points[i]);
@@ -55,5 +59,22 @@ public class KClosestPointsToOrigin {
       result[--K] = q.poll();
     }
     return result;
+  }
+
+  public int[][] kClosestUsingSort(int[][] points, int k) {
+    Map<Integer, List<int[]>> result = new TreeMap<>();
+    for (int[] point : points) {
+      result.computeIfAbsent(calculateOrigin(point), key -> new ArrayList<>()).add(point);
+    }
+    int[][] finalResult = new int[k][2];
+    k--;
+    outer:
+    for (List<int[]> res : result.values()) {
+      for (int[] r : res) {
+        finalResult[k] = r;
+        if (k-- == 0) break outer;
+      }
+    }
+    return finalResult;
   }
 }

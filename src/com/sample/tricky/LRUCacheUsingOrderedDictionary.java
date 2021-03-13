@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * 2) If size goes more than specified then Bottom or tail is removed.
  */
-public class LRUCache1 {
+public class LRUCacheUsingOrderedDictionary {
 
   class MyLRUCache extends LinkedHashMap<Integer, Integer> {
     int capacity;
@@ -31,7 +31,7 @@ public class LRUCache1 {
 
   private MyLRUCache lruCache;
 
-  public LRUCache1(int capacity) {
+  public LRUCacheUsingOrderedDictionary(int capacity) {
     // Initialize linked hash map with accessOrder true
     lruCache = new MyLRUCache(capacity);
   }

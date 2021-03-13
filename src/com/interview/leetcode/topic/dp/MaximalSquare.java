@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.medium;
+package com.interview.leetcode.topic.dp;
 
 /*
 https://leetcode.com/problems/maximal-square/
@@ -14,7 +14,8 @@ Output: 4
 				x | y
 				=====
 				z | a
-			a = Math.min(x,y,z) + 1
+			if a==1 then a = Math.min(x,y,z) + 1
+			else a=0(or leave as such)
 			=====================Why Math.min....=====================
 Ex1:
 				0 1

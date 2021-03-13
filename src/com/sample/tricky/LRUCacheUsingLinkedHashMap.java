@@ -15,16 +15,16 @@ Ex: "a b c d e" - insert "a", insert "b", insert "c", insert "d", insert "e",
 3) When a PUT happens 3 cases are possible
 	a) if key present, remove previousEntry and add it again.
  	b) if capacity not reached, just add it. Key will be at top or recent
- 	c) if capacity is reached, "removeOldest" key using iterator. Put new value.
- 	
-==================================================Problem with this approach===================================================== 
+ 	c) if capacity is reached, get "oldestKey" key using iterator. remove "oldestKey" and Put new key/value.
+
+==================================================Problem with this approach=====================================================
 
  */
-public class LRUCache2 {
+public class LRUCacheUsingLinkedHashMap {
   private LinkedHashMap<Integer, Integer> map = new LinkedHashMap<>();
   private int capacity;
 
-  public LRUCache2(int capacity) {
+  public LRUCacheUsingLinkedHashMap(int capacity) {
     this.capacity = capacity;
   }
 
@@ -36,13 +36,15 @@ public class LRUCache2 {
   }
 
   public void put(int key, int value) {
-    if (map.containsKey(key)) {
+    if (map.containsKey(key)) { // key present, remove previousEntry and add it again.
       map.remove(key);
       map.put(key, value);
-    } else if (map.size() < capacity) {
+    } else if (map.size()
+        < capacity) { // capacity not reached, just add it. Key will be at top or recent
       map.put(key, value);
-    } else { // max capacity reached. Remove tail.
-      map.remove(map.entrySet().iterator().next().getKey());
+    } else { // capacity is reached, get "oldestKey" key using iterator. remove "oldestKey" and Put new key/value.
+      int oldestKey = map.entrySet().iterator().next().getKey();
+      map.remove(oldestKey);
       map.put(key, value);
     }
   }

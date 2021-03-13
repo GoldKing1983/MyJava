@@ -19,7 +19,11 @@ considered as a subtree of itself.
                                                    4 
                                                   / \
                                                  1   2
-                                                Return true, because t has the same structure and node values with a subtree of s.
+                                  Return true, because t has the same structure and node values with a subtree of s.
+
+                                s = ,3,4,1##,2##,5##
+                                t = ,4,1##,2##
+
 =======================================================Example2==================================================================
                                               Given tree s:
                                               
@@ -35,6 +39,9 @@ considered as a subtree of itself.
                                                 / \
                                                1   2
                                               Return false.
+                                  s = ,3,4,1##,2,0###,5##
+                                  t = ,4,1##,2##
+
 =======================================================Solution Approach - Time Complexity O(m*n)================================
 1) Serialize the String s. Refer "SerializeAndDeserializeBinaryTreeRecursionBestPreOrder" for serialization analysis.
 2) Serialize the String t.

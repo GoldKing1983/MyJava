@@ -36,10 +36,8 @@ So, that old data will always present in tail and we can delete tail during LRU 
 public class LRUCache {
   class DLLNode {
     // key is useful in 1case only. To remove the "key from map" during lastNode removal at lineNo101.  
-    int key;
-    int value;
-    DLLNode prevNode;
-    DLLNode nextNode;
+    int key, value;
+    DLLNode prevNode, nextNode;
 
     public DLLNode(int key, int value) {
       this.key = key;
@@ -54,6 +52,25 @@ public class LRUCache {
 
   public LRUCache(int capacity) {
     this.capacity = capacity;
+  }
+
+  public void put(int key, int value) {
+    DLLNode exisitingNode = map.get(key);
+    if (exisitingNode == null) {
+      DLLNode newNode = new DLLNode(key, value);
+      if (map.size() == capacity) {//map reached the maximum capacity
+        map.remove(tail.key);
+        remove(tail);
+        setHead(newNode);
+      } else {
+        setHead(newNode);
+      }
+      map.put(key, newNode);
+    } else {
+      exisitingNode.value = value;
+      remove(exisitingNode);
+      setHead(exisitingNode);
+    }
   }
 
   public int get(int key) {
@@ -91,24 +108,5 @@ public class LRUCache {
     head = newNode;
 
     if (tail == null) tail = head;
-  }
-
-  public void put(int key, int value) {
-    DLLNode exisitingNode = map.get(key);
-    if (exisitingNode == null) {
-      DLLNode newNode = new DLLNode(key, value);
-      if (map.size() == capacity) {//map reached the maximum capacity
-        map.remove(tail.key);
-        remove(tail);
-        setHead(newNode);
-      } else {
-        setHead(newNode);
-      }
-      map.put(key, newNode);
-    } else {
-      exisitingNode.value = value;
-      remove(exisitingNode);
-      setHead(exisitingNode);
-    }
   }
 }

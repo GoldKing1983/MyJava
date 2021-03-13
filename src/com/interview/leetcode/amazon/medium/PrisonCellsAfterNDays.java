@@ -1,5 +1,10 @@
 package com.interview.leetcode.amazon.medium;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
 /*
  * https://leetcode.com/problems/prison-cells-after-n-days/
 
@@ -11,25 +16,30 @@ Simple logical problem. No maths. Only coding.
 This is done by auto. Because "newCells" by default all "0". We don't process 0th and n-1th cell.
 
 2) After every 14 steps state repeats. So at-most 14 state is enough
+
+========================================================Logical Thinking why 14==================================================
+1) Print the cells for 1000.
+2) We can see that after every 14 steps, the result loops. 
  */
-public class PrisonCellsAfterNDays {
-  public int[] prisonAfterNDays(int[] cells, int N) {
-    if (N == 0) return cells;
-    // After every 14 steps state repeats. So at-most 14 state is enough
-    N = N % 14 == 0 ? 14 : N % 14;
-
-    int[] newCells = new int[8];
-
-    while (N-- > 0) {
-      // loop start from 1 and ends 7
-      for (int i = 1; i < 7; i++) {
-        if (cells[i - 1] == cells[i + 1]) newCells[i] = 1;
-        else newCells[i] = 0;
-      }
-      cells = newCells;
-      newCells = new int[8];
+public class  PrisonCellsAfterNDays {
+  public int[][] kClosest(int[][] points, int k) {
+    Map<Integer, List<int[]>> result = new TreeMap<>();
+    for(int[] point : points) {
+      result.computeIfAbsent(calculateOrigin(point[0], point[1]), key-> new ArrayList<>()).add( point);
     }
+    int[][] finalResult = new int[k][2];
+    k--;
+    outer : for(List<int[]> res : result.values()) {
+      for(int[] r : res) {
+        finalResult[k] = r;
+        if(k-- == 0) break outer;
+      }
+    }
+    return finalResult;
 
-    return cells;
+  }
+
+  private int calculateOrigin(int x, int y) {
+    return x*x + y*y;
   }
 }
