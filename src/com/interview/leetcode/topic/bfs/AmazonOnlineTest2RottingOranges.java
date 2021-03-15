@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.easy;
+package com.interview.leetcode.topic.bfs;
 
 import java.util.LinkedList;
 import java.util.Queue;

@@ -21,29 +21,28 @@ If we rotate the second and fourth dominoes, we can make every value in the top 
 See video https://www.youtube.com/watch?v=9Q73ScVu2GI
  */
 public class MinimumDominoRotationsForEqualRow {
-  public int minDominoRotations(int[] openSide, int[] oppositeSide) {
-    int swap1 = findMin(openSide[0], openSide, oppositeSide);
-    int swap2 = findMin(openSide[0], oppositeSide, openSide);
-    int swap3 = findMin(oppositeSide[0], openSide, oppositeSide);
-    int swap4 = findMin(oppositeSide[0], oppositeSide, openSide);
-    int min = IntStream.of(swap1, swap2, swap3, swap4).min().getAsInt();
-    return Integer.MAX_VALUE == min ? -1 : min;
+  public int minDominoRotations(int[] A, int[] B) {
+    int minRotation = Integer.MAX_VALUE;
+    minRotation = Math.min(minRotation, noOfRotation(A[0], A, B));
+    minRotation = Math.min(minRotation, noOfRotation(B[0], A, B));
+    minRotation = Math.min(minRotation, noOfRotation(A[0], B, A));
+    minRotation = Math.min(minRotation, noOfRotation(B[0], B, A));
+
+    return minRotation == Integer.MAX_VALUE ? -1 : minRotation;
   }
 
-  private int findMin(int target, int[] openSide, int[] oppositeSide) {
-    int flipCount = 0;
-    for (int i = 0; i < openSide.length; i++) {
-      if (openSide[i] == target) {
+  private int noOfRotation(int source, int A[], int[] B) {
+    int n = A.length;
+    int rotationRequired = 0;
+    for (int i = 0; i < n; i++) {
+      if (A[i] == source) {
         // no operation needed. i.e already openSide has the target
-        continue;
-      }
-      // flip needed from oppositeSide.
-      if (oppositeSide[i] == target) { // flip matches the target
-        flipCount++;
-      } else { // flip didn't match. No way it can match.
-        return Integer.MAX_VALUE;
+      } else if (B[i] == source) { // flip needed from oppositeSide.
+        rotationRequired++;
+      } else {
+        return Integer.MAX_VALUE; // flip didn't match. No way it can match.
       }
     }
-    return flipCount;
+    return rotationRequired;
   }
 }
