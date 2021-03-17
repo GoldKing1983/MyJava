@@ -46,46 +46,54 @@ ordr
 ordr
 					==========1b added for each 1 i.e if a 1 cannot go anywhere in 4 direction then a "b" will be added==========
 With "b" added
-ordrbbbb
-ordbrbbb
+rdrbbbb
+rdbrbbb
 ==============================================================================================================
 [[1,1,0,1,1],
  [1,0,0,0,0],
  [0,0,0,0,1],
  [1,1,0,1,1]]
 				    ==========1b added for each 1 i.e if a 1 cannot go anywhere in 4 direction then a "b" will be added==========
- odbrbb
- orbb
- odlbbb
- orbb
+ dbrbb
+ rbb
+ dlbbb
+ rbb
 ==============================================================================================================
 
  */
 public class NumberOfDistinctIslands {
+  private int[][] DIRECTIONS = new int[][] {{0, 1}, {0, -1}, {-1, 0}, {1, 0}};
+  private char[] PATHS = new char[] {'r', 'l', 'd', 'u'};
+
   public int numDistinctIslands(int[][] grid) {
-    Set<String> set = new HashSet<>();
-    for (int i = 0; i < grid.length; i++) {
-      for (int j = 0; j < grid[i].length; j++) {
-        if (grid[i][j] != 0) {
-          StringBuilder sb = new StringBuilder();
-          dfs(grid, i, j, sb, "o"); // origin
-          grid[i][j] = 0;
-          set.add(sb.toString());
+
+    int rowMax = grid.length;
+    int colMax = grid[0].length;
+    Set<String> uniqueIsland = new HashSet<>();
+    for (int row = 0; row < rowMax; row++) {
+      for (int col = 0; col < colMax; col++) {
+        if (grid[row][col] == 1) {
+          StringBuilder route = new StringBuilder();
+          dfs(grid, row, col, rowMax, colMax, route);
+          uniqueIsland.add(route.toString());
         }
       }
     }
-    return set.size();
+    return uniqueIsland.size();
   }
 
-  private void dfs(int[][] grid, int i, int j, StringBuilder sb, String dir) {
-    if (i < 0 || i == grid.length || j < 0 || j == grid[i].length || grid[i][j] == 0) return;
-    sb.append(dir);
-    // updating source to 0, to avoid revisit.
-    grid[i][j] = 0;
-    dfs(grid, i - 1, j, sb, "u"); // up
-    dfs(grid, i + 1, j, sb, "d"); // down
-    dfs(grid, i, j - 1, sb, "l"); // left
-    dfs(grid, i, j + 1, sb, "r"); // right
-    sb.append("b"); // back,, it is not about backtracking
+  private void dfs(int[][] grid, int row, int col, int rowMax, int colMax, StringBuilder route) {
+
+    grid[row][col] = 0;
+
+    for (int dir = 0; dir < 4; dir++) {
+      int nextRow = DIRECTIONS[dir][0] + row;
+      int nextCol = DIRECTIONS[dir][1] + col;
+      if (nextRow == rowMax || nextCol == colMax || nextRow < 0 || nextCol < 0) continue;
+      if (grid[nextRow][nextCol] == 0) continue;
+      route.append(PATHS[dir]);
+      dfs(grid, nextRow, nextCol, rowMax, colMax, route);
+    }
+    route.append('b');
   }
 }
