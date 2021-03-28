@@ -42,9 +42,9 @@ and
  [0,1,0]]
 
 If "b" is not added then result would be
-ordr
-ordr
-					==========1b added for each 1 i.e if a 1 cannot go anywhere in 4 direction then a "b" will be added==========
+rdr
+rdr
+					==========add 'b' if we cannot more further in 4 direction or add 'b' at backtracking point==========
 With "b" added
 rdrbbbb
 rdbrbbb
@@ -53,7 +53,7 @@ rdbrbbb
  [1,0,0,0,0],
  [0,0,0,0,1],
  [1,1,0,1,1]]
-				    ==========1b added for each 1 i.e if a 1 cannot go anywhere in 4 direction then a "b" will be added==========
+				    ==========add 'b' if we cannot more further in 4 direction or add 'b' at backtracking point==========
  dbrbb
  rbb
  dlbbb

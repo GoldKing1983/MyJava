@@ -189,19 +189,15 @@ Since a == b is true (both refer to null), end loop while(a != b), return a = nu
  */
 public class IntersectionOfTwoLinkedLists {
   public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
-    // boundary check
-    if (headA == null || headB == null) return null;
-
-    ListNode ptrA = headA;
-    ListNode ptrB = headB;
-
-    // if a & b have different len, then we will stop the loop after second iteration
-    while (ptrA != ptrB) {
-      // for the end of first iteration, we just reset the pointer to the head of another linkedlist
-      ptrA = ptrA == null ? headB : ptrA.next;
-      ptrB = ptrB == null ? headA : ptrB.next;
+    ListNode headACache = headA;
+    ListNode headBCache = headB;
+    while (true) {
+      if (headA == headB) { // reached end
+        if (headA == null) return null;
+        return headA; // Ex: [1][1]
+      }
+      headA = headA == null ? headBCache : headA.next;
+      headB = headB == null ? headACache : headB.next;
     }
-
-    return ptrA;
   }
 }

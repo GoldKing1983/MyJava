@@ -10,25 +10,32 @@ https://leetcode.com/problems/asteroid-collision/discuss/401931/Got-rejected-by-
 
 public class AsteroidCollisionWithoutStack {
   public int[] asteroidCollision(int[] asteroids) {
-    if (asteroids == null || asteroids.length <= 1) {
-      return asteroids;
-    }
-
-    int n = asteroids.length;
-    int j = -1;
-
-    for (int i = 0; i < n; i++) {
-      if (j == -1 || asteroids[j] < 0 || asteroids[i] > 0) {
-        j++;
-        asteroids[j] = asteroids[i]; // Array Source is changed
-      } else if (asteroids[j] < -asteroids[i]) {
-        j--;
-        i--;
-      } else if (asteroids[j] == -asteroids[i]) {
-        j--;
+    int leftIndex = 1;
+    int rightIndex = 0;
+    while (leftIndex < asteroids.length) {
+      if (rightIndex == -1) {
+        asteroids[0] = asteroids[leftIndex];
+        rightIndex = 0;
+        leftIndex++;
+        continue;
+      } else {
+        if (asteroids[rightIndex] > 0 && asteroids[leftIndex] < 0) {
+          if (Math.abs(asteroids[rightIndex]) == Math.abs(asteroids[leftIndex])) {
+            rightIndex--;
+            leftIndex++;
+          } else if (Math.abs(asteroids[rightIndex]) > Math.abs(asteroids[leftIndex])) {
+            leftIndex++;
+          } else {
+            rightIndex--;
+          }
+        } else {
+          rightIndex++;
+          asteroids[rightIndex] = asteroids[leftIndex]; // Update source, so that result will be continuous
+          leftIndex++;
+        }
       }
     }
 
-    return Arrays.copyOf(asteroids, j + 1);
+    return Arrays.copyOf(asteroids, rightIndex + 1);
   }
 }

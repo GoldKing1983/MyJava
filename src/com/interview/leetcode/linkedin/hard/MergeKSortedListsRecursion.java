@@ -1,7 +1,7 @@
 package com.interview.leetcode.linkedin.hard;
 
 import com.interview.leetcode.ListNode;
-import com.interview.leetcode.amazon.easy.MergeTwoSortedListsInPlace;
+import com.interview.leetcode.topic.linkedlist.MergeTwoSortedListsInPlace;
 
 /*
 https://leetcode.com/problems/merge-k-sorted-lists/description/

@@ -68,7 +68,7 @@ Visit done for location 1,1. Closed Island: 1
  */
 public class NumberOfClosedIslands {
   // going clockwise : 0: 'up', 1: 'right', 2: 'down', 3: 'left'
-  private static final int[][] dirs = new int[][] {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
+  private static final int[][] DIRECTIONS = new int[][] {{-1, 0}, {0, 1}, {1, 0}, {0, -1}};
 
   public int closedIsland(int[][] grid) {
     int res = 0;

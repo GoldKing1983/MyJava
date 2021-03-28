@@ -10,7 +10,8 @@ import com.interview.leetcode.ListNode;
 Ex: there are 5 elements in ListNode[]
  I could call mergetTwoLists for [01] [02] [03] [04]. which still work but it is not best solution.
 
- It has to be [0 4] [1 3] [2] Then [0134] [2] Then [01234]
+ It has to be [0 4] [1 3] [2] Then [0134] [2] Then [01234].
+ Because in this approach memory is distributed equally across all lists
 
  Below solution will increase the size of index[0] and will cause more time.
 

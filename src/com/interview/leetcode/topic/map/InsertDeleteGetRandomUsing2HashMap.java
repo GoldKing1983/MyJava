@@ -1,4 +1,4 @@
-package com.interview.leetcode.linkedin.medium;
+package com.interview.leetcode.topic.map;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,13 +14,17 @@ https://leetcode.com/problems/insert-delete-getrandom-o1/description/
 Before Remove     ---- keyMap = {10=1, 20=2, 30=3, 40=4}, valueMap = {1=10, 2=20, 3=30, 4=40}
 After Remove of 20---- keyMap = {10=1,       30=3, 40=2}, valueMap = {1=10, 2=40, 3=30}
 
-2Step for keyMap
-	Step1: Remove 20
-	Step2: Update 40 with 2
+delete operation:
+Ex: delete 20.
+
+3Step for keyMap
+	Step1: Remove 20 . Cache the value. i.e 2
+	Step2: get the size of valueMap. i.e 4. get value of 4 from valueMap. i.e 40
+	Step3: Update keyMap 40 with 2
 
 2Step for valueMap
-	Step1: Remove 4
-	Step2: Update 2 with 40
+	StepA: Remove 4 where 4 is the size of valueMap.
+	StepB: Update 2 with 40. 2 is already cached in step1. 4 is already cached in step2
  */
 public class InsertDeleteGetRandomUsing2HashMap {
   private Map<Integer, Integer> keyMap;

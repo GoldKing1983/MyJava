@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.easy;
+package com.interview.leetcode.topic.linkedlist;
 
 import com.interview.leetcode.ListNode;
 

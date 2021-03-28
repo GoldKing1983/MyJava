@@ -26,10 +26,10 @@ Return a list of the values of all nodes that have a distance K from the target 
 		target=7, K=2 Answer: 4,5
 		target=7, K=3 Answer: 6,3
 ===========================================================Solution Approach=====================================================
-1) Convert the problem from tree to graph.
-2) Build a undirected graph using tree-nodes as vertices, and the parent-child relation as edges
-3) Do BFS with source-node (target) to find all vertices with distance K to it.
-
+1) Think of folding the tree as graph from targetNode. So at-most a node can have 3 neighbors(parent,left and child)
+2) Convert the problem from tree to graph.
+Step1) Build a undirected graph using tree-nodes as vertices, and the parent-left-right relation as edges
+Step2) Do BFS with source-node (target) to find all vertices with distance K to it.
 ===========================================================Data Flow Analysis====================================================
 [3,5,1,6,2,0,8,null,null,7,4]
 
@@ -38,62 +38,47 @@ dataMap is to understand the graph structure(parent-child relationship).
 
  */
 public class AllNodesDistanceKInBinaryTree {
-  Map<TreeNode, List<TreeNode>> adjMap = new HashMap<>();
+  Map<Integer, List<Integer>> adjMap = new HashMap<>();
 
   public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
-    List<Integer> result = new ArrayList<>();
-    if (root == null || K < 0) return result;
-
-    adjMap.put(root, new ArrayList<>());
-    buildMap(root.left, root);
-    buildMap(root.right, root);
-
-    if (!adjMap.containsKey(target)) return result;
-    Set<TreeNode> visited = new HashSet<>();
-    Queue<TreeNode> q = new LinkedList<>();
-    q.add(target);
-    visited.add(target);
-    while (!q.isEmpty()) {
-      int size = q.size();
-      if (K == 0) {
-        for (int i = 0; i < size; i++) result.add(q.poll().val);
-        return result;
-      }
-      for (int i = 0; i < size; i++) {
-        TreeNode node = q.poll();
-        for (TreeNode next : adjMap.get(node)) {
-          if (visited.contains(next)) continue;
-          visited.add(next);
-          q.add(next);
-        }
-      }
-      K--;
-    }
-    return result;
+    buildMap(root);
+    return doBFS(target.val, K);
   }
 
-  /*
-   * Do Pre-Order or Post-Order Traversal. Both will work.  
-             1
-            / \
-           2   3
-    1) 1 will be added already to map in main method. with child empty.
-    =========buildMap will called with 2 as root and 1 as parent.=========
-    2) Put 2 to map, with child empty.
-    3) Connect 1 and 2. Connect 2 and 1.
-    =========buildMap will called with 3 as root and 1 as parent.=========
-    4) Put 3 to map, with child empty.
-    5) Connect 1 and 3. Connect 3 and 1.            
-   */
-  private void buildMap(TreeNode root, TreeNode parent) {
+  private List<Integer>  doBFS(int target, int K) {
+    if (!adjMap.containsKey(target)) return new ArrayList<>();
+    Set<Integer> visited = new HashSet<>();
+    LinkedList<Integer> q = new LinkedList<>();
+    q.add(target);
+    visited.add(target);
+    while (K-- > 0) {
+      int size = q.size();
+      while(size-- > 0) {
+        Integer currentNode = q.poll();
+        for (Integer neighborNode : adjMap.get(currentNode)) {
+          if (visited.contains(neighborNode)) continue;
+          visited.add(neighborNode);
+          q.add(neighborNode);
+        }
+      }
+    }
+    return q;
+  }
+
+  private void buildMap(TreeNode root) {
     if (root == null) return;
 
-    adjMap.put(root, new ArrayList<>());
-    adjMap.get(root).add(parent);
-    adjMap.get(parent).add(root);
+    buildMap(root.left);
+    buildMap(root.right);
 
-    buildMap(root.left, root);
-    buildMap(root.right, root);
+    if(root.left!=null) {
+      adjMap.computeIfAbsent(root.val, k-> new ArrayList<>()).add(root.left.val);
+      adjMap.computeIfAbsent(root.left.val, k-> new ArrayList<>()).add(root.val);
+    }
+    if(root.right!=null) {
+      adjMap.computeIfAbsent(root.val, k-> new ArrayList<>()).add(root.right.val);
+      adjMap.computeIfAbsent(root.right.val, k-> new ArrayList<>()).add(root.val);
+    }
   }
 
 }

@@ -34,6 +34,13 @@ So If graph has 4 nodes. Then there will be 3 edges to traverse all nodes.
 2) Minimum spanning Tree(MST) is about(there will be always more than one solution.)
 	a) getting minimum cost to visit all nodes from source node
 	b) getting minimum cost to visit all nodes from any node
+============================Solving problem with pQ============================================
+===problems NetworkDelayTime,CheapestFlightsWithinKStops, ConnectingCitiesWithMinimumCost,
+PathWithMinimumEffort,FindTheCityWithTheSmallestNumberOfNeighborsAtAThresholdDistance===
+1) In above problems, we pick a sourceNode and declare sourceCost to 0, then we push neighbors of sourceNode to pQ.
+2) In pQ lowest cost neighbors float on top.
+3) We pick the lowestCostNeigbbor and see if all visited. If yes we return output immediately.
+4) Else push all neighbors of lowestCostNeigbbor to pQ again. Till exit condition satisfied.
 ========================================================================
 1) Single Source Shortest path - unidirectional(directed graph)
 	Algorithm1: Dijkstra's Algorithm - O(E log V) - better in most case

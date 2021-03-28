@@ -29,9 +29,10 @@ public class ReorderDataInLogFilesBest {
     Arrays.sort(
         logs,
         (final String s1, final String s2) -> {
-          int string1SplitIndexPos =
-              s1.indexOf(' '); // indexOf API goes from leftToRight and return firstIndexOf
+          // indexOf API goes from leftToRight and return firstIndexOf
+          int string1SplitIndexPos = s1.indexOf(' ');
           int string2SplitIndexPos = s2.indexOf(' ');
+
           char string1FirstCharAfterSplit = s1.charAt(string1SplitIndexPos + 1);
           char string2FirstCharAfterSplit = s2.charAt(string2SplitIndexPos + 1);
 
@@ -44,10 +45,10 @@ public class ReorderDataInLogFilesBest {
           String string2Value = s2.substring(string2SplitIndexPos + 1);
 
           if (isString1IsAlpha && isString2IsAlpha) { // Case : Both String1 and String2 are alpha
-            if (string1Value.equals(string2Value)) { // Ex: "abc hello" "bcd hello"
+            if (string1Value.equals(string2Value)) { // Ex: "abc hello" "bcd hello". Return by their keys
               return string1Key.compareTo(string2Key);
             }
-            return string1Value.compareTo(string2Value); // Ex: "abc test" "bcd hello"
+            return string1Value.compareTo(string2Value); // Ex: "abc test" "bcd hello". Return by their values
           } else if (isString1IsAlpha) { // Ex: "abc test" "bcd 123"
             return -1;
           } else if (isString2IsAlpha) { // Ex: "abc 123" "bcd test"

@@ -1,15 +1,19 @@
-package com.interview.leetcode.amazon.medium;
+package com.interview.leetcode.topic.game;
 
 /*
-
+https://leetcode.com/problems/design-tic-tac-toe/
+========================================================Solution Approach========================================================
+0) 1st is player1.. 2nd is player2
 1) To win Tic-Tac-Toe you must have the entire row or column or diagonal or antiDiagonal.
 Thus, we don't need to keep track of an entire n^2 board.
 2) We only need to keep a count for each row, column, diagonal or antiDiagonal.
 If at any time a row, column,diagonal or antiDiagonal matches the size of the board then that player has won.
 3) Add +1 for Player1 and -1 for Player2.
-4) Each time player places a piece we just need to update the count and check the count of
-row, column, diagonal and anti-diagonal. It (Math.abs(count) == n) then winner found. 
-===========================================================Ex: for 3*3 grid======================================================
+4) At any point we see 3 or -3 winner is found.
+5) Winner can be found row-wise, col-wise, diagonal or anti-diagonal.
+ It (Math.abs(count) == n) then winner found. Return the current player.
+=======================================================Data Flow Analysis========================================================
+========================================================Ex: for 3*3 grid=========================================================
 Player1 places on 0,0
 		|1| | |
 		| | | |

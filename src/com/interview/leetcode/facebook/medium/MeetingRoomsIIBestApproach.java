@@ -30,40 +30,37 @@ Input = [[0, 30],[30,50]
 
 	0  -> 1
 	30 -> 0 (picked endTime)
-	30 -> 1 
+	30 -> 1
 	50 -> 0
 ==============================================================
 */
 public class MeetingRoomsIIBestApproach {
   public int minMeetingRooms(int[][] intervals) {
     int n = intervals.length;
-    int[] startTime = new int[n], endTime = new int[n];
-    for (int i = 0; i < n; i++) {
-      startTime[i] = intervals[i][0];
-      endTime[i] = intervals[i][1];
+    int[] start = new int[n], end = new int[n];
+    int i = 0;
+    for (int[] interval : intervals) {
+      start[i] = interval[0];
+      end[i++] = interval[1];
     }
-    Arrays.sort(startTime);
-    Arrays.sort(endTime);
+    Arrays.sort(start);
+    Arrays.sort(end);
+
     int startIndex = 0, endIndex = 0;
-    int runningCount = 0, minMeetingRoomCount = 0;
-    while (startIndex < n || endIndex < n) {
-      if (startIndex < n && endIndex < n) {
-        if (endTime[endIndex] <= startTime[startIndex]) {
-          runningCount--;
-          endIndex++;
-        } else {
-          runningCount++;
-          startIndex++;
-        }
-      } else if (startIndex < n) { //endTime exhausted or only startTime is available
-        runningCount++;
+    int minMeetingRoomRequired = 0;
+    int currentMeetingRoomRequired = 0;
+    while (startIndex < n && endIndex < n) {
+      int startTime = start[startIndex];
+      int endTime = end[endIndex];
+      if (startTime < endTime) {
+        currentMeetingRoomRequired++;
+        minMeetingRoomRequired = Math.max(minMeetingRoomRequired, currentMeetingRoomRequired);
         startIndex++;
-      } else { //endTime exhausted or only startTime is available
-        runningCount--;
+      } else { // startTime >= endTime --> decrement always
+        currentMeetingRoomRequired--;
         endIndex++;
       }
-      minMeetingRoomCount = Math.max(runningCount, minMeetingRoomCount);
     }
-    return minMeetingRoomCount;
+    return minMeetingRoomRequired;
   }
 }

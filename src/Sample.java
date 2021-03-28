@@ -1,4 +1,4 @@
-
+import java.util.*;
 
 /*
 com.interview.leetcode.topic.
@@ -20,20 +20,39 @@ public class Sample {
    * 
    */
 
-  public int coinChange(int[] nums, int target) {
-    Integer dp[][] = new Integer[nums.length+1][ target+1];
-    int result = coinChange(nums, dp, target, 0, 0, nums.length);
-    return result == Integer.MAX_VALUE ? -1 : result;
-  }
+  public int[][] merge(int[][] intervals) {
+    Arrays.sort(intervals, (a,b)->a[0]-b[0]);
 
-  public int coinChange(int[] coins, Integer[][] dp, int target, int index, int coinCount, int n) {
-    if (target == 0) return coinCount;
-    if (target < 0) return Integer.MAX_VALUE;
-    if (index == n) return Integer.MAX_VALUE;
-    if (dp[index][target] != null) return dp[index][target];
-    int left = coinChange(coins, dp, target - coins[index], index, coinCount + 1, n);
-    int right = coinChange(coins, dp, target, index + 1, coinCount, n);
-    dp[index][target] = Math.min(left, right);
-    return dp[index][target] ;
+        /*
+        1 -- 4
+             4 -- 5
+
+        1--------------4
+            2------3
+
+        1 -- 4
+                5 -- 6
+
+
+        */
+    int n = intervals.length;
+    int[][] result = new int[n][2];
+    int resultIndex = 0;
+    int previousStartTime = intervals[0][0];
+    int previousEndTime = intervals[0][1];
+    for(int i=1; i<n; i++) {
+      int currentStartTime = intervals[i][0];
+      int currentEndTime = intervals[i][1];
+      if(currentStartTime <= previousEndTime) { // merge
+        previousEndTime = Math.max(currentEndTime,previousEndTime);
+      } else {
+        result[resultIndex][0] = previousStartTime;
+        result[resultIndex++][1] = previousEndTime;
+      }
+    }
+    result[resultIndex][0] = previousStartTime;
+    result[resultIndex][1] = previousEndTime;
+
+    return Arrays.copyOfRange(intervals,0,resultIndex);
   }
 }

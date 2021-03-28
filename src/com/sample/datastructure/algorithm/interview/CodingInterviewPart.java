@@ -6,4 +6,4 @@ package com.sample.datastructure.algorithm.interview;
 So use append() and do reverse at end.
 
  */
-public class InterviewCodingPart {}
+public class CodingInterviewPart {}

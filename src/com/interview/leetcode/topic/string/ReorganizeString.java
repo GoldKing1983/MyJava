@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.medium;
+package com.interview.leetcode.topic.string;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +7,8 @@ import java.util.Queue;
 
 /*
  * https://leetcode.com/problems/reorganize-string/
- Similar to TaskSchedulerPriorityQueueApproach
+===========================================================Requirement===========================================================
+Similar to TaskSchedulerPriorityQueueApproach
 
 Given a string S, check if the letters can be rearranged so that two characters that are adjacent to each
 other are not the same. If possible, output any possible result.  If not possible, return the empty string.
@@ -21,10 +22,13 @@ Output: ""
 Input: S ="vvvlo"  ===> why we need PriorityQueue
 Output: "vlvov"
 ================================================Solution Approach====================================================
-1) Idea is to add "countsOfEachCharacter" to a pQ and sort based on the highest frequency.
+1) Capture character/"countOfEachCharacter" in a map.
 2) If any characterCount goes beyond (n+1)/2. Ex: "aaab". n=4. 5/2=2.  Then we cannot re-organize. return "". 
 This is the only exit condition. Rest of all the cases we can form possibleResult.
-3) Pick "currentChar" from pQ.
+2a) Insert the character/"countOfEachCharacter" to pQ sorted by characterCount in descending, so that mostFrequentlyChar
+always float at top.
+        ======how to form result======
+3) Pick top floating "currentChar" from pQ.
 4) If the "lastResultChar" is different from "currentChar", then insert the "currentChar" to result.
 5) Else, poll "nextChar" and insert into result. Offer "currentChar" back to pQ.
 
@@ -35,6 +39,7 @@ public class ReorganizeString {
     int n = s.length();
     for (char c : s.toCharArray()) {
       int count = map.getOrDefault(c, 0) + 1;
+      // If any characterCount goes beyond (n+1)/2. Ex: "aaab". n=4. 5/2=2.  Then we cannot re-organize. return "".
       if (count > (n + 1) / 2) return "";
       map.put(c, count);
     }

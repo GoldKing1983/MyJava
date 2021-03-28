@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.hard;
+package com.interview.leetcode.topic.matrix;
 
 /*
 https://leetcode.com/problems/dungeon-game/

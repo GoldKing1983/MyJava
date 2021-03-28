@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.hard;
+package com.interview.leetcode.topic.matrix;
 
 /*
 https://leetcode.com/problems/dungeon-game/
@@ -34,11 +34,29 @@ Input : [[1000]] Output: 1
 Input: [[-3,5]] Output : 4
 Input: [[5,-3]] Output : 1
 
+========================================================Solution Approach========================================================
+1) Parse from [m-1,n-1] to [0,0]
+2) For each point in matrix update the value.
+3) If the point is m-1,n-1 don't to anything as it is the destination.
+    Ex:[-1] ans:2. Finding answer calculation will be done after the for loops
+4) If the point is lastRow, only one option available. pick from nextCol. Because we traverse from bottomToTop rightToLeft
+      Ex:
+        -1 -2 -3
+        -4 -5 -6
+        -7 -8 -9
+        --For -9 no action needed--
+        --For -8. pick -9  from nextCol and add current -8. Update -8 with -17.
+        --For -7. pick -17 from nextCol add add current -7. Update -7 with -24.
+        --For -6. pick -9  from nextRow add add current -6. Update -6 with -15.
+        --For -5. pick max of(-15,-17) from nextRow add add current -6. So -15+-5=-20. Update -5 with -20.
 
-=======================================Why traverse from bottom-right to top-left=======================================
-If I go from top to bottom updating. Then I need to record positive in an array (for answer) and update dp matrix...
-Also so many corner cases.
-So best approach is traverse from bottom-right to top-left
+updated final matrix
+[-21, -20, -18]
+[-24, -20, -15]
+[-24, -17, -9]
+
+5) If the point is lastCol, only one option available. pick from nextRow.
+6) For rest of point, fetch max from nextRow or nextCol.
 ========================================Data Flow Analysis===Filled from BottemRightCorner to 0,0==============================================================
 
 Input:
@@ -84,8 +102,6 @@ public class DungeonGame {
         if (dungeon[row][col] > 0) dungeon[row][col] = 0;
       }
     }
-    // for(int[] d : dungeon)
-    //       System.out.println(Arrays.toString(d));
     int required = dungeon[0][0];
 
     return required < 0 ? Math.abs(required) + 1 : 1;

@@ -10,4 +10,10 @@ public class Node {
     this.next = null;
     this.random = null;
   }
+  public Node(int val, Node next, Node random) {
+    this.val = val;
+    this.next = next;
+    this.random = random;
+  }
+
 }

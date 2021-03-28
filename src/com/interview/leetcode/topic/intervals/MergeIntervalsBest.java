@@ -6,18 +6,18 @@ import java.util.Arrays;
 https://leetcode.com/problems/merge-intervals
 
 ========================================================Merge Needed - currentStart <= previousEnd ==============================
-Since we do sort, previous will be always lesser or equal to current. So corner cases are eliminated. 
- 
+Since we do sort, previous will be always lesser or equal to current. So corner cases are eliminated.
+
 Case1)		previous   ===>    1==========3
 			current    ===>		 	2==========4
 
             previous   ===>    1==========3
             current    ===>    1===============4
 
-                    =====InvalidCase==Sorting avoids the below case and change it to case1== 
+                    =====InvalidCase==Sorting avoids the below case and change it to case1==
             current    ===>         2==========4
             previous   ===>    1==========3
-            
+
 Case2)		previous   ===>    1===============4
 			current    ===>		 	2=====3
 
@@ -36,35 +36,47 @@ Case4)		previous    ===>    1====2
  */
 public class MergeIntervalsBest {
 
+  /*
+  Time Complexity : O(NlogN) --> Because of sorting. It should be N+O(NlogN)
+  Space Complexity : O(N)
+   */
+  public int[][] merge(int[][] intervals) {
+    Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+
     /*
-    Time Complexity : O(NlogN) --> Because of sorting. It should be N+O(NlogN)
-    Space Complexity : O(N)
-     */
-    public int[][] merge(int[][] intervals) {
-        // Sort input in ascending
-        Arrays.sort(intervals, (a, b) -> a[0] - b[0]);
+    Coding for below 3 cases
+    1 -- 4
+         4 -- 5
 
-        int n = intervals.length;
-        int[][] result = new int[n][2];
-        result[0] = intervals[0];
-        int resultIndex = 0;
-        for (int i = 1; i < n; i++) {
-            int pStart = result[resultIndex][0];
-            int pEnd = result[resultIndex][1];
+    1--------------4
+        2------3
 
-            int cStart = intervals[i][0];
-            int cEnd = intervals[i][1];
+    1 -- 4
+            5 -- 6
 
-            if (cStart <= pEnd) {//merge
-                // Need for Math.max --> Ex: [[1,4],[2,3]].. previousEnd = 4 and not 3
-                result[resultIndex][1] = Math.max(cEnd, result[resultIndex][1]);
-            } else { // no merge or  disjoint intervals
-                resultIndex++;
-                result[resultIndex][0] = cStart;
-                result[resultIndex][1] = cEnd;
-            }
-        }
 
-        return Arrays.copyOf(result, resultIndex + 1);
+    */
+    int n = intervals.length;
+    int[][] result = new int[n][2];
+    int resultIndex = 0;
+    int previousStartTime = intervals[0][0];
+    int previousEndTime = intervals[0][1];
+    for (int i = 1; i < n; i++) {
+      int currentStartTime = intervals[i][0];
+      int currentEndTime = intervals[i][1];
+      if (currentStartTime <= previousEndTime) { // merge
+        // Need for Math.max --> Ex: [[1,4],[2,3]].. previousEnd = 4 and not 3
+        previousEndTime = Math.max(currentEndTime, previousEndTime);
+      } else { // no merge
+        result[resultIndex][0] = previousStartTime;
+        result[resultIndex++][1] = previousEndTime;
+        previousStartTime = currentStartTime;
+        previousEndTime = currentEndTime;
+      }
     }
+    result[resultIndex][0] = previousStartTime;
+    result[resultIndex][1] = previousEndTime;
+
+    return Arrays.copyOfRange(result, 0, resultIndex + 1);
+  }
 }

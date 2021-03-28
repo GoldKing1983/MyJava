@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.medium;
+package com.interview.leetcode.topic.graph;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -79,39 +79,41 @@ Note: graph depicts only unidirectional from top to bottom.
 ====================================================================================================================================
  */
 public class NetworkDelayTime {
-  public int networkDelayTime(int[][] times, int n, int startNode) {
+  Map<Integer, Map<Integer, Integer>> adjMap = new HashMap<>();
+  Queue<int[]> pQ = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+  Set<Integer> visited = new HashSet<>();
 
-    Map<Integer, Map<Integer, Integer>> adjMap = new HashMap<>();
+  private void buildAdjMap(int[][] times) {
     for (int[] time : times) {
-      int from = time[0];
-      int to = time[1];
-      int weight = time[2];
+      int from = time[0], to = time[1], weight = time[2];
       adjMap.computeIfAbsent(from, k -> new HashMap<>()).put(to, weight);
     }
+  }
 
-    Queue<int[]> pQ = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+  private int doBFS(int startNode, int n) {
     pQ.offer(new int[] {startNode, 0});
-    Set<Integer> visited = new HashSet<>();
-    int currentDistance = 0;
+    int maxCost = 0;
 
     while (!pQ.isEmpty()) {
-      int[] fromSourceAndDistance = pQ.poll();
-      int from = fromSourceAndDistance[0];
+      int[] fromSourceAndCost = pQ.poll();
+      int from = fromSourceAndCost[0];
       if (visited.contains(from)) continue;
       visited.add(from);
-      // If I move this line before visited logic, that's it output is wrong.
-      // Because visited protects duplicate visits.
-      currentDistance = fromSourceAndDistance[1];
+      maxCost = fromSourceAndCost[1];
+      if (visited.size() == n) return maxCost;
       Map<Integer, Integer> map = adjMap.get(from);
       if (map == null) continue;
       for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-        int to = entry.getKey();
-        int toDistance = entry.getValue();
-        int currentPathDistance = toDistance + currentDistance;
-        pQ.offer(new int[] {to, currentPathDistance});
+        int to = entry.getKey(), toCost = entry.getValue();
+        int currentPathCost = toCost + maxCost;
+        pQ.offer(new int[] {to, currentPathCost});
       }
     }
-    // If all paths are visited then return the distance
-    return visited.size() == n ? currentDistance : -1;
+    return -1;
+  }
+
+  public int networkDelayTime(int[][] times, int n, int startNode) {
+    buildAdjMap(times);
+    return doBFS(startNode, n);
   }
 }

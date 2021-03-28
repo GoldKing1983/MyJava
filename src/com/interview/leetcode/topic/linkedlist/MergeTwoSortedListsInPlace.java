@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.easy;
+package com.interview.leetcode.topic.linkedlist;
 
 import com.interview.leetcode.ListNode;
 
@@ -12,6 +12,33 @@ See Also ReverseLinkedListBottomUp
 
   Input : 1->3->5, 2->4->6
   Output: 1->2->3->4->5->6
+=======================================================Data Flow Analysis========================================================
+  Input : 1->null, 2->null
+
+  mergeTwoLists((l1)1,(l2)2)
+          |
+  l1.val <= l2.val
+  l1.next = mergeTwoLists(null,2)
+          |
+       return 2
+          |
+     l1.next = 2
+     1.next  = 2
+     return l1.... 1->2
+
+=======================================================Data Flow Analysis========================================================
+  Input : 2->null, 1->null
+
+  mergeTwoLists((l1)2,(l2)1)
+          |
+  l1.val > l2.val
+  l2.next = mergeTwoLists(2,null)
+          |
+       return 2
+          |
+     l2.next = 2
+     1.next  = 2
+     return l2.... 1->2
  */
 
 public class MergeTwoSortedListsInPlace {

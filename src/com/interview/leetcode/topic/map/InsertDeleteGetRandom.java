@@ -1,4 +1,4 @@
-package com.interview.leetcode.linkedin.medium;
+package com.interview.leetcode.topic.map;
 
 import java.util.ArrayList;
 import java.util.HashMap;

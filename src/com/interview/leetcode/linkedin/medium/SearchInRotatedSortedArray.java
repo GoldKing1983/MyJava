@@ -5,7 +5,8 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 Similar to FindMinimumInRotatedSortedArray
 https://www.educative.io/collection/page/5668639101419520/5671464854355968/5141325911425024
 
-1) Since the array is sorted. At any point, if I split the array, one side is sorted and other is not sorted.
+1) Since the array is sorted. At any point, if I split the array,
+                left side is sorted or right side is sorted or both side is sorted.
 2) Find the sorted side by condition (a[low]<=a[mid])--->if true, then  left is sorted, else right side is sorted.
 3) Check if target lies between the sorted side, If yes go towards that side or go opposite.
 

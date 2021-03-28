@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.easy;
+package com.interview.leetcode.topic.stack;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,28 +6,21 @@ import java.util.Map;
 /*
 https://leetcode.com/problems/next-greater-element-i/
 
-Requirement:
-1) search the nums1(not index) in nums2
-2) Verify if any greater number exists?.
-		2a) If exists return greater number.
- 		2b) Else return -1.
-
-nums1 = [4, 1, 2] nums2 = [1, 3, 4, 2]
-Output: [-1,3,-1]
-
-=========
-
-nums1 = [1,3,5,2,4] nums2 = [6,5,4,3,2,1,7]
-Output: [7,7,7,7,7]
-
 =================================Solution Approach - Time Complexity : O(n^2)==========================================
-1) Simple sliding window approach.
-2) For "each of element from left" traverse towards right till the end., if greater element found cache it. Else -1.
-3) Set right = left+1, to traverse for next element
- So for  Ex: nums1 = [1,3,5,2,4] nums2 = [6,5,4,3,2,1,7]
- iteration1: First time left will be at 6 and right set to (leftIndex+1) 5, right will go till the end i.e 7.
- iteration2: Then left moves to 5 and right set to (leftIndex+1) 4. Again right will go till 7.
-==========================
+1) Take nums.
+2) For each of number in nums, find the nextGreaterElement and store in map.
+    a) This is done in linear fashion
+    b) Pick a number at index0 lets say left. right=left+1.
+    c) Traverse all the way from leftToRight. If greaterNumber found update map with key and greaterNumber.
+    Ex: nums = [6,5,4,3,2,1,7]
+        map = {6:7}
+    c) Pick the nextNumber. right=left+1. do stepC.
+            map = {6:7,5:7}
+    d) Finally we will have map like --> {1:7,2:7,3:7,4:7,5:7,6:7,7:-1}
+3) Take findNums.
+4) For each of number in findNums, find the nextGreaterElement from map.
+
+========================================================================================================================
 
 
  */
