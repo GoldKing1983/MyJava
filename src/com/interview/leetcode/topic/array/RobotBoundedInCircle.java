@@ -40,21 +40,21 @@ public class RobotBoundedInCircle {
 
          */
     //                                                               R                 L
-        int x = 0, y = 0, direction = 0, DIRECTIONS[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+        int row = 0, col = 0, direction = 0, DIRECTIONS[][] = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
         for (char c : ins.toCharArray())
-            // X and Y will not change only direction will change
+            // row and col will not change only direction will change
             if (c == 'R') direction = (direction + 1) % 4;
 
-            // X and Y will not change only direction will change
+            // row and col will not change only direction will change
             else if (c == 'L') direction = (direction + 3) % 4;
 
-            // X and Y changes based on current direction
+            // row and col changes based on current direction
             else {
-                x += DIRECTIONS[direction][0];
-                y += DIRECTIONS[direction][1];
+                row += DIRECTIONS[direction][0];
+                col += DIRECTIONS[direction][1];
             }
-        boolean loopFound = x == 0 && y == 0;
+        boolean loopFound = row == 0 && col == 0;
         boolean destinationOtherThanStart = direction > 0;
         return loopFound || destinationOtherThanStart;
     }

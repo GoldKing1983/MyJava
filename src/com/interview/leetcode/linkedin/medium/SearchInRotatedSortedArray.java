@@ -5,8 +5,8 @@ https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 Similar to FindMinimumInRotatedSortedArray
 https://www.educative.io/collection/page/5668639101419520/5671464854355968/5141325911425024
 
-1) Since the array is sorted. At any point, if I split the array,
-                left side is sorted or right side is sorted or both side is sorted.
+1) Since the array is sorted. At any point, if I split the array then 3 cases are possible
+                a) left side is sorted or b) right side is sorted or c) both side is sorted.
 2) Find the sorted side by condition (a[low]<=a[mid])--->if true, then  left is sorted, else right side is sorted.
 3) Check if target lies between the sorted side, If yes go towards that side or go opposite.
 
@@ -23,7 +23,7 @@ Since the array is sorted and rotated. At any point, if I split the array, there
 1) When we code, we might think there are no duplicates in input. Then why it should "<=".
 2) Reason is, in many case. low and mid will be same or high and mid will be same. 
  
-There are so many corner cases... This also covers both side sorted cases. Just mug it... Don't waste time.
+There are so many corner cases... This also covers both side sorted cases. Just remember it... Don't waste time.
 Example1: [10,20] target=20.
 
 Here low=0, high=1. mid=0.  
