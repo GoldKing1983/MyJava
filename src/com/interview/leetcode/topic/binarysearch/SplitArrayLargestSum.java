@@ -1,9 +1,9 @@
-package com.interview.leetcode.google.hard;
+package com.interview.leetcode.topic.binarysearch;
 
 import java.util.Arrays;
 
 /*
-*https://leetcode.com/problems/split-array-largest-sum/
+https://leetcode.com/problems/split-array-largest-sum/
 ========================================================================================================================================
 Requirement: Given an array of numbers, partition them into "optimal-continuous" groups and return highest partition in the group.
 Input: nums = [7,2,5,10,8]  m = 2

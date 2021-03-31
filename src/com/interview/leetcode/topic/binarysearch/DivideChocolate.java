@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.hard;
+package com.interview.leetcode.topic.binarysearch;
 
 import java.util.Arrays;
 
@@ -18,8 +18,8 @@ Input: arr = [10,20,10], K = 1 Output: 10
 Optimal-Continuous SplitUp is : [10] [20,10] So return smallest i.e 10
 
 =====================================================Solution Approach=====================================================
-1) Initialize low with minimal number in array.
-2) Initialize high with sum of array and "not maximal number"
+1) Initialize low with minimal number in array i.e The left bound is max(A),
+2) Initialize high with sum of array and "not maximal number" i.e The right bound is sum(A).
 3) Pick a number(mid) between low and high. Verify if you can make K partition for that number.
 3a) If yes then go right, meaning we can optimize more.
 Ex: If I can able to partition into 2 for input [10,20,30] with number 15.

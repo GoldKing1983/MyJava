@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.medium;
+package com.interview.leetcode.topic.string.parenthesis;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -39,7 +39,7 @@ Step1) Balance CloseParenthesis
 
 Step2) Balance LeftOver OpenParenthesis
  */
-public class ValidParenthesisString {
+public class ValidParenthesisStringStack {
   public boolean checkValidString(String s) {
     Deque<Integer> openStack = new ArrayDeque<>();
     Deque<Integer> starStack = new ArrayDeque<>();
