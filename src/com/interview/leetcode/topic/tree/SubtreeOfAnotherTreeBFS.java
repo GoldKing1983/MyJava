@@ -1,4 +1,4 @@
-package com.interview.leetcode.ebay;
+package com.interview.leetcode.topic.tree;
 
 import java.util.ArrayList;
 import java.util.Deque;

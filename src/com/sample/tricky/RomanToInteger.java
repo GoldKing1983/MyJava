@@ -21,7 +21,7 @@ Ex2: 'IX'.
  	 No loop needed for X. 10 directly added to result.
  	 Loop Starts : Come from n-1.
 	 Process I. Compare current and next. Loop runs 1 time.
-	  If current is lesser, subtract current and result.
+	 If current is lesser, subtract current and result.
 
 Ex3: 'XI'.
 	 No loop needed for I. 10 directly added to result.

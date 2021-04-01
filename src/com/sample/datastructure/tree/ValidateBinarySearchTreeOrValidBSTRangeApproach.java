@@ -69,7 +69,7 @@ That logic will fail for above. Because 15's child 6,20 is valid with respect to
 		10   ||  6    ||    15 ==============> logic fails here
 ============================================================================================================================
  */
-public class ValidateBinarySearchTreeOrValidBST {
+public class ValidateBinarySearchTreeOrValidBSTRangeApproach {
   // ====================================Approach1 Recursion=======================================
   public boolean isValidBST(TreeNode root) {
     return isValid(Long.MIN_VALUE, root, Long.MAX_VALUE);

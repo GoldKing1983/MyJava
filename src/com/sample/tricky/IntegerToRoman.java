@@ -2,6 +2,17 @@ package com.sample.tricky;
 
 /*
 https://leetcode.com/problems/integer-to-roman/description/
+===========================================================Requirement===========================================================
+Given an integer, convert it to a roman numeral.
+Ex: Input: 8...  Output: VIII         
+Ex: Input: 39... Output: XXXIX
+Ex: Input: 33... Output: XXXIII
+Ex: Input: 58... Output: LVIII...Explanation: L = 50, V = 5, III = 3.
+========================================================Solution Approach========================================================
+1) Break the numbers into slices by below pattern 
+2) The slice must be made from big number to small number.
+3) Initially Code intToRomanStepByStepApproach...
+4) Then do the full stretch code.   
 
 Remember 1		4  		5 		9 from left till 1000...
 		 10 	40 		50		90
@@ -13,11 +24,13 @@ Add relevant Roman Numbers for the same.
 		 X		XL		L		XC
 		 C		CD		D		CM
 		 M
+
+
  */
 public class IntegerToRoman {
 
-  // Below code will work from 1 to 10. Add this in loop with corresponding "number and roman"
-  // Evaluate from big always
+  // Below code will work from 1 to 39. 
+  // Add this in loop with corresponding "number and roman"... Evaluate from big always
   public String intToRomanStepByStepApproach(int num) {
     StringBuilder result = new StringBuilder();
     while (num >= 1) {
@@ -41,16 +54,19 @@ public class IntegerToRoman {
     return result.toString();
   }
 
+
   public String intToRoman(int num) {
     int[] numbers = {1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1};
     String[] romanNumbers = {"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"};
 
     StringBuilder result = new StringBuilder();
-    for (int i = 0; i < numbers.length && num != 0; ) {
-      if (num >= numbers[i]) {
-        result.append(romanNumbers[i]);
-        num = num - numbers[i];
-      } else i++;
+    for (int i = 0; num > 0; i++) {
+      while (true) {
+        if (num >= numbers[i]) {
+          result.append(romanNumbers[i]);
+          num = num - numbers[i];
+        } else break;
+      }
     }
     return result.toString();
   }

@@ -15,7 +15,7 @@ Note: The solution set must not contain duplicate triplets.
 1) Sort the number
 2) Take a number. Do 2Sum for remaining number.
 3) Sorting takes O(log N). 2 loops in takes O(n^2). So Time Complexity is approximately: O(n^2)
-
+4) Duplicate check needs to happen after forming first result.  If I do before forming result, then result will be empty.
 ================How to Avoid Duplicate in 3 cases==========================
 1) Avoid Outer Loop Duplicate 
 Ex: [-1 -1 0 1]
@@ -33,7 +33,7 @@ As per data, avoiding either left or right duplicate is enough. Because logicall
 will not form, same duplicate result again. So other side is balanced automatically.
 =================================Important Note:======================================
 Corner Case : [0,0,0,0]. Output: [0,0,0]. 
-Duplicate check needs to happen after forming first result.  If I do before forming result, then result will be empty. 
+ 
  */
 public class ThreeSum {
 
@@ -46,8 +46,7 @@ public class ThreeSum {
       int firstNumber = nums[outer];
       int left = outer + 1, right = n - 1;
       while (left < right) {
-        int secondNumber = nums[left];
-        int thirdNumber = nums[right];
+        int secondNumber = nums[left], thirdNumber = nums[right];
         int total = firstNumber + secondNumber + thirdNumber;
         if (total == 0) {
           result.add(Arrays.asList(firstNumber, secondNumber, thirdNumber));
