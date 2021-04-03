@@ -1,7 +1,17 @@
 package com.interview.leetcode.linkedin.hard;
 
 /*
- * https://leetcode.com/problems/integer-to-english-words/
+https://leetcode.com/problems/integer-to-english-words/
+
+Example 1:
+
+Input: num = 123
+Output: "One Hundred Twenty Three"
+Example 2:
+
+Input: num = 12345
+Output: "Twelve Thousand Three Hundred Forty Five"
+
  */
 public class IntegerToEnglishWords {
 	private final String[] belowTen = new String[] {"", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};

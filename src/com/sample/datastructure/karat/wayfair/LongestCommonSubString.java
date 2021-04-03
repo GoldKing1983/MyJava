@@ -106,8 +106,3 @@ public class LongestCommonSubString {
   }
 }
 
-// Your previous work is preserved below:
-//
-// * Hello, world!
-// * This is a fully functional Markdown environment.
-//

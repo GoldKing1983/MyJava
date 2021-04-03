@@ -1,4 +1,4 @@
-package com.interview.leetcode.linkedin.hard;
+package com.interview.leetcode.topic.slidingwindow;
 
 import java.util.HashMap;
 
@@ -83,63 +83,45 @@ Shrinking Window by 1 index. Left moved to Index: 10. Incrementing Map Count for
 =========================================================================================================================
  */
 public class MinimumWindowSubstringSlidingWindow {
-  int noOfMatchingChar = 0;
-  int left = 0;
-  int right = 0;
-  int minleft = 0;
-  int minright = 0;
-  int minWindowLength = 0;
-  HashMap<Character, Integer> freqMap = new HashMap<>();
-  String inputString;
-  String searchString;
 
-  public String minWindow(String s, String t) {
-    this.inputString = s;
-    this.searchString = t;
-    minWindowLength = s.length() + 1;
-    if (s.length() < t.length() || s.length() == 0) return "";
+  public String minWindow(String inputString, String searchString) {
+    int left = 0, noOfMatchingChar = 0, minWindowSize = Integer.MAX_VALUE;
+    String result = "";
+    HashMap<Character, Integer> freqMap = new HashMap<>();
+
+    if (inputString.length() < searchString.length() || inputString.length() == 0) return "";
 
     // initialize freqMap
-    for (char c : t.toCharArray()) {
-      if (freqMap.containsKey(c)) freqMap.put(c, freqMap.get(c) + 1);
-      else freqMap.put(c, 1);
-    }
+    for (char c : searchString.toCharArray()) freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
 
-    for (; right < s.length(); right++) {
+
+    for (int right = 0; right < inputString.length(); right++) {
       char rightChar = inputString.charAt(right);
       if (freqMap.containsKey(rightChar)) {
         freqMap.put(rightChar, freqMap.get(rightChar) - 1);
 
         if (freqMap.get(rightChar) >= 0) noOfMatchingChar++;
+        if (noOfMatchingChar != searchString.length()) continue;
 
-        moveLeft();
-      }
-    }
-    if (minWindowLength > s.length()) return "";
+        while (true) { // Capture Window and Shrink. 
+          int currentWindowSize = right - left + 1;
+          if (currentWindowSize < minWindowSize) {
+            result = inputString.substring(left, right + 1);
+            minWindowSize = currentWindowSize;
+          }
 
-    return s.substring(minleft, minleft + minWindowLength);
-  }
-
-  private void updateResultWindow() {
-    if (right - left + 1 < minWindowLength) {
-      minleft = left;
-      minright = right;
-      minWindowLength = minright - minleft + 1;
-    }
-  }
-
-  private void moveLeft() {
-    // Left is moved when a window is found.
-    while (noOfMatchingChar == searchString.length()) {
-      updateResultWindow();
-      char leftChar = inputString.charAt(left);
-      if (freqMap.containsKey(leftChar)) {
-        freqMap.put(leftChar, freqMap.get(leftChar) + 1);
-        if (freqMap.get(leftChar) > 0) {
-          noOfMatchingChar--;
+          char leftChar = inputString.charAt(left++); //Left is moved when a window is found.
+          if (freqMap.containsKey(leftChar)) {
+            freqMap.put(leftChar, freqMap.get(leftChar) + 1);
+            if (freqMap.get(leftChar) > 0) {
+              noOfMatchingChar--; // Shrink stops when noOfMatchingChar size changed
+              break;
+            }
+          }
         }
       }
-      left++;
     }
+    return result;
   }
+
 }

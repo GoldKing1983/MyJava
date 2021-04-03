@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 1) Cache the longest point row and col.
 2) From longestResult row and col, "traverse back diagonally down to top", till dp[row][col]!=0, because result is
-formulated "diagonally up to down"
+formulated "diagonally from top to bottom"
 */
 public class LongestCommonSubStringReturnLongestString {
   // user 0 -- b c d

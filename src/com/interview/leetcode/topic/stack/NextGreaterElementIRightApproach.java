@@ -48,14 +48,16 @@ public class NextGreaterElementIRightApproach {
     int n = nums2.length;
     // for the last element it will be always -1. So skip for last element
     for (int i = 1; i < n; i++) {
-      int currentNum = nums2[i];
+      int currentNumber = nums2[i];
       while (true) {
-        if (stack.peek() < currentNum) { // 5,6
-          map.put(stack.pop(), currentNum);
+        int previousNumberInStack = stack.peek();
+        if (previousNumberInStack < currentNumber) { // 5,6
+          stack.pop();
+          map.put(previousNumberInStack, currentNumber);
         } else break;
         if (stack.isEmpty()) break;
       }
-      stack.push(currentNum);
+      stack.push(currentNumber);
     }
     for (int i = 0; i < nums1.length; i++) nums1[i] = map.getOrDefault(nums1[i], -1);
     return nums1;

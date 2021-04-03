@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.medium;
+package com.interview.leetcode.topic.slidingwindow;
 
 import java.util.HashMap;
 import java.util.Map;

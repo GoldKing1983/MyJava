@@ -2,8 +2,17 @@ package com.interview.leetcode.linkedin.hard;
 
 /*
  * https://leetcode.com/problems/integer-to-english-words/
- *
- * Simple Understanding code for input 123
+
+Example 1:
+
+Input: num = 123
+Output: "One Hundred Twenty Three"
+Example 2:
+
+Input: num = 12345
+Output: "Twelve Thousand Three Hundred Forty Five"
+
+Simple Understanding code for input 123
  */
 public class IntegerToEnglishWordsStepByStep {
   String[] lessThan10 = {"", "One", "Two", "Three"};

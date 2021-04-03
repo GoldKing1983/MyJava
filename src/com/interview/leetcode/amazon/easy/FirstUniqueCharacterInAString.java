@@ -20,9 +20,14 @@ return 2.
  */
 public class FirstUniqueCharacterInAString {
   public int firstUniqChar(String s) {
-    int freq[] = new int[26];
-    for (int i = 0; i < s.length(); i++) freq[s.charAt(i) - 'a']++;
-    for (int i = 0; i < s.length(); i++) if (freq[s.charAt(i) - 'a'] == 1) return i;
+    int[] bucket = new int[26];
+    for (char c : s.toCharArray()) bucket[c - 'a']++;
+
+    int i = 0;
+    for (char c : s.toCharArray()) {
+      if (bucket[c - 'a'] == 1) return i;
+      i++;
+    }
     return -1;
   }
 }
