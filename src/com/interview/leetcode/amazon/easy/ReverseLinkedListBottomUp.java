@@ -18,7 +18,7 @@ public class ReverseLinkedListBottomUp {
 
   private ListNode recur(ListNode head) {
     if (head.next == null) return head;
-    ListNode cacheLastNode = reverseList(head.next);
+    ListNode cacheLastNode = reverseList(head.next); // Because this is the first node
     // =================== Reverse Logic Start ===================
     head.next.next = head; // Child point back to Parent.
     head.next = null; // Cut "Parent to Child" Link.

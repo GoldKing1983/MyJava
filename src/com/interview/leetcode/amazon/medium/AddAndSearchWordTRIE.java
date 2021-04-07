@@ -59,7 +59,7 @@ public class AddAndSearchWordTRIE {
   public boolean searchFromLevel(String word, Trie tempRoot) {
     for (int i = 0; i < word.length(); i++) {
       Character c = word.charAt(i);
-      // for the case input=["a"] and searchString=["a."]
+      // for the case input=["a"] and searchString=["a."] --> return false
       if (tempRoot.children.size() == 0) return false;
       // Below recursion logic is similar to WordBreakRecursion
       if (c == '.') {
@@ -80,6 +80,6 @@ public class AddAndSearchWordTRIE {
         return false;
       }
     }
-    return tempRoot.isLeaf;
+    return tempRoot.isLeaf; // once all characters are matched. finally trie should say it is leaf, then only return true. 
   }
 }

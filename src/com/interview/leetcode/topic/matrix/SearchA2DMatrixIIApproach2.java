@@ -1,4 +1,4 @@
-package com.interview.leetcode.ebay;
+package com.interview.leetcode.topic.matrix;
 
 /*
 Similar to SearchA2DMatrixIIApproach1. But we start the search from top right corner.

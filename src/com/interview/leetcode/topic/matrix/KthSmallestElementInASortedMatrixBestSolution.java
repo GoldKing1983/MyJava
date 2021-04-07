@@ -1,4 +1,4 @@
-package com.interview.leetcode.linkedin.medium;
+package com.interview.leetcode.topic.matrix;
 /*
  * https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/#
  * https://www.educative.io/collection/page/5668639101419520/5671464854355968/4605334997958656

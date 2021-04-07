@@ -25,9 +25,9 @@ public class ValidPalindrome {
   public boolean isPalindrome(String s) {
     int leftPtr = 0;
     int rightPtr = s.length() - 1;
-    char leftPtrChar = ' ';
-    char rightPtrChar = ' ';
     while (true) {
+      char leftPtrChar = ' ';
+      char rightPtrChar = ' ';
       while (leftPtr < rightPtr) {
         char tempLeftPtrChar = s.charAt(leftPtr);
         if (Character.isAlphabetic(tempLeftPtrChar)) {
@@ -50,16 +50,11 @@ public class ValidPalindrome {
         }
         rightPtr--;
       }
-      if (leftPtrChar == ' ' || rightPtrChar == ' ')
-        return true;
-      if (leftPtrChar != rightPtrChar)
-        return false;
+      if (leftPtrChar == ' ' || rightPtrChar == ' ') return true;
+      if (leftPtrChar != rightPtrChar) return false;
 
       leftPtr++;
       rightPtr--;
-      // Reset values
-      leftPtrChar = ' ';
-      rightPtrChar = ' ';
     }
   }
 }

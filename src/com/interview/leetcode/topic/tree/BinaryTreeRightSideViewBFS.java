@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.medium;
+package com.interview.leetcode.topic.tree;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

@@ -48,7 +48,7 @@ Update Row 1
 Update Row 2
 [17,2,17]
 [33,33,7]
-[21,10,37] --> Math.min(33,7) + 14 --> Math.min(18,7) + 3 --> Math.min(18,33) + 19
+[21,10,37] --> Math.min(33,7) + 14=21 --> Math.min(18,7) + 3=10 --> Math.min(18,33) + 19=37
 
 Result is minimum cost of last Row. If there is only one row result is minimum 1st row itself.
 */

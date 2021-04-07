@@ -17,6 +17,14 @@ It is possible that several messages arrive roughly at the same time.
 2) If the key exists, if currentTimeStamp-previousTimeStamp < 10. Simply ignore. return false
 3) If the key exists, if currentTimeStamp-previousTimeStamp >= 10.  add/update key again with new timeStamp.
 
+Input  : [[],  [1, "foo"], [2, "bar"], [3, "foo"], [8, "bar"], [10, "foo"], [11, "foo"]]
+Output : [null, true,         true,       false,     false,        false,      true]
+        1) true because foo is new entry.
+        2) true because bar is new entry
+        3) false because foo exists and currentTimeStamp-previousTimeStamp < 10
+        4) false because bar exists and currentTimeStamp-previousTimeStamp < 10
+        5) false because foo exists and currentTimeStamp-previousTimeStamp < 10
+        6) true because foo exists and currentTimeStamp-previousTimeStamp == 10
  */
 public class LoggerRateLimiter {
   private HashMap<String, Integer> loggerMapper = new HashMap<>();

@@ -24,39 +24,60 @@ Window position                Max
  1  3  -1  -3 [5  3  6] 7       6
  1  3  -1  -3  5 [3  6  7]      7
 =======================================Solution Approach===================================================================
-This problem is an extension of problem "NextGreaterElementIRightApproach". So understand "NextGreaterElementIRightApproach"
-Below solution is possible, because of doubly linked list where we can insert/delete at both ends
+
+
+There are 2 cases the window in pQ can shrink
+case1: when currentNumber > deque.peekLast().. this shrink can happen any-time.. i.e before or after full window
+       Ex: [1,2,3,4,5,6] k=5... at index4 processing deque=[5]... window shrinked before fully forming. 
+       
+       This logic is also similar to NextGreaterElementIRightApproach.
+         
+
+case2: when window moves. left side data needs to be removed and right side will be added.
+                          So i need to remove leftSide data.
+                          But I don't know which one to pick or when to pick. 
+                          So I will see if dequeHead has windowStartData then remove from leftSide.
+       Ex: [6,5,4,3,2,1] k=5... at index4 processing deque=[6,5,4,3,2] result=[6].
+                          So if nums[windowBegninning]==dequeHead then remove dequeHead.  
+                          it cannot be "result[windowBegninning]==dequeHead". because sameResult continues for more than 1Window. 
+
+1) Below solution is possible, because of doubly linked list where we can insert/delete at both ends
+2) Because in case1 we do peekLast and removeLast.
+           in case2 we do peek(peekFirst) and poll(removeFirst)
 
 
  */
 public class SlidingWindowMaximumOptimum {
 
   public int[] maxSlidingWindow(int[] nums, int k) {
-    if (nums.length == 0) {
-      return new int[0];
-    }
+    int n = nums.length;
     Deque<Integer> deque = new ArrayDeque<>(k);
-    int[] res = new int[nums.length + 1 - k];
-    // Before a full window, simply update element to queue
-    for (int i = 0; i < k - 1; i++) {
-      updateQueue(deque, nums[i]);
-    }
-    // Once the desired window is achieved, get result from head.
-    for (int i = 0; i < res.length; i++) {
-      updateQueue(deque, nums[i + k - 1]);
-      res[i] = deque.peek(); // peek data as queue
-      // remove the element at head if its index no longer falls in current window
-      if (nums[i] == deque.peek()) {
-        deque.poll();// poll data as queue
+    int[] res = new int[n + 1 - k];
+
+    int windowBeginning = 0;
+    for (int i = 0; i < n; i++) {
+      int currentNumber = nums[i];
+      // Case 1 Shrink. Similar to NextGreaterElementIRightApproach
+      while (!deque.isEmpty() && currentNumber > deque.peekLast()) {
+        deque.removeLast();
       }
+      deque.offer(currentNumber);
+
+      /*
+        Ex: 1,3,-1 k=3.. continue works 2 times... deque=[3]
+        Till the initial window not formed, shrink by case1 only
+       */
+      if (i < k - 1) continue;
+
+      res[windowBeginning] = deque.peek(); // peek data as queue
+
+      // Case 2 Shrink
+      if (nums[windowBeginning] == deque.peek()) {
+        deque.poll();// remove firstElement from queue
+      }
+
+      windowBeginning++;
     }
     return res;
-  }
-
-  private void updateQueue(Deque<Integer> queue, int currentNumber) {
-    while (!queue.isEmpty() && currentNumber > queue.peekLast()) {
-      queue.removeLast();
-    }
-    queue.offer(currentNumber);
   }
 }

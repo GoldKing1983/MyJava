@@ -7,6 +7,26 @@ import java.util.Set;
 
 public class LongestPalindrome {
 
+  public int longestPalindromeBucket(String s) {
+    int[] lowerUpper = new int[52];
+    int resultCount = 0;
+    for (char c : s.toCharArray()) {
+      if (Character.isLowerCase(c)) {
+        lowerUpper[c - 'a']++;
+      } else {
+        lowerUpper[c - 'A' + 26]++;
+      }
+    }
+    for (int i = 0; i < 52; i++) {
+      int count = lowerUpper[i];
+      resultCount = resultCount + (count % 2 == 0 ? count : count - 1);
+    }
+    for (int i = 0; i < 52; i++) {
+      if (lowerUpper[i] % 2 != 0) return resultCount + 1;
+    }
+    return resultCount;
+  }
+
   public int longestPalindrome(String s) {
     Set<Character> set = new HashSet<>();
     int result = 0;

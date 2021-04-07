@@ -8,7 +8,8 @@ Similar problem : https://www.educative.io/courses/coderust-hacking-the-coding-i
 2) All the non-zero elements must retain their original order.
 ==========================================================Solution Approach======================================================
 1) Move the "writePtr" to stays at data "0"
-2) If "readPtr" is non-zero. then move data from "non-zero" to zero. Update nonZero at readLocation to zero.
+2) If "readPtr" is non-zero. then move data from "non-zero" to zero. 
+3) Update nonZero at readLocation to zero.
 =================================================================================================================================
  */
 public class MoveZeroesSimple {
@@ -18,6 +19,7 @@ public class MoveZeroesSimple {
     int write = 0;
     // Move write to first zero point.
     while (write < n && nums[write] != 0) write++;
+    
     for (int read = write + 1; read < n; read++) {
       if (nums[read] != 0) {
         nums[write] = nums[read];

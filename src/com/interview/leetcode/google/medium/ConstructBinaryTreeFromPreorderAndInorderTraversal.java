@@ -38,6 +38,7 @@ So for loop is better.
  */
 public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
   int index = 0;
+  
   // key as nodeValue and value as indexOfNodeValue
   HashMap<Integer, Integer> inOrderMap = new HashMap<>();
 

@@ -68,12 +68,12 @@ Ex6: Valid Input a->b, a->c, c->b, b->d, d->a... Ans: a->b->d->a->c->b
 2) With bacTrack we can go with next combination. But that code is too much
  */
 public class ReconstructItinerary {
-  HashMap<String, PriorityQueue<String>> map = new HashMap<>();
+  HashMap<String, PriorityQueue<String>> adjMap = new HashMap<>();
   LinkedList<String> path = new LinkedList<>();
 
   public List<String> findItinerary(List<List<String>> tickets) {
     for (List<String> ticket : tickets)
-      map.computeIfAbsent(ticket.get(0), k -> new PriorityQueue<>()).offer(ticket.get(1));
+      adjMap.computeIfAbsent(ticket.get(0), k -> new PriorityQueue<>()).offer(ticket.get(1));
 
     dfs("JFK");
     return path;
@@ -84,7 +84,7 @@ public class ReconstructItinerary {
   // Iteration2: fromCity is b, b has no child. So If will be executed. b added to result. path=[b]
   // Iteration3: Iteration1 loop ends. a added to result. path=[a,b]
   public void dfs(String fromCity) {
-    PriorityQueue<String> toCities = map.get(fromCity);
+    PriorityQueue<String> toCities = adjMap.get(fromCity);
 
     if (toCities == null) path.addFirst(fromCity);
     else {

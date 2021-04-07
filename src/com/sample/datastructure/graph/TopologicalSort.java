@@ -38,7 +38,7 @@ public class TopologicalSort {
     HashMap<Integer, List<Integer>> adjMatrix = new HashMap<>(); // adjacency list graph
     for (int i = 0; i < vertices; i++) {
       inDegree.put(i, 0);
-      adjMatrix.put(i, new ArrayList<Integer>());
+      adjMatrix.put(i, new ArrayList<>());
     }
 
     // b. Build the graph

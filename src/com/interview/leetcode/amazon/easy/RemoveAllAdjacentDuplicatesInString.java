@@ -16,19 +16,6 @@ of which only "aa" is possible, so the final string is "ca".
 
  */
 public class RemoveAllAdjacentDuplicatesInString {
-  /* 1) 3ms. Best Approach. Using 2 Pointers
-     2) If 
-   
-   */
-  public String removeDuplicates(String S) {
-    int write = 0, n = S.length();
-    char[] res = S.toCharArray();
-    for (int read = 0; read < n; ++read, ++write) {
-      res[write] = res[read]; // copy from right to left
-      if (write > 0 && res[write - 1] == res[write]) write -= 2;
-    }
-    return new String(res, 0, write);
-  }
 
   // 16 ms. better
   //1) If current and previous match and remove previous

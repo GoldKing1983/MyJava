@@ -1,4 +1,4 @@
-package com.interview.leetcode.linkedin.easy;
+package com.interview.leetcode.topic.matrix;
 
 /*
 https://leetcode.com/problems/search-a-2d-matrix/
@@ -25,24 +25,20 @@ Output: true
  */
 public class SearchA2DMatrix {
 
-  private int colMax;
-  private int[][] matrix;
-
   public boolean searchMatrix(int[][] matrix, int target) {
     int rowMax = matrix.length;
     if (rowMax == 0) return false;
-    colMax = matrix[0].length;
-    this.matrix = matrix;
-    return binSearch(0, rowMax * colMax-1, target);
+    int colMax = matrix[0].length;
+    return binSearch(matrix, 0, rowMax * colMax - 1, target, colMax);
   }
 
-  public boolean binSearch(int low, int high, int target) {
+  public boolean binSearch(int[][] matrix, int low, int high, int target, int colMax) {
     if (low <= high) {
       int mid = low + (high - low) / 2;
       int midValue = matrix[mid / colMax][mid % colMax];
       if (midValue == target) return true;
-      else if (midValue < target) return binSearch(mid + 1, high, target);
-      else return binSearch(low, mid - 1, target);
+      else if (midValue < target) return binSearch(matrix, mid + 1, high, target, colMax);
+      else return binSearch(matrix, low, mid - 1, target, colMax);
     }
     return false;
   }

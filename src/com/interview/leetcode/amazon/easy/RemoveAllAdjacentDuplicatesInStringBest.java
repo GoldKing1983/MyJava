@@ -14,47 +14,42 @@ s = "foobaa", return "fb"
 
 
 
-========================================================Solution Approach========================================================
-1) Both different -->  writePtr++ and moveReadPtrDataToWritePtrData and readPtr++.
-2) Both same --> writePtr-- and readPtr++.
+1) Solution is similar to stack approach.
+2) If stack is notEmpty and stackSize is 2 or more, compare current and previous.
+3) If both are same. remove previous
 
-input: "foobaa" output: "fb"
 
-wr
- foobaa
+==========Note if both are same. from 1 it goes to 2. Else it goes to 0. that is the trick. +2 or -2
+Ex: aa
+write = 0
+write = 1
+      current and previous are same. 
+      write goes to 0.
 
- wr 
- foobaa
-
- wr
-foobaa
-
-w  r
-foobaa
-
- w  r
-fbobaa
-
-  w  r 
-fbabaa
-
- w    r 
-fbabaa
+Ex: ab
+write = 0
+write = 1
+      current and previous are different. 
+      write goes to 2.
 
  */
 public class RemoveAllAdjacentDuplicatesInStringBest {
-  public String removeDuplicates(String inputStr) {
-    char[] result = inputStr.toCharArray();
-    int write = -1, read = 0, n = result.length;
-    while (read < n) {
-      if (write >= 0 && result[write] == result[read]) {
+  public String removeDuplicates(String S) {
+    if (S == null || S.length() == 0) return S;
+    int write = 0;
+    int n = S.length();
+    char[] result = new char[n];
+
+    for (int read = 0; read < n; read++) {
+      result[write] = S.charAt(read);
+      if (write <= 0) { // less than or equal to 1  element exists in result. So no compare possible
+        write++;
+      } else if (result[write] == result[write - 1]) {
         write--;
       } else {
         write++;
-        result[write] = result[read];
       }
-      read++;
     }
-    return String.valueOf(result, 0, write + 1);
+    return new String(result, 0, write);
   }
 }

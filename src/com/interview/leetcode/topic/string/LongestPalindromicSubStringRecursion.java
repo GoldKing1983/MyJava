@@ -1,4 +1,4 @@
-package com.interview.leetcode.linkedin.medium;
+package com.interview.leetcode.topic.string;
 
 /*
 https://leetcode.com/problems/longest-palindromic-substring/

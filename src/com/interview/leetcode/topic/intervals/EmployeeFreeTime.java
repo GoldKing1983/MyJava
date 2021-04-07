@@ -1,9 +1,8 @@
 package com.interview.leetcode.topic.intervals;
 
-import com.interview.leetcode.Interval;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import com.interview.leetcode.Interval;
 
 /*
 https://leetcode.com/problems/employee-free-time/description/
@@ -50,23 +49,23 @@ https://leetcode.com/problems/employee-free-time/description/
 HighLevel Logic is "MergeKSortedLists" and low level logic is "MergeInterval"
  */
 public class EmployeeFreeTime {
-  public List<Interval> employeeFreeTime(List<List<Interval>> avails) {
-    List<Interval> result = new ArrayList<>();
-    List<Interval> timeLine = new ArrayList<>();
-    avails.forEach(listEntry -> timeLine.addAll(listEntry));
-    Collections.sort(timeLine, ((interval1, interval2) -> interval1.start - interval2.start));
 
-    Interval previous = timeLine.get(0);
-    for (Interval current : timeLine) {
-      if (previous.end < current.start) { // No overlap.
-        result.add(new Interval(previous.end, current.start));
-        previous = current;
-      } else { // Overlap.
-        // Keep the bigger one as previous. Because when there is overlap, next compare has to be
-        // done with big number.
-        // Ex1: previous=[1,5] current=[2,10].. so current wins.
-        // Ex2: previous=[1,5] current=[2,3].. so previous wins.
-        previous = previous.end < current.end ? current : previous;
+  public List<Interval> employeeFreeTimeSimplified(List<List<Interval>> intervals) {
+    List<Interval> combinedIntervals = new ArrayList<>();
+    intervals.forEach(k -> combinedIntervals.addAll(k));
+    combinedIntervals.sort((i1, i2) -> i1.start - i2.start);
+    // intervals: [[[1,2],[5,6]],[[1,3]],[[4,10]]] combinedIntervals: [1,2],[1,3][4,10],[5,6]
+    int previousEndTime = combinedIntervals.get(0).end;
+    List<Interval> result = new ArrayList<>();
+    for (int i = 1; i < combinedIntervals.size(); i++) {
+      int currentStartTime = combinedIntervals.get(i).start;
+      int currentEndTime = combinedIntervals.get(i).end;
+      if (previousEndTime >= currentStartTime) { // merge
+        previousEndTime = Math.max(previousEndTime, currentEndTime);
+      } else { // no-merge. Result Found
+        result.add(new Interval(previousEndTime, currentStartTime)); //add the gap between previous and current interval to result
+        previousEndTime = currentEndTime;
+
       }
     }
     return result;

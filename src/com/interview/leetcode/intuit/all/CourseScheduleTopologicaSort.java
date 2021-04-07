@@ -64,31 +64,28 @@ public class CourseScheduleTopologicaSort {
 
   public boolean canFinish(int n, int[][] pre) {
     Map<Integer, List<Integer>> adjMap = new HashMap<>();
-    Map<Integer, Integer> inDegree = new HashMap<>();
-    for (int i = 0; i < n; i++) {
-      adjMap.put(i, new ArrayList<>());
-      inDegree.put(i, 0);
-    }
+    int[] inDegree = new int[n];
+
+    for (int i = 0; i < n; i++) adjMap.put(i, new ArrayList<>());
+
     for (int i = 0; i < pre.length; i++) {
-      adjMap.get(pre[i][1]).add(pre[i][0]);
-      inDegree.put(pre[i][0], inDegree.get(pre[i][0]) + 1);
+      int mainCourse = pre[i][0], dependencyCourse = pre[i][1];
+      adjMap.get(dependencyCourse).add(mainCourse);
+      inDegree[mainCourse] = inDegree[mainCourse] + 1;
     }
     Queue<Integer> sourceQ = new ArrayDeque<>();
-    for (int i = 0; i < n; i++) if (inDegree.get(i) == 0) sourceQ.add(i);
+    for (int i = 0; i < n; i++) if (inDegree[i] == 0) sourceQ.add(i);
 
     if (sourceQ.isEmpty()) return false;
-    List<Integer> sortedOrder = new ArrayList<>();
+    List<Integer> sortedOrder = new ArrayList<>();//int courseCount = 0;
     while (!sourceQ.isEmpty()) {
       int parent = sourceQ.poll();
-      sortedOrder.add(parent);
-      List<Integer> childrens = adjMap.get(parent);
-      for (Integer children : childrens) {
-        int childInDegreeCount = inDegree.get(children);
-        childInDegreeCount--;
-        if (childInDegreeCount == 0) sourceQ.offer(children);
-        inDegree.put(children, childInDegreeCount);
+      sortedOrder.add(parent);//courseCount++;
+      for (Integer children : adjMap.get(parent)) {// get all childs. If child is empty, then loop will not execute
+        inDegree[children]--; // if inDegree[index] goes negative.. It doesn't matter. Next line will not execute or no worries. 
+        if (inDegree[children] == 0) sourceQ.offer(children);
       }
     }
-    return (sortedOrder.size() == n);
+    return (sortedOrder.size() == n); // (courseCount == n);
   }
 }

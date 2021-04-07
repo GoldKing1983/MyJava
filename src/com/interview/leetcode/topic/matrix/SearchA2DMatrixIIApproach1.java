@@ -1,9 +1,10 @@
-package com.interview.leetcode.ebay;
+package com.interview.leetcode.topic.matrix;
 
 /*
 https://leetcode.com/problems/search-a-2d-matrix/
+See Also CountNegativeNumbersInASortedMatrix
 
-1) Given an sorted input matrix from leftToRight, topToBottom but not topRightCornerToNextRowBeginning.
+1) Given an sorted input matrix from leftToRight(row-wise), topToBottom(col-wise) but not topRightCornerToNextRowBeginning.
 2) Find whether elements exists or not.
 
 Input:
@@ -16,7 +17,14 @@ matrix = [
 ]
 target = 3
 Output: true
-
+========================================================Solution Common Point====================================================
+1) Remember the reverse-z
+2) So 2 solution possible. topRightCorner to bottomLeftCorner or bottomLeftCorner to topRightCorner
+                     -------
+                    |
+                    |
+                    |
+             -------
 ==========================================================Note===================================================================
 1) We are not doing any binary search. It is a simple move about any direction
 2) See https://leetcode.com/problems/search-a-2d-matrix-ii/solution/ Approach4 PNG video.

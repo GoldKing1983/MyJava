@@ -1,6 +1,7 @@
 package com.interview.leetcode.google.hard;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 /*
 https://leetcode.com/problems/basic-calculator/description/
@@ -9,6 +10,7 @@ Input may Contain
 1) operators ====> + - ( )
 2) Numbers
 3) Empty
+4) Input may contain negative numbers. Ex: -1+2
 
 1) Key point is doing evaluation from left to right.
 2) Evaluate when a "operator "+" or "-" is found" or when ")" is found.
@@ -46,8 +48,14 @@ will complicate the code.
  */
 public class BasicCalculator {
   public int calculate(String str) {
-    ArrayDeque<Character> operatorStack = new ArrayDeque<>();
-    ArrayDeque<Integer> numberStack = new ArrayDeque<>();
+    Deque<Character> operatorStack = new ArrayDeque<>();
+    Deque<Integer> numberStack = new ArrayDeque<>();
+
+    // deal with the negative numbers
+    if (str.charAt(0) == '-') str = "0" + str; // Ex: -1+1 
+    str = str.replace("(-", "(0-"); // Ex: 1-(-1+1)
+    str = str.replace("(+", "(0+"); // Ex: 1-(+1+1)
+
     Integer number = null;
     for (Character c : str.toCharArray()) {
       switch (c) {

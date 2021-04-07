@@ -1,6 +1,5 @@
 package com.interview.leetcode.topic.string;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,11 +23,11 @@ public class WordBreakDP {
     int n = s.length();
 
     for (int i = 0; i < n; i++) {
-      if (dp[i] || i==0) {
+      if (dp[i] || i == 0) {
         for (int j = i + 1; j <= n; j++) {
           String prefixString = s.substring(i, j);
           if (dictionary.contains(prefixString)) {
-            if(j == n) return true;
+            if (j == n) return true;
             dp[j] = true;
           }
         }

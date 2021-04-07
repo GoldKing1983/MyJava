@@ -56,6 +56,23 @@ public class LongestCommonSubStringReturnLongestString {
     String[] input3 = {"x", "y", "z"};
     String[] input4 = {"a", "y", "x"};
 
+    String[] user0 = {"start", "green", "blue", "pink", "register", "orange", "one/two"};
+    String[] user1 = {"start", "pink", "register", "orange", "red", "a"};
+    String[] user2 = {"a", "one", "two"};
+    String[] user3 = {"pink", "orange", "yellow", "plum", "blue", "tan", "red", "amber",
+        "HotRodPink", "CornflowerBlue", "LightGoldenRodYellow", "BritishRacingGreen"};
+    String[] user4 = {"pink", "orange", "amber", "BritishRacingGreen", "plum", "blue", "tan", "red",
+        "lavender", "HotRodPink", "CornflowerBlue", "LightGoldenRodYellow"};
+    String[] user5 = {"a"};
+
+
+    System.out.println(Arrays.toString(findContiguousHistory(user0, user1)));// => ["pink", "register", "orange"]
+    System.out.println(Arrays.toString(findContiguousHistory(user0, user2)));// => [] (empty)
+    System.out.println(Arrays.toString(findContiguousHistory(user2, user1)));// => ["a"]
+    System.out.println(Arrays.toString(findContiguousHistory(user5, user2)));// => ["a"]
+    System.out.println(Arrays.toString(findContiguousHistory(user3, user4)));// => ["plum", "blue", "tan", "red"]
+    System.out.println(Arrays.toString(findContiguousHistory(user4, user3)));// => ["plum", "blue", "tan", "red"]
+
     System.out.println(Arrays.toString(findContiguousHistory(input1, input2)));
     System.out.println(Arrays.toString(findContiguousHistory(input1, input1)));
     System.out.println(Arrays.toString(findContiguousHistory(input2, input1)));

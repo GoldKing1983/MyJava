@@ -6,15 +6,13 @@ Similar problem : https://www.educative.io/courses/coderust-hacking-the-coding-i
 ==========================================Requirement===================================================================
 1) Move all the 0's to the end of array.
 2) All the non-zero elements must retain their original order.
-==========================================Basic Idea====================================================================
-1) Instead of searching for 0. Search for non-zero and move it to the writePtr.
-The reason being 0 can be over-written with non-zero values. And finally 0 can be filled.
-2) No swap is needed, move value from readPtr to writePtr.
-3) readPtr moves and looks for non-zeroes. if non-zero found override data at writePtr.
-4) When a value is moved from "readPtr to writePtr", increment writePtr.
-5) At the end of iteration "fill 0" "from Index to array length".
 ======================================================Solution Approach=================================================
-Think of solution as magnetFromLeftSide pulling all non-zeroes.
+1) Think of solution as magnetFromLeftSide pulling all non-zeroes.
+2) Instead of searching for 0. Search for non-zero and move it to the writePtr.
+The reason being 0 can be over-written with non-zero values. And finally 0 can be filled.
+3) readPtr moves and looks for non-zeroes. if non-zero found override data at writePtr.
+4) No swap is needed, move value from readPtr to writePtr.
+
 Step1: Move data from "readPtr to writePtr", if it is non-zero.
 Step2: Fill zeroes at end.
 =====================================Worst Case Analysis================================================================

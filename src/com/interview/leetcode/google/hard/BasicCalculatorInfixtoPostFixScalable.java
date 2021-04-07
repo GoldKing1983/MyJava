@@ -8,60 +8,10 @@ import java.util.Map;
 import java.util.Queue;
 
 /*
-https://leetcode.com/problems/basic-calculator-iii/
-https://www.youtube.com/watch?v=vq-nUF0G4fI
-===========================================================Requirement===========================================================
-Input may Contain
-1) operators ====> + - * / ( )
-2) Numbers (Only positive, no negative number)
-3) Empty
-========================================================Solution Approach========================================================
-                                    =====================Infix To PostFix=====================
-1) When we analyze "inFixInput" to "postFixOutput", order of operands(numbers) will never change. 
-So if "currentChar" is number, we can add it to "postFix" result directly.
-Ex: input:5+2*3-1 --> infixToPostFix = 5,2,3,*,+,1,-  ==> we can see that order of 5,2,3,1 didn't changed. 
-Ex: input:5+3*2/1 --> 532*1/+
-2) if currentChar is operator(+-*%/) are 2 cases are possible. 
-          case1 for handling ")" alone. case2 for handling rest of operators.
-
-case1: If "currentChar" is ")". Till "(", poll everything from "operatorStack" and add it to "postFix" result.
-Basic idea on above case: Anything inside "()" we can treat it as isolated. Ex: (a+b)*c. So when ")" comes Evaluate till "(". 
-
-case2: Compare "currentOperator" and "previousOperator".  
-     Ex1: 5*4+2 --> If "currentOperatorPrecedence(+)" is <= "previousOperatorPrecedence". 
-     Add "previousOperator" to "postFix" result.
-     Ex2: 5+4*2 --> Else add "currentOperator" to operatorStack.
-
-operator no-process case3: If "currentChar" is "(". Just add it to "operatorStack".  
-                                  =====================Evaluate PostFix======================
-1) If currentToken is "number" push it to "numberStack".
-2) If currentToken is "operator". Pop top2 number from "numberStack". Evaluate and push it to "numberStack".
-3) Result is carried in "numberStack". Return top from "numberStack".                            
-=====================================================Data Flow Analysis==========================================================
-
-Ex: "2*(5+5*2)/3+(6/2+8)"
-
-Converted PostFix: [2, 5, 5, 2, *, +, *, 3, /, 6, 2, /, 8, +, +]
-
-=====Evaluating the PostFix=======
-[2, 5, 5, 2, *, +, *, 3, /, 6, 2, /, 8, +, +]
-
-[2, 5,  10    , +, *, 3, /, 6, 2, /, 8, +, +]
-
-[2,     15       , *, 3, /, 6, 2, /, 8, +, +]
-
-[       30          , 3, /, 6, 2, /, 8, +, +]
-
-[          10             , 6, 2, /, 8, +, +]
-
-[          10             ,    3   , 8, +, +]
-
-[          10             ,     11       , +]
-
-[                         21                ]
-
+ * Copied from BasicCalculatorIIIInfixToPostFixScalable
  */
-public class BasicCalculatorIIIInfixToPostFixScalable {
+
+public class BasicCalculatorInfixtoPostFixScalable {
   public int calculate(String str) {
     // deal with the negative numbers
     if (str.charAt(0) == '-') str = "0" + str; // Ex: -1+1 
@@ -165,4 +115,6 @@ public class BasicCalculatorIIIInfixToPostFixScalable {
     operators.put('(', 0);
     operators.put(')', 0);
   }
+
+
 }

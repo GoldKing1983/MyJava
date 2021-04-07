@@ -31,6 +31,12 @@ public class DecompressRunLengthEncodedList {
     for (int i = 0; i < n / 2; i++) {
       resultN += nums[2 * i];
     }
+
+    // Below also good, instead of above for loop.
+    //    for(int i=0; i<n; i=i+2) {
+    //      resultN += nums[i];
+    //    }
+
     int[] result = new int[resultN];
     for (int i = 0; i < n / 2; i++) {
       int count = nums[2 * i];
