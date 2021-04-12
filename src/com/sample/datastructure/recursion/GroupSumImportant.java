@@ -18,7 +18,7 @@ public class GroupSumImportant {
   public boolean groupSum(int index, int[] nums, int target) {
     if (target == 0) return true;
 
-    // (target < 0 || index==a.length) for positive numbers
+    // (target < 0 || index==a.length)..if input has negative then target<0 is fine
     if (index == nums.length) return false;
 
     boolean left = groupSum(index + 1, nums, target - nums[index]);

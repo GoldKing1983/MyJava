@@ -16,11 +16,7 @@ public class LeafSimilarTrees {
   public boolean leafSimilar(TreeNode root1, TreeNode root2) {
     List<Integer> root1Leaf = recur(root1, new ArrayList<>());
     List<Integer> root2Leaf = recur(root2, new ArrayList<>());
-    if (root1Leaf.size() != root2Leaf.size()) return false;
-    for (int i = 0; i < root1Leaf.size(); i++) {
-      if (!root1Leaf.get(i).equals(root2Leaf.get(i))) return false;
-    }
-    return true;
+    return root1Leaf.equals(root2Leaf);
   }
 
   private List<Integer> recur(TreeNode root, List<Integer> result) {

@@ -2,19 +2,14 @@ package com.interview.leetcode.amazon.easy;
 
 /*
  https://leetcode.com/problems/flood-fill/
-==============================================Requirement==============================================
- 1) Go in all the 4 direction, if oldColor is present in that index. Update the index with newColor.
- 2) Recursion stops if don't see "oldColor" in any of "current" or "4 adjacent sides"
- 3) Comparing to NumberOfIsland.
- 		a) In NumberOfIsland recursion startsWith 1 in current. "current" and 4 "adjacentSide" is updated to 0(1 to 0 or 0 to 0).
- 		Recursion stops if it sees 0.
-		b) Here recursion startsWith oldColor in current. "current" and 4 "adjacentSide" is updated to newColor,
-		 only if current/4 adjacentSide is oldColor. Recursion stops if it sees anything other than oldColor.
-		 So during the start of the recursion itself, if newColor is startIndex, then return input directly.
-
+===========================================================Requirement===========================================================
+ 1) Given a matrix with startRow,startCol and newColor.
+ 2) Pick the value at startRow,startCol as name it as sourceColor.
+ 3) With startRow,startCol as initial point update all connected points to newColor 
+============================================================Example1=============================================================
 Ex: newColor=2, sr=1, sc=1
-Here oldColor is 1 which is at index 1,1.
-Update all 1(oldColor) in 4 direction to newColor 2 recursively.
+Here sourceColor is 1 which is at index 1,1.
+Update all 1(sourceColor) in 4 direction to newColor 2 recursively.
 	[1,1,1],
 	[1,1,0],
 	[1,0,1]]
@@ -23,8 +18,11 @@ Output:
 	[2,2,2],
 	[2,2,0],
 	[2,0,1]]
-0 cannot be updated because oldColor is 1.
+0 cannot be updated because sourceColor is 1.
 1 at index (2,2) cannot be updated, because recursion cannot go through 0.
+
+========================================================Solution Approach========================================================
+Similar to NumberOfIsland
 
 */
 public class FloodFill {
@@ -33,25 +31,26 @@ public class FloodFill {
   private static final int[][] DIRECTIONS = new int[][] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
   public int[][] floodFill(int[][] image, int row, int col, int newColor) {
-    if (image[row][col] == newColor) return image;
-    recur(image, row, col, image.length, image[0].length, image[row][col], newColor);
+    int sourceColor = image[row][col], maxRow = image.length, maxCol = image[0].length;
+    
+    if (sourceColor == newColor) return image;
+    
+    recur(image, row, col, maxRow, maxCol, sourceColor, newColor);
+    
     return image;
   }
 
-  private void recur(
-      int[][] image, int row, int col, int rowMax, int colMax, int oldColor, int newColor) {
+  private void recur(int[][] image, int row, int col, int maxRow, int maxCol, int sourceColor,
+      int newColor) {
 
     image[row][col] = newColor;
     for (int i = 0; i < 4; i++) {
       int nextRow = row + DIRECTIONS[i][0];
       int nextCol = col + DIRECTIONS[i][1];
-      if (nextRow == rowMax
-          || nextCol == colMax
-          || nextRow < 0
-          || nextCol < 0
-          || image[nextRow][nextCol] != oldColor) continue;
+      if (nextRow == maxRow || nextCol == maxCol || nextRow < 0 || nextCol < 0) continue;
+      if (image[nextRow][nextCol] != sourceColor) continue;
 
-      recur(image, nextRow, nextCol, rowMax, colMax, oldColor, newColor);
+      recur(image, nextRow, nextCol, maxRow, maxCol, sourceColor, newColor);
     }
   }
 }

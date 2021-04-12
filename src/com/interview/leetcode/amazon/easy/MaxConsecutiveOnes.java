@@ -13,24 +13,36 @@ Explanation: The first two digits or the last three digits are consecutive 1s.
 
  */
 public class MaxConsecutiveOnes {
-  public int findMaxConsecutiveOnes(int[] nums) {
-    int max = 0;
-    int count = 0;
-    for (int i = 0; i < nums.length; i++) {
-      if (nums[i] == 1) {
-        count++;
-        max = Math.max(max, count);
-      } else count = 0;
+  public int findMaxConsecutiveOnesLookFor1(int[] nums) {
+    int maxConsecutiveOnes = 0;
+    int consecutiveOnes = 0;
+    for (int num : nums) {
+      if (num == 1) {
+        consecutiveOnes++;
+        maxConsecutiveOnes = Math.max(maxConsecutiveOnes, consecutiveOnes);
+      } else consecutiveOnes = 0;
     }
-    return max;
+    return maxConsecutiveOnes;
+  }
+
+  public int findMaxConsecutiveOnesLookFor0(int[] nums) {
+    int consecutiveOnes = 0;
+    int maxConsecutiveOnes = 0;
+    for (int num : nums) {
+      if (num == 0) {
+        maxConsecutiveOnes = Math.max(maxConsecutiveOnes, consecutiveOnes);
+        consecutiveOnes = 0;
+      } else consecutiveOnes++;
+    }
+    return Math.max(maxConsecutiveOnes, consecutiveOnes);
   }
 
   // Without If Else Code
   public int findMaxConsecutiveOnesWithoutIf(int[] nums) {
     int maxSum = 0, sum = 0;
-    for (int n : nums) {
-      sum *= n; // If current is 0. sum changes to 0. If current is 1, sum still stays the same
-      sum += n;
+    for (int num : nums) {
+      sum *= num; // If current is 0. sum changes to 0. If current is 1, sum still stays the same
+      sum += num;
       maxSum = Math.max(maxSum, sum);
     }
     return maxSum;

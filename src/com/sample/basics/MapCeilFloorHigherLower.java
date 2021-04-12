@@ -1,6 +1,10 @@
 package com.sample.basics;
 
 import java.util.TreeMap;
+// The ceilingKey() returns a number greaterThanOrEqualTo keys passed. If nothing found returns null.
+// The higherKey() returns a number greaterThan the keys passed. . If nothing found returns null.
+// The ceilingKey() returns a number greaterThanOrEqualTo keys passed. If nothing found returns null.
+// The higherKey() returns a number greaterThan the keys passed. . If nothing found returns null.
 
 public class MapCeilFloorHigherLower {
   public static void main(String[] args) {
@@ -9,14 +13,11 @@ public class MapCeilFloorHigherLower {
     treeMap.put(1, 11);
     treeMap.put(10, 101);
     treeMap.put(5, 55);
-    System.out.println(treeMap.ceilingKey(4));
-    System.out.println(treeMap.higherKey(4));
-    // The ceilingKey() method returns the least (smallest) key in this map that is greater than or
-    // equal to the element passed
-    System.out.println(treeMap.ceilingKey(5));
-    System.out.println(treeMap.ceilingEntry(5).getValue());
-    // The higherKey() method returns the least (smallest) key in this map that is greater than
-    // (not equal too) the element passed
-    System.out.println(treeMap.higherKey(5));
+    System.out.println(treeMap.ceilingKey(5));//5
+    System.out.println(treeMap.higherKey(5));//10
+    
+    System.out.println(treeMap.floorKey(5));//5
+    System.out.println(treeMap.lowerKey(5));//1
+    
   }
 }

@@ -19,7 +19,7 @@ Explanation: Buy on day 1 (price = 1) and sell on day 5 (price = 5), profit = 5-
 1) Don't think and code as requirement says. Because in example1 it says buy at day1 and sell at day5
 2) It might seem like we are doing multiple transactions.
 Ex: 1 100 200.... MaxProfit 199
-How it should be: Buy at day1 and sell at day5 . Profit 199
+How it should be: Buy at day1 and sell at day3 . Profit 199
 
 	But we can code:buy at 1  -> sell at day2 100, Profit 99
 					buy at 100-> sell at day3 200, Profit 99+100=199
@@ -30,8 +30,8 @@ Coding to "How it should be" is pretty large. Still we achieve the same. It is w
 public class BestTimeToBuyAndSellStockII {
   public int maxProfit(int[] prices) {
     int maxProfit = 0;
-    for (int i = 0; i < prices.length - 1; i++) {
-      int profit = prices[i + 1] - prices[i]; // current and next
+    for (int i = 1; i < prices.length; i++) {
+      int profit = prices[i] - prices[i - 1]; // buy yesterday and sell today
 
       if (profit > 0) maxProfit += profit;
     }

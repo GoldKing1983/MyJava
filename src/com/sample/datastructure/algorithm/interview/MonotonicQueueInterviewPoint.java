@@ -4,8 +4,11 @@ package com.sample.datastructure.algorithm.interview;
 
 https://leetcode.com/problems/sliding-window-maximum/discuss/65885/This-is-a-typical-monotonic-queue-problem
 
-Problem which needs insertion and deletion at both ends of queue.
-MonotonicQueue in Java is ArrayDeque.
+
+MonotonicQueue is concept...keeping data either increasing(ascending) or decreasing(descending) in queue/stack.... 
+
+Ex: In NextGreaterElementI using stack we keep data in descendingOrder(Ex: 7,6,5,4,3,2)..
+once we see 8, we pop all lowerValues, set result...
 
 496. Next Greater Element I
 503. Next Greater Element II

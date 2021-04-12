@@ -34,9 +34,9 @@ Space complexity: O(n) - where n is the number of entries in HashMap
 		3) During second time map[hash] will have previous value in step2. So table[100] = "second"->"first"
 		4) During third time map[100] = "third"->"second"->"first"
 =========REMOVE Operation===========
-1) If the hashKey is not found. Then data not found. No Operation.
-1) If the node to be deleted is at first. Then I need to connect the bucket head with 2nd node.
-2) For rest of the case simply join next with next.next
+Case1) If the hashKey is not found. Then data not found. No Operation.
+Case2) If the node to be deleted is at first. Then I need to connect the bucket head with 2nd node.
+Case3) For rest of the case simply join next with next.next
 ==========FIND=======
 find will be used during PUT and GET to verify node exists or not
 ===============
@@ -75,6 +75,7 @@ public class DesignHashMap {
     } else {
       Map existingNode = find(firstNode, key);
       if (existingNode == null) { // Key not exist. Collission
+        //Add currentNode as firstNode or head.
         Map node = new Map();
         node.key = key;
         node.value = value;
@@ -106,13 +107,14 @@ public class DesignHashMap {
       myMap[hashKey] = firstNode.next;
       return;
     }
+    Map prevNode = firstNode;
     Map nextNode = firstNode.next;
     while (nextNode != null) {
       if (nextNode.key == key) {
-        firstNode.next = nextNode.next; // skip the nextNode
+        prevNode.next = nextNode.next; // skip the nextNode
         return;
       }
-      firstNode = nextNode;
+      prevNode = nextNode;
       nextNode = nextNode.next;
     }
   }

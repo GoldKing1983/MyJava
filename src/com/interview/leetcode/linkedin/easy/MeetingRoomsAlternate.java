@@ -32,10 +32,10 @@ public class MeetingRoomsAlternate {
     Arrays.sort(intervals, (x, y) -> x[0] - y[0]);
 
     for (int i = 1; i < intervals.length; i++) {
-      int previousEnd = intervals[i - 1][1];
-      int currentStart = intervals[i][0];
+      int previousEndTime = intervals[i - 1][1];
+      int currentStartTime = intervals[i][0];
 
-      if (previousEnd > currentStart) return false;
+      if (previousEndTime > currentStartTime) return false; // if (currentStartTime < previousEndTime) return false;
     }
 
 

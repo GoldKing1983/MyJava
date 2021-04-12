@@ -21,6 +21,18 @@ Two meetings overlap if one of them starts while the other is still taking place
 =========================================================Solution Approach=======================================================
 Same logic as MeetingRoomsII
 
+    [10,20][20,30]
+    10 -> 1
+    20 -> -1 updated to 0
+    30 -> 1
+
+    [10,20][20,30] [19,20]
+    10 -> 1
+    19 -> 1
+    20 -> -1, updated to 0, updated to -1
+    30 -> 1
+
+
 
 */
 public class MeetingRoomsUsingTreeMap {

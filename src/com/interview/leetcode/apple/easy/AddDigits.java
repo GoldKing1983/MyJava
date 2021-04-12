@@ -16,9 +16,15 @@ public class AddDigits {
 
   public int addDigits(int num) {
     while (num >= 10) {
-      int q = num % 10;
-      num = num / 10 + q;
+      int divisionResult = num / 10; //   Ex: 38 -> 3  ..11 -> 1 
+      int reminder = num % 10; //         Ex: 38 -> 8  ..11 -> 1
+      num = divisionResult + reminder; // Ex: 38 -> 11 ..2 
     }
+    return num;
+  }
+
+  public int addDigitsOneLine(int num) {
+    while (num >= 10) num = (num / 10) + (num % 10);
     return num;
   }
 }

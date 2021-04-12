@@ -41,43 +41,36 @@ The "minimum absolute difference" between 2 and 4 is 4.
 
 public class MinimumAbsoluteDifferenceInBST {
 
-  int minDiff = Integer.MAX_VALUE;
-  Integer prev = null;
+  int minDifference = Integer.MAX_VALUE;
+  Integer previousValue = null;
 
-  public int getMinimumDifference(TreeNode root) {
-    recur(root);
-    return minDiff;
-  }
-
-  public void recur(TreeNode root) {
-
-    if (root == null) return;
-
-    recur(root.left);
-
-    if (prev == null) prev = root.val;// There will be minimum 2 nodes in input. So no needed bother about minimum.
+  public int minDiffInBST(TreeNode root) {
+    if (root == null) return minDifference;
+    minDiffInBST(root.left);
+    if (previousValue == null) previousValue = root.val;
     else {
-      int currentMin = root.val - prev;
-      minDiff = Math.min(minDiff, currentMin);
+      int currentDifference = root.val - previousValue;
+      minDifference = Math.min(minDifference, currentDifference);
+      previousValue = root.val;
     }
-    recur(root.right);
-
+    return minDiffInBST(root.right);
   }
 
-  // Solution based on "right-first-in-order-traversal".  currentDiff=  prev - root.val
-  private void recurRightToLeft(TreeNode root) {
-    if (root == null) return;
+  // Solution based on "right-first-in-order-traversal".  currentDiff=  previousValue - root.val
+  private int recurRightToLeft(TreeNode root) {
+    if (root == null) return minDifference;
 
     recurRightToLeft(root.right);
 
-    if (prev == null) prev = root.val;
+    if (previousValue == null) previousValue = root.val;
     else {
-      minDiff = Math.min(minDiff, prev - root.val);
-      prev = root.val;
+      int currentDifference = previousValue - root.val;
+      minDifference = Math.min(minDifference, currentDifference);
+      previousValue = root.val;
     }
 
 
-    recurRightToLeft(root.left);
+    return recurRightToLeft(root.left);
 
   }
 }

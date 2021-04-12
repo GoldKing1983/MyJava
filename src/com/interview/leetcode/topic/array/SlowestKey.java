@@ -1,8 +1,5 @@
 package com.interview.leetcode.topic.array;
 
-import java.util.Collections;
-import java.util.TreeSet;
-
 /*
 1) Given an array of times where each entry represents seconds and corresponding keysReleased at that time.
 2) Return longestTime which key was pressed.
@@ -17,21 +14,26 @@ import java.util.TreeSet;
 public class SlowestKey {
   public char slowestKey(int[] releaseTimes, String keysPressed) {
     // If there is only 1 key pressed then answer is firstKey pressed time
-    int longestTime = releaseTimes[0];
-    TreeSet<Character> longestTimePressedKey = new TreeSet<>(Collections.reverseOrder());
-    longestTimePressedKey.add(keysPressed.charAt(0));
+    int maxLongestTime = releaseTimes[0];
+    char longestTimePressedKey = keysPressed.charAt(0);
 
-    // from 2ndKey pressedTime, compare current and previous.
+    // from 2ndKey pressedTime, compare current and longestTimePressedKey.
     for (int i = 1; i < keysPressed.length(); i++) {
+      char currentPressedKey = keysPressed.charAt(i);
       int currentLongestTime = releaseTimes[i] - releaseTimes[i - 1];
-      if (currentLongestTime > longestTime) {
-        longestTimePressedKey = new TreeSet<>(Collections.reverseOrder());
-        longestTimePressedKey.add(keysPressed.charAt(i));
-        longestTime = currentLongestTime;
-      } else if (currentLongestTime == longestTime) {
-        longestTimePressedKey.add(keysPressed.charAt(i));
+
+      if (currentLongestTime == maxLongestTime) {
+        // tie happened. Pick the biggest character just by below comparing..
+        // Ex: a,b... b's integer value greater than a's integer value
+        if (currentPressedKey > longestTimePressedKey) {
+          longestTimePressedKey = currentPressedKey;
+        }
+      } else if (currentLongestTime > maxLongestTime) {
+        maxLongestTime = currentLongestTime;
+        longestTimePressedKey = currentPressedKey;
       }
     }
-    return longestTimePressedKey.first();
+    return longestTimePressedKey;
+
   }
 }

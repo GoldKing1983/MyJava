@@ -24,7 +24,7 @@ public class MapSortByValue {
 
     System.out.println("==========Sort By Value===========");
     TreeMap<String, Integer> mapSortedByValue =
-        new TreeMap<>((a, b) -> mapSortedByKey.get(a).compareTo(mapSortedByKey.get(b)));
+        new TreeMap<>((a, b) -> map.get(a).compareTo(map.get(b)));
     mapSortedByValue.putAll(map);
     System.out.println("Map Sorted By Value: " + mapSortedByValue);
 

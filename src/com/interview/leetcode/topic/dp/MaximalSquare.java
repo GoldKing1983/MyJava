@@ -83,7 +83,7 @@ Filling DP Matrix Position: 2,1
 Filling DP Matrix Position: 2,2
 [1, 1, 1]
 [1, 2, 2]
-[1, 2, 2]
+[1, 2, 3]
 =====================================================================================
  */
 public class MaximalSquare {

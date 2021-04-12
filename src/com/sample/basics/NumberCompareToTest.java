@@ -13,6 +13,9 @@ public class NumberCompareToTest {
 
     num1 = 20;
     System.out.println(num1.compareTo(num2));
+    
+    
+    
   }
 
 }

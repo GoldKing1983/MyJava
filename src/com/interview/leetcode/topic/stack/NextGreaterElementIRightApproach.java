@@ -31,11 +31,10 @@ The stack will first contain [9, 8, 7, 3, 2, 1] and then we see 6 which is great
 so we pop 1 2 3 whose next greater element should be 6
 Map Values : {1=6, 2=6, 3=6}
 For ---> 9, 8, 7 nothing added in map, which means -1.
-
+=======================================================Data Flow Analysis========================================================
 Example2: 6 5 4 3 2 1
 All Elements will be added to stack. So there is nothing greater for any element.
-
-==========================
+=================================================================================================================================
 
 
  */

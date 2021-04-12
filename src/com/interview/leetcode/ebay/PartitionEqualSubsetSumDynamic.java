@@ -1,7 +1,6 @@
 package com.interview.leetcode.ebay;
 
 import java.util.Arrays;
-
 import com.leetcode.dynamicprogramming.GroupSumDP;
 
 /*
@@ -12,18 +11,11 @@ If we able to get a result of sum/2 using groupsum. Then remaining number is rem
 
 */
 public class PartitionEqualSubsetSumDynamic {
-  public static void main(String[] args) {
-    PartitionEqualSubsetSumDynamic p = new PartitionEqualSubsetSumDynamic();
-    int[] input = new int[] {1, 5, 11, 5};
-    System.out.println(p.canPartition(input));
-  }
 
   public boolean canPartition(int[] nums) {
     int sum = Arrays.stream(nums).sum();
-    if (sum % 2 == 1) {
-      return false;
-    }
-    System.out.println("Target to achieve is " + sum / 2);
+    if (sum % 2 == 1) return false;
+
     GroupSumDP g = new GroupSumDP();
     return g.groupSum(nums, sum / 2);
   }
