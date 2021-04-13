@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.hard;
+package com.interview.leetcode.topic.array;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
