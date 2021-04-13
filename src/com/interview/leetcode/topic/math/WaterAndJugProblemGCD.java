@@ -1,7 +1,7 @@
-package com.interview.leetcode.google.medium;
+package com.interview.leetcode.topic.math;
 
 /*
-
+https://leetcode.com/problems/water-and-jug-problem/
 ==================================================Requirement==================================================
 You are given two jugs with capacities x and y litres. There is an infinite amount of water supply available.
 You need to determine whether it is possible to measure exactly z litres using these two jugs.
@@ -43,23 +43,23 @@ public class WaterAndJugProblemGCD {
   public boolean canMeasureWater(int x, int y, int z) {
     // Ex: x=2,y=2,z=6
     if (x + y < z) return false;
-    // Ex: x=2,y=2,z=0
-    if (z == 0) return true;
-    // Ex: x=0,y=2,z=2
-    if (x == 0) return y == z;
-    // Ex: x=2,y=0,z=2
-    if (y == 0) return x == z;
+
     // Ex: x=3,y=5,z=4
     return z % gcd(x, y) == 0;
+
   }
 
-  public int gcd(int a, int b) {
+  private int gcd(int a, int b) {
+
     while (true) {
-      int temp = a;
-      a = b % a;
-      b = temp;
-      if (a == 0) break;
+      if (a < b) {
+        a = a + b;
+        b = a - b;
+        a = a - b;
+      }
+      a = a % b;
+      if (a == 0) return b;
     }
-    return b;
+
   }
 }

@@ -12,13 +12,15 @@ Output: 5
 Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
              Not 7-1 = 6, as selling price needs to be larger than buying price.
 ==============================================Solution Approach - BruteForce - O(n^2)==============================================
-1) Take each entry as buy. try to sell for all continuous entries. Cache the max profit.
-2) Ex: For 5 day stocks. Buy at Day1. Sell at 2,3,4,5.
-              			 Buy at Day2. Sell at 3,4,5.
-              			 Buy at Day3. Sell at 4,5.
-              			 Buy at Day4. Sell at 5.
+1) Consider 0thDay value as minimumBuyPrice. 
+    =======
+2) Consider everyDayPrice as sellPrice.
+3) Calculate todaysProfit. 
+4) Update maxProfit from todaysProfit
+5) Update minimumBuyPrice from todays price.
+    
 ===================================================DP Thinking===============================================
-For each of current days. Cache the lowestBuyPrice for previous days. Use lowestBuyPrice as a buy price.
+For each of current days. Cache the lowestBuyPrice for "all of previous days". Use lowestBuyPrice as a buy price.
 ==============================================Solution Approach==============================================
 For each of currentDay price, use previousLowestPrice as buyPrice and currentDay price as sellPrice..
 Ex: For 5 day stocks. Keep Min of{Day1} as buyPrice. sellPrice at Day1Price.
@@ -32,13 +34,15 @@ Ex: For 5 day stocks. Keep Min of{Day1} as buyPrice. sellPrice at Day1Price.
 public class BestTimeToBuyAndSellStock {
 
   public int maxProfit(int[] prices) {
+    int minimumBuyPrice = prices[0];
     int maxProfit = 0;
-    int lowestBuyPriceDpCache = Integer.MAX_VALUE;
-    for (int i = 0; i < prices.length; i++) {
-      lowestBuyPriceDpCache = Math.min(prices[i], lowestBuyPriceDpCache);
-      int todaysProfit = prices[i] - lowestBuyPriceDpCache;
-      maxProfit = Math.max(todaysProfit, maxProfit);
+    for (int i = 1; i < prices.length; i++) {
+      int sellPrice = prices[i];
+      int todaysProfit = sellPrice - minimumBuyPrice;
+      maxProfit = Math.max(maxProfit, todaysProfit);
+      minimumBuyPrice = Math.min(minimumBuyPrice, prices[i]);
     }
     return maxProfit;
   }
+
 }

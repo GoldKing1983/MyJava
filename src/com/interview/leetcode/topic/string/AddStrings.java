@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.easy;
+package com.interview.leetcode.topic.string;
 
 /*
 https://leetcode.com/problems/add-strings/description/
@@ -19,6 +19,8 @@ public class AddStrings {
     int carry = 0;
 
     while (num1Index >= 0 || num2Index >= 0) {
+      // 0-'0' = 0...48-48=0......
+      // 1-'0' = 1...49-48=1......
       int number1 = num1Index >= 0 ? num1.charAt(num1Index--) - '0' : 0;
       int number2 = num2Index >= 0 ? num2.charAt(num2Index--) - '0' : 0;
 

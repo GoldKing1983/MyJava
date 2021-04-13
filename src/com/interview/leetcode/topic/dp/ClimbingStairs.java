@@ -1,4 +1,4 @@
-package com.sample.tricky;
+package com.interview.leetcode.topic.dp;
 
 /*
 https://leetcode.com/problems/climbing-stairs/description/

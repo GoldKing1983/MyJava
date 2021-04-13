@@ -43,19 +43,19 @@ Same code as tree height, with 2 changes
 */
 public class DiameterOfBinaryTreeOrLongestPath {
 
-  private int maxDiameter;
-
   public int diameterOfBinaryTree(TreeNode root) {
     recur(root);
     return maxDiameter;
   }
 
-  public int recur(TreeNode root) {
-    if (null == root) return 0;
+  int maxDiameter = 0;
 
+  private int recur(TreeNode root) {
+    if (root == null) return 0;
     int leftTreeHeight = recur(root.left);
     int rightTreeHeight = recur(root.right);
-    maxDiameter = Math.max(maxDiameter, leftTreeHeight + rightTreeHeight);
+    int currentDiameter = leftTreeHeight + rightTreeHeight;
+    maxDiameter = Math.max(maxDiameter, currentDiameter);
     return Math.max(leftTreeHeight, rightTreeHeight) + 1;
   }
 }

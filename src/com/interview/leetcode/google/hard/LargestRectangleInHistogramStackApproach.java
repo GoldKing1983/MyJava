@@ -23,9 +23,9 @@ height = [2,1,5,6,2,3] Output: 10(5+5)
 ========================================Solution Approach========================================
 1) If currentValue is greater than previousValue, push the index to stack. Increment currIndex.
 2) Else calculate area. currIndex is not incremented. currIndex is taken as base.
-  	2a) Taking currIndex as base, stack is popped(looped) and area is calculated.
-  	2b) If currIndex is 5, then area is calculated for 4 to 3, then 4 to 2 like that,
-  	so we keep 3 values at the same time
+  	2a) Taking currIndex only as base. it is not used for calculating width. 
+  	2b) If currIndex is 5, then area is calculated for index4 alone then from index4 to index3, 
+  	then from index4 to index2 all the way till stack.isNotEmpty && currentIndexValue>stack.peek()
 ========================================Data Flow Analysis========================================
 Input : [1,2,3,4,5,3,3,2] Output: 15
 
@@ -99,15 +99,18 @@ public class LargestRectangleInHistogramStackApproach {
         stack.push(currIndex);
         currIndex++;
       } else {
-        int prevIndex = stack.pop();
-        int prevValue = height[prevIndex];
+        //  Ex: [1,2,3,4,2]...below logic will be executed during2 at index4 ...and ends at index1
+        while (!stack.isEmpty() && height[currIndex] <= height[stack.peek()]) {
+          int prevIndex = stack.pop();
+          int prevValue = height[prevIndex];
 
-        Integer prevPrevIndex = stack.isEmpty() ? null : stack.peek();
-        // Calculate Current Area
-        int width = prevPrevIndex == null ? currIndex : currIndex - prevPrevIndex - 1;
-        int currentArea = prevValue * width;
+          Integer prevPrevIndex = stack.isEmpty() ? null : stack.peek();
+          // Calculate Current Area
+          int width = prevPrevIndex == null ? currIndex : currIndex - prevPrevIndex - 1;
+          int currentArea = prevValue * width;
 
-        max = Math.max(currentArea, max);
+          max = Math.max(currentArea, max);
+        }
       }
     }
 

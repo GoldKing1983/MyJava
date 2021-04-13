@@ -23,6 +23,7 @@ public class LinkedHashMapTest {
     System.out.println(cache.entrySet().iterator().next().getKey()); // Prints 1. First Inserted
 
     cache.get(5);
+    
     System.out.println(cache);
 
     Iterator<Entry<Integer, Integer>> entry = cache.entrySet().iterator();

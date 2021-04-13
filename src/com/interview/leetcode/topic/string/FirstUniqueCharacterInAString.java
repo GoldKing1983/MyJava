@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.easy;
+package com.interview.leetcode.topic.string;
 
 /*
 https://leetcode.com/problems/first-unique-character-in-a-string/

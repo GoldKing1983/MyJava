@@ -1,4 +1,4 @@
-package com.interview.leetcode.linkedin.easy;
+package com.interview.leetcode.topic.tree;
 
 import com.interview.leetcode.TreeNode;
 import java.util.LinkedList;

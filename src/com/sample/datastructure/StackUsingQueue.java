@@ -5,10 +5,24 @@ import java.util.Queue;
 
 /*
 https://leetcode.com/problems/implement-stack-using-queues/discuss/62516/Concise-1-Queue-Java-C++-Python
-
+===========================================================Requirement===========================================================
 1) Can be done with single queue instead of 2 queues.
-2) Whenever insert happens. Insert data. Then move n-1 data again.
-3) Rest of the APIs are same.
+2) Think of people waiting in line. Make the currentPerson stand in line. 
+3) Move n-1 to go and stand behind currentPersion. Just loop is enough. 
+=======================================================Data Flow Analysis========================================================
+Ex: 1,2,3
+
+  1
+  
+  
+  1,2 --> Add 2 to queue. 
+  2,1 --> circle 1 back
+  
+  
+  2,1,3 --> Add 3 to queue. 
+  1,3,2 --> circle 2 back.
+  3,2,1 --> circle 1 back.
+  
  */
 public class StackUsingQueue {
 	Queue<Integer> q;

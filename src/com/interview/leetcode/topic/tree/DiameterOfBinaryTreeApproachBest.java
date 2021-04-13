@@ -50,7 +50,8 @@ public class DiameterOfBinaryTreeApproachBest {
   }
 
   public int recur(TreeNode root) {
-
+    // root null check is verified at main method.
+    
     int leftTreeHeight = root.left == null ? 0 : recur(root.left) + 1;
     int rightTreeHeight = root.right == null ? 0 : recur(root.right) + 1;
 
