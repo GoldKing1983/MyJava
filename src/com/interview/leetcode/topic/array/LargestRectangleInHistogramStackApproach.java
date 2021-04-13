@@ -12,13 +12,14 @@ https://www.youtube.com/watch?v=RVIh0snn4Qc&feature=youtu.be
 Given n non-negative integers representing the histogram's bar height where the width of each bar is 1,
 find the area of largest rectangle in the histogram.
 height = [2,1,5,6,2,3] Output: 10(5+5)
-					  __
+					  __ 
 		 6		   __|  |
 		 5		  |  |  |
 		 4 		  |	 |  |   __
  		 3	 __	  |	 |  |__|  |
 		 2	|  |__|  |  |  |  |
-		_1__|__|__|__|__|__|__|___________________
+		 1__|__|__|__|__|__|__|___________________
+
 
 ========================================Solution Approach========================================
 1) If currentValue is greater than previousValue, push the index to stack. Increment currIndex.
@@ -104,9 +105,11 @@ public class LargestRectangleInHistogramStackApproach {
           int prevIndex = stack.pop();
           int prevValue = height[prevIndex];
 
-          Integer prevPrevIndex = stack.isEmpty() ? null : stack.peek();
+          int width = -1;
+          if (stack.isEmpty()) width = currIndex; // if stack.isEmpty. Then width is from 0 to currentIndex...
+          else width = currIndex - stack.peek() - 1; // else width logic differs.
+
           // Calculate Current Area
-          int width = prevPrevIndex == null ? currIndex : currIndex - prevPrevIndex - 1;
           int currentArea = prevValue * width;
 
           max = Math.max(currentArea, max);
@@ -118,12 +121,16 @@ public class LargestRectangleInHistogramStackApproach {
     while (!stack.isEmpty()) {
       int prevIndex = stack.pop();
       int prevValue = height[prevIndex];
-      Integer prevPrevIndex = stack.isEmpty() ? null : stack.peek();
+
+      int width = -1;
+      if (stack.isEmpty()) width = currIndex; // if stack.isEmpty. Then width is from 0 to currentIndex...
+      else width = currIndex - stack.peek() - 1; // else width logic differs.
+
       // Calculate Current Area
-      int width = prevPrevIndex == null ? currIndex : currIndex - prevPrevIndex - 1;
       int currentArea = prevValue * width;
 
       max = Math.max(currentArea, max);
+
     }
 
     return max;
