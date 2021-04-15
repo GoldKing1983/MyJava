@@ -10,7 +10,7 @@ import java.util.Map;
 2) dictionary can contain duplicate. Each word can be used only once.
 
 Ex1: dict = [foo, ba, r, ba, z] inputString="foobarbaz" output: true
-Ex1: dict = [foo, ba, r, z]     inputString="foobarbaz" output: false  
+Ex2: dict = [foo, ba, r, z]     inputString="foobarbaz" output: false... Because ba occurs one time only and it is used already.  
  */
 public class AmazonOnlineTestWordBreak {
 
@@ -24,6 +24,7 @@ public class AmazonOnlineTestWordBreak {
       for (int i = 0; i < n; i++) {
 
         String prefixString = currentString.substring(0, i + 1);
+        
         if (!dictionary.containsKey(prefixString) || dictionary.get(prefixString) <= 0) continue;
         dictionary.put(prefixString, dictionary.get(prefixString) - 1);
 
