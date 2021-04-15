@@ -1,10 +1,10 @@
-package com.interview.leetcode.linkedin.easy;
+package com.interview.leetcode.topic.stack;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 /*
- * https://leetcode.com/problems/max-stack/description/
+https://leetcode.com/problems/max-stack/description/ 
 1) push(x) -- Push element x onto stack.
 2) pop() -- Remove the element on top of the stack and return it.
 3) top() -- Get the element on the top.
@@ -13,7 +13,8 @@ import java.util.Deque;
 
 ==========Solution Note: Using 1 stack and max variable.==========
  	1) A regular stack already supports the first 4 operations.
- 	2) For the fifth operation do PreOrder Traversal
+ 	2) For the fifth operation do recursion stack...
+ 	See also queue QueueUsingStack
 
  */
 public class MaxStackUsingPair {
@@ -55,14 +56,12 @@ public class MaxStackUsingPair {
    * 1) [Bottom 1,2,5,4,3 Top]. Data to be popped is 5.
    * 2) 3 popped, 4 popped. for 5 base condition will return.
    * 3) push 4, push 3.
-   * Note: Logic follows PreOrder Traversal.
-   * On Top base condition. Middle Pop. On Bottom Push.
-   * Note: When max is popped. New max will be formed which will be taken care by push operation
+   * Max for 4 and 3 will be populated by push logic... Nice Trick
    */
   private void popMax(int dataToPop) {
-    int[] pair = stack.pop();
-    if (pair[0] == dataToPop) return;
+    int stackTop = stack.pop()[0];
+    if (stackTop == dataToPop) return;
     popMax(dataToPop);
-    push(pair[0]);
+    push(stackTop);
   }
 }

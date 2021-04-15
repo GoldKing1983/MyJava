@@ -1,4 +1,4 @@
-package com.interview.leetcode.facebook.easy;
+package com.interview.leetcode.topic.array;
 
 /*
 https://leetcode.com/problems/remove-duplicates-from-sorted-array/
@@ -29,6 +29,31 @@ public class RemoveDuplicatesFromSortedArray {
       } else {
         nums[write] = nums[read];
         write++;
+      }
+    }
+    return write;
+  }
+
+  // Below code avoids un-necessary copying. Ex: [1,2,3,4,5]. In above code, "else(copy)" logic runs "n" times.
+  // If we start our logic from directly duplicates. Then unnecessary copying can be avoided.
+  // See also MoveZeroesBesyEasy
+  public int removeDuplicatesAvoidUnnecessaryCopy(int[] nums) {
+    int write = 1;
+    // Move write to first duplicate location. 
+    while (write < nums.length) {
+      if (nums[write] == nums[write - 1]) break;
+      write++;
+    }
+
+    int read = write + 1;
+    while (read < nums.length) {
+      if (nums[read] == nums[read - 1]) {
+        read++;
+      } else {
+        nums[write] = nums[read];
+        read++;
+        write++;
+
       }
     }
     return write;

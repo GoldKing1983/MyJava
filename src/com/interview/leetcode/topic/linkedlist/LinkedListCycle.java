@@ -1,20 +1,20 @@
 package com.interview.leetcode.topic.linkedlist;
 
-import com.interview.leetcode.ListNode;
 import java.util.HashSet;
 import java.util.Set;
+import com.interview.leetcode.ListNode;
 
 public class LinkedListCycle {
   public boolean hasCycle(ListNode head) {
     if (head == null) return false;
-    ListNode slowPtr = head;
-    ListNode fastPtr = head;
-    while (fastPtr != null && fastPtr.next != null) {
-      slowPtr = slowPtr.next;
-      fastPtr = fastPtr.next;
-      fastPtr = fastPtr.next;
+    ListNode fastPtrNode = head;
+    ListNode slowPtrNode = head;
+    while (fastPtrNode.next != null && fastPtrNode.next.next != null) {
+      slowPtrNode = slowPtrNode.next;
+      fastPtrNode = fastPtrNode.next;
+      fastPtrNode = fastPtrNode.next;
+      if (fastPtrNode == slowPtrNode) return true;
 
-      if (slowPtr == fastPtr) return true; // loop found
     }
     return false;
   }

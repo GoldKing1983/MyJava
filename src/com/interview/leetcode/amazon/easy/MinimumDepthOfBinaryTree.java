@@ -1,8 +1,8 @@
 package com.interview.leetcode.amazon.easy;
 
-import com.interview.leetcode.TreeNode;
 import java.util.LinkedList;
 import java.util.Queue;
+import com.interview.leetcode.TreeNode;
 
 /*
 https://leetcode.com/problems/minimum-depth-of-binary-tree/
@@ -25,19 +25,17 @@ Note: A leaf is a node with no children.
  		        n   3
  */
 public class MinimumDepthOfBinaryTree {
-  int min = Integer.MAX_VALUE;
-
   public int minDepth(TreeNode root) {
-    recur(root, 1);
-    return Integer.MAX_VALUE == min ? 0 : min;
+    if (root == null) return 0;
+    if (root.left != null && root.right != null)
+      return Math.min(minDepth(root.left), minDepth(root.right)) + 1;
+
+    if (root.left != null) return minDepth(root.left) + 1;
+
+    return minDepth(root.right) + 1;
+
   }
 
-  private void recur(TreeNode root, int level) {
-    if (root == null) return;
-    if (root.left == null && root.right == null) min = Math.min(min, level);
-    recur(root.left, level + 1);
-    recur(root.right, level + 1);
-  }
 
   public int minDepth1(TreeNode root) {
     Queue<TreeNode> q = new LinkedList<>();

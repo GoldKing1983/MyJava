@@ -7,11 +7,13 @@ import java.util.LinkedList;
 https://leetcode.com/problems/implement-queue-using-stacks/description/
 
 ========================================================Solution Approach========================================================
-1) Keep the element "stacked" like "queue" during push itself. This makes pop operation easy.
+1) Think of placing element in stack1.Ex: Arranging books over by over.
+2) When placing a new book on top of stack1, take all books from stack1 and put it into stack2.
+3) When stack1 is empty, place the newBook. Now take books from stack2 to put it on stack1.   
 
-
+4) Now for the stack2 we can use recursion.   
 =======================================================Data Flow Analysis========================================================
-input: 1,2,3,4
+input: [Bottom 1,2,3,4 Top]
 
 process1 : [1]
 

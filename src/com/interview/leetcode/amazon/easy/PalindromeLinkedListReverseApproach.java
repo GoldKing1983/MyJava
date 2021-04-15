@@ -14,7 +14,7 @@ Input: 1->2->2->1
 Output: true
 ======================================================Solution Approach==========================================================
 This method takes O(n) time and O(1) extra space.
-1) Get the middle of the linked list.
+1) Get the middle of the linked list, using slow fast pointer approach.
 2) Reverse the second half of the linked list.
 3) Check if the first half and second half are identical.
 4) Note: Original Structure destroyed
@@ -47,10 +47,10 @@ public class PalindromeLinkedListReverseApproach {
     ListNode prev = null;
     ListNode curr = head;
     while (curr != null) {
-      ListNode nextTemp = curr.next;
+      ListNode next = curr.next;
       curr.next = prev;
       prev = curr;
-      curr = nextTemp;
+      curr = next;
     }
     return prev;
   }

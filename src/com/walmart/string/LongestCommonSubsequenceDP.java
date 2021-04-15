@@ -39,27 +39,36 @@ public class LongestCommonSubsequenceDP {
   /*
    For Input : Input: input = "abcde", pattern = "ace"
    *
-       0  a  b  c  d  e
-  =====================
-  0 || 0  0  0  0  0  0
-  a || 0  1  1  1  1  1
-  c || 0  1  1  2  2  2
-  e || 0  1  1  2  2  3
-
+       0  a  c  e
+  ===============
+  0 || 0  0  0  0
+  a || 0  1  1  1
+  b || 0  1  1  1
+  c || 0  1  2  2
+  d || 0  1  2  2
+  e || 0  1  2  3
+  
      */
   public int longestCommonSubsequence(String input, String pattern) {
-    int rowMax = input.length();
-    int colMax = pattern.length();
-    int[][] dp = new int[rowMax + 1][colMax + 1];
-    for (int row = 1; row <= rowMax; row++) {
-      for (int col = 1; col <= colMax; col++) {
-        if (input.charAt(row - 1) == pattern.charAt(col - 1)) {
+    int maxRow = input.length() + 1;
+    int maxCol = pattern.length() + 1;
+    if (maxRow == 1 || maxCol == 1) return 0;
+    int[][] dp = new int[maxRow][maxCol];
+    int longestCommonSubSequence = 0;
+    for (int row = 1; row < maxRow; row++) {
+      char rowValue = input.charAt(row - 1);
+      for (int col = 1; col < maxCol; col++) {
+        char colValue = pattern.charAt(col - 1);
+        if (rowValue == colValue) {
           dp[row][col] = dp[row - 1][col - 1] + 1;
         } else {
-          dp[row][col] = Math.max(dp[row][col - 1], dp[row - 1][col]);
+          dp[row][col] = Math.max(dp[row - 1][col], dp[row][col - 1]);
         }
+        longestCommonSubSequence = Math.max(longestCommonSubSequence, dp[row][col]);
+
       }
     }
-    return dp[rowMax][colMax];
+
+    return longestCommonSubSequence;
   }
 }

@@ -8,7 +8,7 @@ https://leetcode.com/problems/first-unique-character-in-a-string/
 
 This question was asked by Amazon Onsite for me in 2019
 
-1) Assume if it is a stream. They you cannot parse 2 times. Also you need result at each point.
+1) Assume if it is a stream. Then you cannot parse input 2 times. Also you need result at each point.
 2) Use sliding window. left always stands on firstUniqueCharacter.
 3) Cache the countOfCharacter in map. 
 4) If the currentCharacterCount>1 then it cannot be unique. 

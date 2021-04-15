@@ -7,7 +7,7 @@ import com.interview.leetcode.ListNode;
 1) Run the loop 2 times. firstTime ptrA  points ListA, second time ptrA points ListB.
 2) Run the loop 2 times. firstTime ptrB  points ListB, second time ptrB points ListA.
 3) Now, if  there is a cycle or not. Both ptrA and ptrB will meet at samePoint.
-4) Because length they are iterating combinely is same. totalLength = list1.length + list2.length.
+4) Because length iterated by both pointer is same. totalLength = list1.length + list2.length.
 5) If the meeting point is null, then there is no intersection else intersection is there.
 =====================================================Solution Approach===========================================================
 Trick to this solution is running both the listNode at the same time.
@@ -193,7 +193,7 @@ public class IntersectionOfTwoLinkedLists {
     ListNode headBCache = headB;
     while (true) {
       if (headA == headB) { // reached end
-        if (headA == null) return null;
+        if (headA == null) return null; // This line is understand that there is no merge. It can be ignored.
         return headA; // Ex: [1][1]
       }
       headA = headA == null ? headBCache : headA.next;

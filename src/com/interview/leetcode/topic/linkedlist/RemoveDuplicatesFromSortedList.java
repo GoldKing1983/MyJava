@@ -30,7 +30,7 @@ public class RemoveDuplicatesFromSortedList {
 
       if (next == null) break;
 
-      if (current.val == next.val) current.next = next.next;
+      if (current.val == next.val) current.next = next.next; // connect current and next
       else current = next;
     }
 

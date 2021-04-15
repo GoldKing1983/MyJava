@@ -1,4 +1,4 @@
-package com.interview.leetcode.facebook.easy;
+package com.interview.leetcode.topic.tree;
 
 /*
 https://leetcode.com/problems/balanced-binary-tree/description/

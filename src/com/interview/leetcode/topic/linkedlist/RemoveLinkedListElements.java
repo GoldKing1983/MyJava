@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.easy;
+package com.interview.leetcode.topic.linkedlist;
 
 import com.interview.leetcode.ListNode;
 
@@ -29,6 +29,25 @@ public class RemoveLinkedListElements {
       currentHead = currentHead.next;
     }
     return dummyHead.next;// Change3
+  }
+
+  // Similar to DeleteDuplicateValueNodesFromASortedLinkedList
+  public ListNode removeElementsAlternate(ListNode head, int target) {
+    if (head == null) return head;
+
+    // Make head stays in first non-target value.
+    while (head != null) {
+      if (head.val == target) head = head.next;
+      else break;
+    }
+    // Ex: [1,1,2] target=1... head changed to 2
+    ListNode tempHead = head;
+
+    while (tempHead != null && tempHead.next != null) {
+      if (tempHead.next.val == target) tempHead.next = tempHead.next.next;
+      else tempHead = tempHead.next;
+    }
+    return head;
   }
 
   public ListNode removeElementsWithoutDummyHead(ListNode head, int val) {

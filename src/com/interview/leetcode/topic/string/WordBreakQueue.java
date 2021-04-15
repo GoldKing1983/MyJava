@@ -106,21 +106,27 @@ Doing Memoization will convert this to O(n^3). Note "not exponential".
  */
 public class WordBreakQueue {
 
-  public boolean wordBreak(String s, List<String> wordDict) {
-    Set<String> wordDictSet = new HashSet<>(wordDict);
+  public boolean wordBreak(String s, List<String> wordDictList) {
+    Set<String> dictionary = new HashSet<>(wordDictList);
+    if (dictionary.contains(s)) return true; // if whole of s available in dictionary. No processing needed.
+
     Queue<String> queue = new LinkedList<>();
+    // visited logic is added for ex: s=aaaaaaaaaaaaaaaaaaa dict=['a','aa','aaa','aaaa','aaaaa','aaaaaa'];
     Set<String> visited = new HashSet<>();
     queue.add(s);
     while (!queue.isEmpty()) {
       String currentString = queue.poll();
-      if (visited.contains(currentString)) continue;
-      visited.add(currentString);
       int n = currentString.length();
+
       for (int i = 0; i < n; i++) {
         String prefixString = currentString.substring(0, i + 1);
-        if (wordDictSet.contains(prefixString)) {
-          if (i + 1 == n) return true; // Reached end, nothing more to process.
+        if (dictionary.contains(prefixString)) {
           String suffixString = currentString.substring(i + 1, n);
+          if (dictionary.contains(suffixString)) return true;
+
+          if (visited.contains(suffixString)) continue;
+          visited.add(suffixString);
+
           queue.add(suffixString);
         }
       }

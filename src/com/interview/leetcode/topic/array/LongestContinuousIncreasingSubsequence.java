@@ -1,4 +1,4 @@
-package com.interview.leetcode.facebook.easy;
+package com.interview.leetcode.topic.array;
 
 /*
 
@@ -12,18 +12,17 @@ Input: [2,2,2,2,2] Output: 1
  */
 public class LongestContinuousIncreasingSubsequence { // LCIS
   public int findLengthOfLCIS(int[] nums) {
-    if (nums.length == 0) return 0;
-    int currentLongest = 1;
-    int longestResult = currentLongest;
-    for (int left = 0, right = 1; right < nums.length; left++, right++) {
-      if (nums[right] > nums[left]) {
-        currentLongest++;
-        longestResult = Math.max(longestResult, currentLongest);
+    if (nums == null || nums.length == 0) return 0;
+    int maxIncreasingSequence = 1;
+    int currentIncreasingSequence = 1;
+    for (int i = 1; i < nums.length; i++) {
+      if (nums[i] > nums[i - 1]) {
+        currentIncreasingSequence++;
+        maxIncreasingSequence = Math.max(maxIncreasingSequence, currentIncreasingSequence);
       } else {
-        currentLongest = 1;
-        left = right - 1;
+        currentIncreasingSequence = 1;
       }
     }
-    return longestResult;
+    return maxIncreasingSequence;
   }
 }

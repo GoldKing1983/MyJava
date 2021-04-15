@@ -1,4 +1,9 @@
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /*
 com.interview.leetcode.topic.
@@ -23,39 +28,53 @@ public class Sample {
    * 
    */
 
-  public int[][] merge(int[][] intervals) {
-    Arrays.sort(intervals, (a,b)->a[0]-b[0]);
+  public int solve(int[][] matrix) {
+    int maxRow = matrix.length;
+    int maxCol = matrix[0].length;
+    int[][] dp = new int[maxRow][maxCol];
 
-        /*
-        1 -- 4
-             4 -- 5
+    for (int row = 0; row < maxRow; row++) {
+      Map<Integer, Set<Integer>> visited = new HashMap<>();
+      for (int col = 0; col < maxCol; col++) {
+        if (matrix[row][col] == 2) {
+          visited.computeIfAbsent(row, v -> new HashSet<>()).add(col);
+          bfs(matrix, dp, row, col, maxRow, maxCol, visited);
+        }
 
-        1--------------4
-            2------3
-
-        1 -- 4
-                5 -- 6
-
-
-        */
-    int n = intervals.length;
-    int[][] result = new int[n][2];
-    int resultIndex = 0;
-    int previousStartTime = intervals[0][0];
-    int previousEndTime = intervals[0][1];
-    for(int i=1; i<n; i++) {
-      int currentStartTime = intervals[i][0];
-      int currentEndTime = intervals[i][1];
-      if(currentStartTime <= previousEndTime) { // merge
-        previousEndTime = Math.max(currentEndTime,previousEndTime);
-      } else {
-        result[resultIndex][0] = previousStartTime;
-        result[resultIndex++][1] = previousEndTime;
       }
     }
-    result[resultIndex][0] = previousStartTime;
-    result[resultIndex][1] = previousEndTime;
+    int minimumDistance = Integer.MAX_VALUE;
+    for (int row = 0; row < maxRow; row++) {
+      for (int col = 0; col < maxCol; col++) {
+        if (matrix[row][col] == 2 || matrix[row][col] == 1) continue;
+        minimumDistance = Math.min(minimumDistance, dp[row][col]);
+      }
+    }
+    return minimumDistance;
 
-    return Arrays.copyOfRange(intervals,0,resultIndex);
+  }
+
+  private int[][] DIRECTIONS = new int[][] {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
+
+  private void bfs(int[][] matrix, int[][] dp, int startRow, int startCol, int maxRow, int maxCol,
+      Map<Integer, Set<Integer>> visited) {
+    Deque<int[]> q = new ArrayDeque<>();
+    q.offer(new int[] {startRow, startCol});
+    while (!q.isEmpty()) {
+      int[] currentPoint = q.poll();
+      int currentRow = currentPoint[0];
+      int currentCol = currentPoint[1];
+      for (int i = 0; i < 4; i++) {
+        int nextRow = DIRECTIONS[i][0] + currentRow;
+        int nextCol = DIRECTIONS[i][1] + currentCol;
+        if (nextRow == maxRow || nextCol == maxCol || nextRow < 0 || nextCol < 0) continue;
+        if ((visited.containsKey(nextRow) && visited.get(nextRow).contains(nextCol))) continue;
+        visited.computeIfAbsent(nextRow, v -> new HashSet<>()).add(nextCol);
+        if (matrix[nextRow][nextCol] == 1) continue;
+        dp[nextRow][nextCol]++;
+        q.offer(new int[] {nextRow, nextCol});
+
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.easy;
+package com.interview.leetcode.topic.stack;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -15,8 +15,9 @@ public class MinStackUsingSingleStack {
 
   public void push(int x) {
     if (!stack.isEmpty()) {
-      int prevMin = stack.peek()[1];
-      stack.push(new int[] {x, Math.min(prevMin, x)});
+      int previousMin = stack.peek()[1];
+      int currentMin = Math.min(previousMin, x);
+      stack.push(new int[] {x, currentMin});
     } else stack.push(new int[] {x, x});
   }
 

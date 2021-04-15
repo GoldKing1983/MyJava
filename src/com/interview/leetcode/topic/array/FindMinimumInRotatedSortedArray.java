@@ -1,4 +1,4 @@
-package com.interview.leetcode.google.medium;
+package com.interview.leetcode.topic.array;
 
 /*
 https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
@@ -43,8 +43,10 @@ Since the array is sorted and rotated. At any point, if I split the array, there
 public class FindMinimumInRotatedSortedArray {
   public int findMin(int[] nums) {
     int low = 0, high = nums.length - 1;
-    int result = nums[0];
     int firstNumber = nums[0];
+    // Save the result for the case [1,2,3,4,5].. Because in this on seeing mid, we have to go left. 
+    // But logic goes right. Code never updates the cacheResult. We send the initial filled result.
+    int result = firstNumber;
     while (low <= high) {
       int mid = low + (high - low) / 2;
       // Ex: [50,10,20,30,40].low=0, high=4. mid=index2 i.e.20. 20<50. Cache 20 and go left

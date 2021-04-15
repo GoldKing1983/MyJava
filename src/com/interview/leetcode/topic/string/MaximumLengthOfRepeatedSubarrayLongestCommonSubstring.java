@@ -17,7 +17,7 @@ Explanation: The repeated subarray with maximum length is [3, 2, 1].
     B is col
     
         0   3   2   1   4   7
-        0   0   0   0   0
+        0   0   0   0   0   0
      1  0   0   0   1   0   0   
      2  0   0   1   0   0   0
      3  0   1   0   0   0   0

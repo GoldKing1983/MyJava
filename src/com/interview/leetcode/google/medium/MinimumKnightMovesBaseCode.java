@@ -14,7 +14,8 @@ Return the minimum number of steps needed to move the knight to the square [x, y
 |x| + |y| <= 300
 
 =======================================High Level Thinking==================================================================
-1) We can think of this problem as a shortest path problem on a graph: there are '300' nodes, each connected in 8 ways and further.
+1) We can think of this problem as a shortest path problem on a graph: 
+there are '300' nodes, each connected in 8 ways and further.
 =======================================Solution Approach=====Similar to "OpenTheLock"=============================================================
 1) Start with "0,0".
 2) Generate next "8 position" for each position.
