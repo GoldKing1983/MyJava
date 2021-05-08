@@ -50,34 +50,39 @@ We can divide the vertices into two groups: {0, 2} and {1, 3}.
  */
 public class IsGraphBipartite {
 
-  public boolean isBipartite(int[][] graph) {
-    int n = graph.length;
-    Boolean[] colors = new Boolean[n];
-
-    // This graph might be a disconnected graph. So check each unvisited node.
-    for (int i = 0; i < n; i++) {
-      if (colors[i] == null) {
-        colors[i] = true;
-        validColor(graph, colors, i);
-        if (!isBiPartite) return false;
-      }
-
+  /*
+  1) true is red, false is blue and null is not-colored
+  2) Do Dfs.
+  3) Start color the node with true...alternatively change it.
+  4) If a node is visited check its color, different than current
+  
+  */
+  public boolean solve(int[][] graph) {
+    int maxRow = graph.length;
+    Boolean[] dp = new Boolean[maxRow];
+    for (int row = 0; row < maxRow; row++) {
+      if (dp[row] != null) continue; // already colred
+      dp[row] = true; // set default color as red
+      if (!isBiPartite(graph, dp, row, true)) return false;
     }
     return true;
+
   }
 
-  private boolean isBiPartite = true;
+  private boolean isBiPartite(int[][] graph, Boolean[] dp, int sourceRow, Boolean currentColor) {
 
-  public void validColor(int[][] graph, Boolean[] colors, int parent) {
-    boolean parentColor = colors[parent];
-    for (int child : graph[parent]) {
-      if (colors[child] == null) { // not colored or not visited
-        colors[child] = !parentColor; // Assign child node with opposite of parentColor
-        validColor(graph, colors, child);
-      } else if (colors[child] == parentColor) {// if parent and child has same color. Terminate with false.
-        isBiPartite = false;
-        return;
+    for (int neighbor : graph[sourceRow]) {
+      // we don't need to do anything dp[neighbor]==null.. because it is not colored and recursion must run..
+      if (dp[neighbor] != null) { // not colored
+
+        // if currentColor and neighborColr same return false
+        if (currentColor == dp[neighbor]) return false;
+        continue; // already colored... 
       }
+      // Assign neighbor node with opposite of parentColor
+      dp[neighbor] = !currentColor;
+      if (!isBiPartite(graph, dp, neighbor, !currentColor)) return false;
     }
+    return true;
   }
 }

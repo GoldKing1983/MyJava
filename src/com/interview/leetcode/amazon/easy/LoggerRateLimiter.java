@@ -5,11 +5,8 @@ import java.util.HashMap;
 /*
 https://leetcode.com/problems/logger-rate-limiter/
 
-Design a logger system that receive stream of messages along with its timestamps,
-each message should be printed if and only if it is not printed in the last 10 seconds.
-
-Given a message and a timestamp (in seconds granularity), return true if the message should be printed in the given timestamp,
-otherwise returns false.
+1) Design a logger system that receive stream of messages along with its timestamps,
+2) Return false, if twoOrMore message occurs in last 10 seconds.
 
 It is possible that several messages arrive roughly at the same time.
 

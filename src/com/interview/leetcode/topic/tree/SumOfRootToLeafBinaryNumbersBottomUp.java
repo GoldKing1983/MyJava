@@ -22,20 +22,20 @@ https://leetcode.com/problems/sum-of-root-to-leaf-binary-numbers/
 
  */
 public class SumOfRootToLeafBinaryNumbersBottomUp {
-  public int sumRootToLeafDFS(TreeNode root) {
-    return recur(root, 0, 0);
+  public int sumRootToLeaf(TreeNode root) {
+    return recur(root, 0);
   }
 
-  private int recur(TreeNode root, int currentNumber, int sum) {
+  private int recur(TreeNode root, int currentNumber) {
     if (root == null) return 0;
 
-    int nextNumber = currentNumber * 2 + root.val;
-    if (root.left == null && root.right == null) {
-      sum += nextNumber;
-      return sum;
-    }
-    int left = recur(root.left, nextNumber, sum);
-    int right = recur(root.right, nextNumber, sum);
+    currentNumber = currentNumber * 2 + root.val;
+
+    if (root.left == null && root.right == null) return currentNumber;
+
+    int left = recur(root.left, currentNumber);
+    int right = recur(root.right, currentNumber);
+
     return left + right;
   }
 }

@@ -8,6 +8,19 @@ https://leetcode.com/problems/merge-intervals
 
 Same as MergeIntervalsBest. But sorting by startTime and endTime separately.
 ==================================
+
+        2 4
+         1  3
+
+       1  3
+         2  4   
+
+      
+      1 3   
+     0    4
+
+     0      4
+       1  3   
  */
 public class MergeIntervalsAlternate {
 

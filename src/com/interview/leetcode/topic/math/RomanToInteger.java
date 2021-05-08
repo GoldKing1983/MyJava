@@ -10,8 +10,8 @@ https://leetcode.com/problems/roman-to-integer/
 2) Initially assign lastNumber as result.
    Then in each iteration, compare "currentNumber" and "nextNumber".
  	"currentNumber" is added or subtracted to result based on condition.
-3) If currentNumber is less than previousNumber. add "previousNumber" to result.
-     										Else subtract "previousNumber" from result.
+3) If currentNumber is greater than or equal to nextNumber. add "currentNumber" to result.
+     										    Else subtract "currentNumber" from result.
 =====================================================Data Flow Analysis==========================================================
 How to Solve this problem. Do data Analysis.
 Ex1: 'X'.
@@ -29,7 +29,7 @@ Ex3: 'XI'.
 	 Process X. Compare current and next. Loop runs 1 time.
 	 If current is greater than next, add current and result.
 
-Ex3: 'XX'.
+Ex4: 'XX'.
 	 No loop needed for X. 10 directly added to result.
 	 Loop Starts : Come from n-1.
 	 Process X. Compare current and next. Loop runs 1 time.
@@ -57,8 +57,8 @@ public class RomanToInteger {
     for (int i = n - 1; i >= 0; i--) {
       Integer currentNumber = map.get(s.charAt(i));
       Integer nextNumber = map.get(s.charAt(i + 1));
-      if (currentNumber < nextNumber) result -= currentNumber;
-      else result += currentNumber;
+      if (currentNumber >= nextNumber) result += currentNumber;
+      else result -= currentNumber;
     }
     return result;
   }

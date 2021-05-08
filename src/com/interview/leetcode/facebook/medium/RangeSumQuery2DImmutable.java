@@ -11,19 +11,11 @@ https://www.youtube.com/watch?v=PwDqpOMwg6U
 [1, 3, 6]
 [5, 12, 21]
 [12, 27, 45]
-		=============Fill First row sum=============
-[1, 3, 0]
-[0, 0, 0]
-[0, 0, 0]
-
+		=============Fill First row for dp matrix=============
 [1, 3, 6]
 [0, 0, 0]
 [0, 0, 0]
-		=============Fill First col sum=============
-[1, 3, 6]
-[5, 0, 0]
-[0, 0, 0]
-
+		=============Fill First col for dp matrix=============
 [1, 3, 6]
 [5, 0, 0]
 [12, 0, 0]
@@ -64,8 +56,8 @@ input =
 [1,  3,  6]
 [5, 12, 21]
 [12, 27, 45]
-
-For Input : 1,1 to 2,1
+============================================================Example1 - For a rectangle=============================================================
+For Input : 1,1(5) to 2,1(8)
 
 dp[2,1] = 27
 dp[0,1] = 3  -
@@ -82,6 +74,22 @@ dp[0,0] = 1  +
 	Answer = B-y-z+x
 
 Addition is needed because "x" is there both row-wise and column-wise
+============================================================Example2 - For a square=============================================================
+For Input : 1,1(5) to 2,2(9) -- 5+6+9+8=28
+
+dp[2,1] = 45
+dp[0,1] = 6  - (45-6=39)
+dp[2,0] = 12 - (39-12=27)
+dp[0,0] = 1  + (27+1=28)
+         ====
+          28
+         ====
+    To find region between A and B.
+    [x, y, 0]
+    [0, A, 0]
+    [z, B, 0]
+
+    Answer = B-y-z+x
 
  */
 public class RangeSumQuery2DImmutable {

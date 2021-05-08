@@ -22,49 +22,49 @@ Input:
 Output: 262
        ====
 ===================================================Data Flow Analysis==============================================================
-Top-To-Bottom
+Top-To-Bottom - gather the whole number
 											   1(1)
 										     /   \
 										(12)2     3(13)
 										   / \
 									 (124)4   5(125)
 
-Bottom-To-Bottom
+Bottom-To-Top - traverse back the sum 
 											   1(262)
 										     /   \
 									   (249)2     3(13)
 										   / \
 									 (124)4   5(125)
 ============================================Solution Approach======================================================================
-Step1) Recurse Left and Right.
-Step2) Return Left+Right.
-Step3) Add baseCondition. If currentNodes left and right is null. Then return pathSum.
-	  For the base case code... just take 2 example
+Step0) generate currentNumber --> Top-To-Bottom - gather the wholeNumber
+Step1) Add baseCondition. If currentNodes left and right is null. Then return wholeNumber.
+Step2) Recurse Left and Right. 
+Step3) Return Left+Right--> Bottom-To-Top - traverse back the sum
+=======================================================Data Flow Analysis========================================================
 	  Ex1: input: null. Ans=0.  So add ---> if (currentNode == null) return 0;
 	  Ex2: input: [1] . Ans=1.
 	  		Calculate PathSum : 1
 	  		If left and right null then return pathsum...
 ====================================================================================================================================
+time complexity and space complexity are 0(n) and 0(h),
 
 */
 public class SumRootToLeafNumbersBottomUp {
 
   public int sumNumbers(TreeNode root) {
 
-    return recur(root, 0, 0);
+    return recur(root, 0);
   }
 
-  private int recur(TreeNode root, int currentNumber, int sum) {
+  private int recur(TreeNode root, int currentNumber) {
     if (root == null) return 0;
-    int nextNumber = currentNumber * 10 + root.val;
+    
+    currentNumber = currentNumber * 10 + root.val;
 
-    if (root.left == null && root.right == null) {
-      sum += nextNumber;
-      return sum;
-    }
+    if (root.left == null && root.right == null) return currentNumber;
 
-    int left = recur(root.left, nextNumber, sum);
-    int right = recur(root.right, nextNumber, sum);
+    int left = recur(root.left, currentNumber);
+    int right = recur(root.right, currentNumber);
 
     return left + right;
   }

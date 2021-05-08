@@ -55,7 +55,8 @@ public class ValidParenthesisStringStack {
       }
     }
 
-    // Step2) Balance LeftOver OpenParenthesis
+    // Ex1: (* -- True
+    // Ex2: *( -- False
     while (!openStack.isEmpty() && !starStack.isEmpty())
       if (starStack.pop() < openStack.pop()) return false;
 

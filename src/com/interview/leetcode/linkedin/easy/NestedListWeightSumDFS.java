@@ -51,7 +51,7 @@ Explanation: One 1 at depth 1, one 4 at depth 2, and one 6 at depth 3; 1 + 4*2 +
 			root--->list--->list--->6  =====>Here depth = 3
 
 =======================================================Solution Approach=========================================================
-1) Visualize input as List<Tree> where Tree can have "number" or List<Tree>. But cannot have both.
+1) Visualize input as List<n-ary-tree> where Tree can further have "number(leaf)" or List<n-ary-tree>. But cannot have both.
 2) For each of NestedInteger, further it can expand as List<NestedInteger> or it can be integer and terminate the node.
 3) So if NestedInteger is integer, add it to sum with depth. Else recurse further.
 
@@ -59,20 +59,26 @@ The problem tree visualization is harder than the solution.
 
  */
 public class NestedListWeightSumDFS {
-  private int sum = 0;
-
   public int depthSum(List<NestedInteger> nestedList) {
-    depthSum(nestedList, 1);
-    return sum;
+    int resultSum = 0;
+
+    // I have multiple-- NestedInteger
+    for (NestedInteger root : nestedList) {
+      resultSum += dfs(root, 1);
+    }
+    return resultSum;
   }
 
-  public void depthSum(List<NestedInteger> root, int depth) {
-    for (NestedInteger nested : root) {
-      if (nested.isInteger()) {
-        sum += nested.getInteger() * depth;
-      } else {
-        depthSum(nested.getList(), depth + 1);
-      }
+  private int dfs(NestedInteger root, int level) {
+    if (root.isInteger()) {
+      return root.getInteger() * level;
     }
+    int sum = 0;
+    for (NestedInteger child : root.getList()) {
+      sum += dfs(child, level + 1);
+    }
+    return sum;
+
+
   }
 }

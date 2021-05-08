@@ -7,10 +7,27 @@ import java.util.Map;
 
 /*
 https://leetcode.com/problems/group-shifted-strings
+===========================================================Requirement===========================================================
+1) Given a list of inputString.
+2) Group them into similar string.
+3) What is "similar string". If I keep rotate a string by 1char... then if it matches another string... then they both form a group.
+Ex: "abc" -> "bcd" -> ... -> "xyz" all form 1 group
+    "a" -> "b" ->"c" ... -> "z" all form 1 group
+    "az" -> "ba" ....za--> all form 1 group
+ 
+============================================================Example1=============================================================
+Input: strings = ["abc","bcd","xyz","acef","az","ba","a","z"]
+Output: [["abc","bcd","xyz"],["acef"],["a","z"], ["az","ba"]]
+         
+         "abc","bcd","xyz" -> forms a group because each differ by 1 char difference
+         "acef" -> don't match with any. so it is alone in a group.  
+         "a","z" -> forms a group
+         "az","ba" -> forms a group
 
 
-=================================================Solution Approach=================================================
-Form unique key for each word to group them.
+========================================================Solution Approach========================================================
+1) Form unique key for each word to group them.
+2) The unique key must start with "a", so that all can be grouped. 
 
 EX:["abc","bcd","a","z", "az","ba"]
 
@@ -37,27 +54,29 @@ public class GroupShiftedStrings {
   }
 
   private String getHashedString(String string) {
-    StringBuilder hashedString = new StringBuilder();
+    char[] hashedString = new char[string.length()];
+
     char firstChar = string.charAt(0);
-    int shiftRequiredFromLeftToRight = firstChar - 'a'; // for a=0, for b=1
+
+    int shiftRequiredFromRightToLeft = firstChar - 'a'; // for a=0, for b=1
+    int i = 0;
     for (char currentChar : string.toCharArray()) {
       int currentCharIndex = currentChar - 'a';
-      // Ex: string="b". shiftRequiredFromLeftToRight=1. updatedCurrentCharIndex=0
-      int shiftRequiredFromLeftToRightForCurrentChar =
-          currentCharIndex - shiftRequiredFromLeftToRight;
+      // Ex: string="b". shiftRequiredFromRightToLeft=1. updatedCurrentCharIndex=0
+      int shiftRequiredFromRightToLeftForCurrentChar =
+          currentCharIndex - shiftRequiredFromRightToLeft;
       /*
-      Ex: string="ba". shiftRequiredFromLeftToRight=1. For "a". shiftRequiredFromLeftToRightForCurrentChar=-1
+      Ex: string="ba". shiftRequiredFromRightToLeft=1. For "a". shiftRequiredFromRightToLeftForCurrentChar=-1
       It should be 25. So adding 26 to -1, to make it 25.
       hashedString = "az"
       */
-      shiftRequiredFromLeftToRightForCurrentChar =
-          shiftRequiredFromLeftToRightForCurrentChar >= 0
-              ? shiftRequiredFromLeftToRightForCurrentChar
-              : 26 + shiftRequiredFromLeftToRightForCurrentChar;
+      shiftRequiredFromRightToLeftForCurrentChar = shiftRequiredFromRightToLeftForCurrentChar >= 0
+          ? shiftRequiredFromRightToLeftForCurrentChar
+          : 26 + shiftRequiredFromRightToLeftForCurrentChar;
 
-      int updatedCurrentCharIndex = 'a' + shiftRequiredFromLeftToRightForCurrentChar;
-      hashedString.append((char) updatedCurrentCharIndex);
+      char updatedCurrentChar = (char) ('a' + shiftRequiredFromRightToLeftForCurrentChar);
+      hashedString[i++] = updatedCurrentChar;
     }
-    return hashedString.toString();
+    return String.valueOf(hashedString);
   }
 }

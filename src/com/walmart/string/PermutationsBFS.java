@@ -48,18 +48,20 @@ public class PermutationsBFS {
    */
   public List<List<Integer>> permute(int[] nums) {
     LinkedList<List<Integer>> queue = new LinkedList<>();
-    // Step1) Add Empty as initialResult.
-    queue.offer(new ArrayList<>()); // Insert empty at initial
-    // Step2) Iterate each of number from index0 to indexN-1.
-    for (int currentNumber : nums) {
+
+    queue.offer(new ArrayList<>()); // Step1) Add Empty as initialResult.
+
+    for (int currentNumber : nums) { // Step2) Iterate each of number from index0 to indexN-1.
+
       int existingComboSize = queue.size();
 
-      // Step3) Pick the currentNumber from indexI. Add currentNumber to each of previousCombo.
-      while (existingComboSize-- > 0) {
+      while (existingComboSize-- > 0) { // Step3) Pick the currentNumber from indexI. Add currentNumber to each of previousCombo.
+
         List<Integer> oldCombo = queue.poll();
+
         for (int k = 0; k <= oldCombo.size(); k++) {
-          List<Integer> currentCombo = new ArrayList<>(oldCombo);
-          currentCombo.add(k, currentNumber);
+          List<Integer> currentCombo = new LinkedList<>(oldCombo);
+          currentCombo.add(k, currentNumber); // This is costlier operation, because list moves element from left to right
           queue.offer(currentCombo);
         }
       }

@@ -15,7 +15,10 @@ Ex:
 
    boolean mirrorLeftRight = dfs(left.left, right.right); // Compare 3 with 3
    boolean mirrorRightLeft = dfs(left.right, right.left); // Compare 4 with 4
-
+=========================================================Time Complexity=========================================================
+O(n)
+========================================================Space Complexity=========================================================
+O(h)
 */
 public class SymmetricTreeBottomUp {
 

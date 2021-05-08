@@ -45,12 +45,14 @@ public class MergeIntervalsBest {
 
     /*
     Coding for below 3 cases
+Case1:    
     1 -- 4
          4 -- 5
-
+        3-----5
+Case2:         
     1--------------4
         2------3
-
+Case3:
     1 -- 4
             5 -- 6
 
@@ -59,21 +61,27 @@ public class MergeIntervalsBest {
     int n = intervals.length;
     int[][] result = new int[n][2];
     int resultIndex = 0;
+    
     int previousStartTime = intervals[0][0];
     int previousEndTime = intervals[0][1];
+    
     for (int i = 1; i < n; i++) {
       int currentStartTime = intervals[i][0];
       int currentEndTime = intervals[i][1];
+      
       if (currentStartTime <= previousEndTime) { // merge
         // Need for Math.max --> Ex: [[1,4],[2,3]].. previousEnd = 4 and not 3
         previousEndTime = Math.max(currentEndTime, previousEndTime);
       } else { // no merge
+        
         result[resultIndex][0] = previousStartTime;
         result[resultIndex++][1] = previousEndTime;
+        
         previousStartTime = currentStartTime;
         previousEndTime = currentEndTime;
       }
     }
+    
     result[resultIndex][0] = previousStartTime;
     result[resultIndex][1] = previousEndTime;
 

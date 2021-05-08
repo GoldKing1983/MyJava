@@ -8,6 +8,15 @@ https://www.youtube.com/watch?v=I6HrVRGGYNI
 
 Prime Numbers are : 2, 3, 5, 7, 11, 13, 17, 19, 23 and 29.
 
+    Ex: 100
+    sqrt 100 = 10
+    1   2   3   4   5   6   7   8   9   10
+    t   t   t   f   t   f   t   f   f    f  =>2 will be true. But set multiples of 2 false
+    t   t   t   t   t   f   t   t   f    f  =>3 will be true. But set multiples of 3 false
+                ==for 5==
+    t   t   t   t   t   f   t   t   f    f  =>5 will be true. But set multiples of 5 false
+
+
 1) Initially consider all elements as primes. So create a "dp" of boolean of n and set to true.
 2) Start from 2. Set multiples of i to false.
 	2a) Set all multiples of 2 to false.

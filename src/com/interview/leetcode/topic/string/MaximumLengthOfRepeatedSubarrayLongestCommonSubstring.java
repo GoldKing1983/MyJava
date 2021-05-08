@@ -47,8 +47,12 @@ public class MaximumLengthOfRepeatedSubarrayLongestCommonSubstring {
 
     int maxLength = 0;
     for (int row = 1; row < maxRow; row++) { // 0th row ignored.. A is row. Keep the AthData idle per row.
+
+      int aData = A[row - 1];
+
       for (int col = 1; col < maxCol; col++) { // 0th col ignored.. B is col. Run BthData for each of AthData
-        int aData = A[row - 1], bData = B[col - 1];
+
+        int bData = B[col - 1];
 
         if (aData == bData) dp[row][col] = dp[row - 1][col - 1] + 1;
 

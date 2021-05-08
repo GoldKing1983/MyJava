@@ -49,17 +49,17 @@ Here "randomIndex" is mid
 ========================================================
 Initially ========= low:0, mid: 1, high:3=========
 Between 2 and 4, missing size is: 1
-Missing size  <k. So going right side. Updating low to 0
+Missing size  <k. So going right side. Updating low to 2
 Updated low and high are ========= low:2, high:3=========
 ========================================================
 Initially ========= low:2, mid: 2, high:3=========
 Between 2 and 6, missing size is: 2
-Missing size  <k. So going right side. Updating low to 2
+Missing size  <k. So going right side. Updating low to 3
 Updated low and high are ========= low:3, high:3=========
 ========================================================
 Initially ========= low:3, mid: 3, high:3=========
 Between 2 and 8, missing size is: 3
-Missing size  <k. So going right side. Updating low to 3
+Missing size  <k. So going right side. Updating low to 4
 Updated low and high are ========= low:4, high:3=========
 ========================================================
 low went below high. Calculating kth(4) missing number: nums[0]+k+high=9

@@ -12,32 +12,23 @@ and a number n, return if n new flowers can be planted in it without violating t
 
  */
 public class CanPlaceFlowers {
+
   public boolean canPlaceFlowers(int[] flowerbed, int n) {
+    if (n == 0) return true;
     for (int i = 0; i < flowerbed.length; i++) {
-      if (flowerbed[i] == 1) continue;
-      else if (flowerbed[i] == 0) {
-        // I can plant only if current column is 0, previous column is 0 and next column is 0.
-        if (isPreviousColumnOfFlowerBedIsZero(flowerbed, i)
-            && isNextColumnOfFlowerBedIsZero(flowerbed, i)) {
-          flowerbed[i] = 1; // Plant on the flowerbed
-          n--; // Reduce the count of plant to be flowerbed
-        }
+
+      boolean isLeftGood = i == 0 ? true : flowerbed[i - 1] == 0;
+      boolean isRightGood = i == flowerbed.length - 1 ? true : flowerbed[i + 1] == 0;
+
+      // I can plant only if current column is 0, previous column is 0 and next column is 0.
+      if (flowerbed[i] == 0 && isLeftGood && isRightGood) {
+        flowerbed[i] = 1; // Plant on the flowerbed
+        n--; // Reduce the count of plant to be flowerbedded
+        if (n == 0) return true;
       }
+
     }
-    return n <= 0;
+    return false;
   }
 
-  private boolean isPreviousColumnOfFlowerBedIsZero(int[] flowerbed, int currentColumn) {
-    if (currentColumn == 0) { // For 0th column, nothing to check before
-      return true;
-    }
-    return flowerbed[currentColumn - 1] == 0;
-  }
-
-  private boolean isNextColumnOfFlowerBedIsZero(int[] flowerbed, int currentColumn) {
-    if (currentColumn == flowerbed.length - 1) { // For n-th column, nothing to check after
-      return true;
-    }
-    return flowerbed[currentColumn + 1] == 0;
-  }
 }

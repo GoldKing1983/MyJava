@@ -1,7 +1,7 @@
 package com.sample.datastructure.recursion;
 
 /*
-https://leetcode.com/problems/powx-n/solution/
+https://leetcode.com/problems/powx-n
 ====================================================Requirement==================================================================
 Implement pow(x, n), which calculates x raised to the power n (i.e. xn).
 ======================================================Example1===================================================================
@@ -13,7 +13,7 @@ Output: 9.26100
 ======================================================Example3===================================================================
 Input: x = 2.00000, n = -2
 Output: 0.25000
-Explanation: 2-2 = 1/22 = 1/4 = 0.25
+Explanation: 2^-2 = 1/2^2 = 1/4 = 0.25
 ==========================================Solution Approach - O(log n)==========================================
 1) Base Case: Anything power0 is 1. So return 1
 2) Divide the n, till n gets 0.
@@ -43,9 +43,10 @@ public class PowerNProblemBinSearch {
   }
 
   public double myPow(double base, int n) {
+    // 2^
     if (n < 0) {
       base = 1 / base;
-      n = -n;
+      // n = -n; not sure when this is needed. But without this is good.
     }
 
     return postOrder(base, n);

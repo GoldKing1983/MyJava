@@ -1,65 +1,58 @@
 package com.interview.leetcode.topic.tree;
 
-/**
- * https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
- * 
- * An empty tree is height-balanced. A non-empty binary tree T is balanced if:
+import com.interview.leetcode.TreeNode;
+
+/*
+https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
+===========================================================Requirement===========================================================
+An empty tree is height-balanced. A non-empty binary tree T is balanced if:
 1) Left subtree of T is balanced
 2) Right subtree of T is balanced
 3) The difference between heights of left subtree and right subtree is not more than 1.
-
-The below logic will take O(n^2). 
+============================================================Example1=============================================================
+                        1
+                       / \
+                      2   3
+                     / \
+                    4   5
+                   / \
+                  6   7
+output: false                     
+============================================================Example2=============================================================
+                            a
+                       /        \
+                      b          c
+                    /   \       / \
+                   d     e     l   m 
+                  / \   / \   / \
+                 f   g h   i n   o
+                / \
+               j   k
+output: true
+                        
  */
 
 public class HeightBalancedTree {
-	static class Node {
-		int data;
-		Node left, right;
 
-		Node(int d) {
-			data = d;
-			left = right = null;
-		}
-	}
+  public boolean isBalanced(TreeNode node) {
+    recur(node);
+    return isBalanced;
+  }
 
-	Node root;
+  private boolean isBalanced = true;
 
-	private boolean isBalanced(Node node) {
-		/* If tree is empty then return true */
-		if (node == null)
-			return true;
+  private int recur(TreeNode node) {
+    //if(!isBalanced) return 0; // If balanced is false. No more recursion needed.
+    if (node == null) return 0;
 
-		/* Get the height of left and right sub trees */
-		int lh = height(node.left);
-		int rh = height(node.right);
+    /* Get the height of left and right sub trees */
+    int leftHeight = recur(node.left);
+    int rightHeight = recur(node.right);
 
-		if (Math.abs(lh - rh) <= 1 && isBalanced(node.left) && isBalanced(node.right))
-			return true;
+    if (Math.abs(leftHeight - rightHeight) > 1) isBalanced = false;
 
-		/* If we reach here then tree is not height-balanced */
-		return false;
-	}
+    return Math.max(leftHeight, rightHeight);
+  }
 
-	int height(Node node) {
-		/* base case tree is empty */
-		if (node == null)
-			return 0;
 
-		return 1 + Math.max(height(node.left), height(node.right));
-	}
-
-	public static void main(String args[]) {
-		HeightBalancedTree tree = new HeightBalancedTree();
-		tree.root = new Node(1);
-		tree.root.left = new Node(2);
-		tree.root.right = new Node(3);
-		tree.root.left.left = new Node(4);
-		tree.root.left.right = new Node(5);
-		tree.root.left.left.left = new Node(8);
-
-		if (tree.isBalanced(tree.root))
-			System.out.println("Tree is balanced");
-		else
-			System.out.println("Tree is not balanced");
-	}
 }

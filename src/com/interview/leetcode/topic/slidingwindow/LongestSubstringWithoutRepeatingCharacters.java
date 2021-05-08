@@ -12,10 +12,12 @@ Input can contain "English letters, digits, symbols and spaces".
 "abcad" output:4 ("bcad")
 "abcbad" output:4 ("cbad")
 ======================================================Solution Approach======================================================
-1) Record unique character in HashSet.
-2) Initially left=0, right will be moved.
-3) If duplicate not found, add it to Set. window=(right-left+1)  or set.size().
-4) If duplicate found, then move left to "previousIndexOfDuplicate" + 1.
+1) Record unique character or slidingWindow in HashSet.
+2) Initially left=0, right=0 and right will be moved.
+3) right will be keep moving. left is stagnant and moves when duplicate occurs.
+4) Add currentChar or rightChar to slidingWindowSet. 
+  If slidingWindowSet contains the rightChar already, it return false i.e duplicate found
+5) If duplicate found, then move left to "previousIndexOfDuplicate" + 1.
 
 Using array to track count is difficult, because input can contain 128 ASCII characters .
 */
@@ -23,22 +25,21 @@ Using array to track count is difficult, because input can contain 128 ASCII cha
 public class LongestSubstringWithoutRepeatingCharacters {
 
   public int lengthOfLongestSubstring(String s) {
-    int maxWindow = 0;
-    Set<Character> set = new HashSet<>();
-    for (int left = 0, right = 0; right < s.length(); right++) {
-      char rightChar = s.charAt(right);
-      if (set.contains(rightChar)) { // duplicate. shrink window.
+    int maxWindow = 0, left = 0;
+    Set<Character> slidingWindowSet = new HashSet<>();
+    for (char rightChar : s.toCharArray()) {
+      boolean isUnique = slidingWindowSet.add(rightChar);
+      if (!isUnique) { // duplicate. shrink window.
         char leftChar = s.charAt(left);
         while (leftChar != rightChar) {
-          set.remove(leftChar);
+          slidingWindowSet.remove(leftChar);
           left++;
           leftChar = s.charAt(left);
         }
-        left++; // shrink to "previous index of duplicate" + 1.
-      } else {
-        set.add(rightChar);
-        maxWindow = Math.max(set.size(), maxWindow);
+        left++; // Ex: aa... left=0... move left to 1...
       }
+      maxWindow = Math.max(slidingWindowSet.size(), maxWindow);
+
     }
     return maxWindow;
   }

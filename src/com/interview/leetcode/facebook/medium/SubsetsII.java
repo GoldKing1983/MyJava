@@ -13,12 +13,14 @@ Same Logic as subset problem.
 If found a duplicate (i.e., when the current and the previous numbers are same), instead of
 adding the current number (which is a duplicate) to all the existing subsets,
 only add it to the subsets which were created in the previous step.
-=========================================================================================================================
+===========================================================Corner Case===========================================================
 Input: [5,5,5,5,5]
 Output: [[],[5],[5,5],[5,5,5],[5,5,5,5],[5,5,5,5,5]]
 
 ================================================Solution to prevent duplicate============================================
   Cache the previous size and change the startindex to previous  "size"
+  
+  Coding Point: We cannot assume previousSize = currentSize/2. Because in "Corner Case" example, result grows by 1. 
 =========================================================================================================================
 
 */

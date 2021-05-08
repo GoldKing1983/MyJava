@@ -1,4 +1,5 @@
 package com.sample.datastructure.algorithm.interview;
+
 /*
 
 See image "BinaryBacktracking.jpeg"
@@ -11,5 +12,7 @@ See image "N*NBackTracking.png" depicting NQueen Problem
 =============================Must See - Classic BackTracking=============================
 1) FactorCombinations
 2) Combinations
+3) PartitionToKEqualSumSubsetsBackTrack
  */
-public class BackTrackingInterviewPoint {}
+public class BackTrackingInterviewPoint {
+}

@@ -18,6 +18,11 @@ Ex1:
 
 Output:3
 =============================
+Ex1:
+[12301]
+[11231]
+
+Output:3
  */
 public class LongestCommonSubStringRecursion {
   public int findLCSLength(String s1, String s2) {

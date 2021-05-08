@@ -27,7 +27,7 @@ public class FileReadWriteOnSameFile {
         employeeString.append(employee.name).append(" ");
         employeeString.append(employee.id).append(" ");
         employeeString.append(employee.salary);
-        fw.write(employeeString.toString() + "\n");
+        fw.write(employeeString.toString() + "\n"); // don't forget to add \n for each line. Otherwise fill will be garbled.
       }
     } catch (Exception e) {
       System.out.println("Exception occurred while writing employees to file" + e);

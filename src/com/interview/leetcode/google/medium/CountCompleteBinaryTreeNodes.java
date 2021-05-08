@@ -82,7 +82,7 @@ public class CountCompleteBinaryTreeNodes {
     int currentLeftCount = leftNodesCount(root);
     int currentRightCount = rightNodesCount(root);
     if (currentLeftCount == currentRightCount) { // Exit Condition
-      return (int) Math.pow(2, currentLeftCount) - 1; // return (1 << leftHeight) - 1;
+      return (int) Math.pow(2, currentLeftCount) - 1; // return (1 << currentLeftCount) - 1;
     }
     int leftCount = countNodes(root.left);
     int rightCount = countNodes(root.right);

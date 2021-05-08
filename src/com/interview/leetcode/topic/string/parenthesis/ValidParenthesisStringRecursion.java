@@ -9,20 +9,24 @@ public class ValidParenthesisStringRecursion {
     return checkValidString(s, 0, 0);
   }
 
-  private boolean checkValidString(String s, int index, int count) {
-    if (count < 0) return false;
+  private boolean checkValidString(String s, int index, int openCount) {
+    if (openCount < 0) return false;
 
-    if (index == s.length()) return count == 0;
+    if (index == s.length()) return openCount == 0;
 
     if (s.charAt(index) == '(') {
-      return checkValidString(s, index + 1, count + 1);
+
+      return checkValidString(s, index + 1, openCount + 1);
 
     } else if (s.charAt(index) == ')') {
-      return checkValidString(s, index + 1, count - 1);
+
+      return checkValidString(s, index + 1, openCount - 1);
+
     } else {
-      boolean considerOpen = checkValidString(s, index + 1, count + 1);
-      boolean considerClose = checkValidString(s, index + 1, count - 1);
-      boolean neightherOperNorClose = checkValidString(s, index + 1, count);
+
+      boolean considerOpen = checkValidString(s, index + 1, openCount + 1); // Ex: *)
+      boolean considerClose = checkValidString(s, index + 1, openCount - 1); // Ex: (*
+      boolean neightherOperNorClose = checkValidString(s, index + 1, openCount); // Ex: (*)
 
       if (considerOpen || considerClose || neightherOperNorClose) return true;
     }

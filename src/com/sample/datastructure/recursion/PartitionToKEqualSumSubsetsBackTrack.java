@@ -3,15 +3,18 @@ package com.sample.datastructure.recursion;
 import java.util.Arrays;
 
 /*
- * https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/
- *
- * 1) We use an array isVisited[] to record which element in nums[] is used for grouping the sum.
- * 2) Each time when we get a currentSum = target, we start again from position 0 in nums[] for unvisited elements.
- *
+https://leetcode.com/problems/partition-to-k-equal-sum-subsets/description/
+
+===========================================================Requirement===========================================================
+1) Given an integer array nums and an integer k. 
+2) return true, if it is possible to divide this array into k non-empty subsets whose sums are all equal.
+========================================================Solution Approach========================================================
+1) Add currentNumber to currentSum and currentNumber to visited(to indicate we are adding this number to result). 
+
 There are 3 base condition at point
-1) currentSum==target ---> result found.
-2) currentSum>target ---> return
-3) currentSum < target ---> in loop for unvisited element call partition.
+2) currentSum==target ---> result found.
+3) currentSum>target ---> return
+4) currentSum < target ---> in loop for unvisited element call partition.
 
 ========================================================================================================
 When (currentSum==target) we start the recursion again from 0.
@@ -48,31 +51,28 @@ public class PartitionToKEqualSumSubsetsBackTrack {
   public boolean canPartitionKSubsets(int[] nums, int k) {
     int sum = Arrays.stream(nums).sum();
     if (k <= 0 || sum % k != 0) return false;
-    canPartition(nums, new boolean[nums.length], 0, k, 0, sum / k);
-    return result;
+    return canPartition(nums, new boolean[nums.length], 0, k, 0, sum / k);
+
   }
 
-  private boolean result = false;
+  private boolean canPartition(int[] nums, boolean[] visited, int start, int k, int currentSum,
+      int targetSum) {
+    if (k == 1) return true;
 
-  private void canPartition(
-      int[] nums, boolean[] isVisited, int startIndex, int k, int currentSum, int target) {
-    if (result || currentSum > target) return;
-    // When k-1 combo, remaining 1 combo has to match. so checking for k==1 rather than k==0
-    if (k == 1) {
-      result = true;
-      return;
+    if (currentSum > targetSum) return false;
+
+    if (currentSum == targetSum) return canPartition(nums, visited, 0, k - 1, 0, targetSum);
+
+    // loop executed when currentSum < targetSum
+    for (int i = start; i < nums.length; i++) {
+
+      if (visited[i]) continue;
+      visited[i] = true;
+      if (canPartition(nums, visited, i + 1, k, currentSum + nums[i], targetSum)) return true;
+      visited[i] = false;
+
     }
-    if (currentSum == target) {
-      canPartition(nums, isVisited, 0, k - 1, 0, target);
-      return;
-    }
-    for (int i = startIndex; i < nums.length; i++) {
-      System.out.println(Arrays.toString(isVisited));
-      if (!isVisited[i]) {
-        isVisited[i] = true;
-        canPartition(nums, isVisited, i + 1, k, currentSum + nums[i], target);
-        isVisited[i] = false;
-      }
-    }
+
+    return false;
   }
 }

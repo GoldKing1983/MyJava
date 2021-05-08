@@ -8,9 +8,10 @@ import java.util.Set;
 
 /*
 https://leetcode.com/problems/word-break/description/
-
-Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
-determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+===========================================================Requirement===========================================================
+1) Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
+2) determine if s can be segmented into a space-separated sequence of one or more dictionary words.
+3) I can use each word in dictionary any number of times.
 
 Input: s = "bb", wordDict = ["a","b","bbb","bbbb"]
 Expected: true
@@ -124,7 +125,7 @@ public class WordBreakQueue {
           String suffixString = currentString.substring(i + 1, n);
           if (dictionary.contains(suffixString)) return true;
 
-          if (visited.contains(suffixString)) continue;
+          if (visited.contains(suffixString)) continue; // Visited logic not needed for interview point. 
           visited.add(suffixString);
 
           queue.add(suffixString);

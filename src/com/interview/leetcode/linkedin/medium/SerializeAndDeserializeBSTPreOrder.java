@@ -49,19 +49,19 @@ public class SerializeAndDeserializeBSTPreOrder {
 
   int index = 0;
 
-  // Similar to ValidateBinarySearchTreeOrValidBST
+  //Similar to ValidateBinarySearchTreeOrValidBST
   private TreeNode deserialize(String[] serializedSplitString, int low, int high) {
     if (index == serializedSplitString.length) return null;
 
     int rootValue = Integer.parseInt(serializedSplitString[index]);
-    if (rootValue > low && rootValue < high) {
-      TreeNode root = new TreeNode(rootValue);
-      index++;
-      root.left = deserialize(serializedSplitString, low, rootValue); // low=5, rootValue=10
-      root.right = deserialize(serializedSplitString, rootValue, high); // low=10, rootValue=20
-      return root;
-    }
-    return null;
+
+    if (rootValue <= low || rootValue >= high) return null;
+
+    TreeNode root = new TreeNode(rootValue);
+    index++;
+    root.left = deserialize(serializedSplitString, low, rootValue); // low=5, rootValue=10
+    root.right = deserialize(serializedSplitString, rootValue, high); // low=10, rootValue=20
+    return root;
   }
 
 }

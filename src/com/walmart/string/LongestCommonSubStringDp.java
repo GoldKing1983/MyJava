@@ -42,11 +42,11 @@ public class LongestCommonSubStringDp {
     int[][] dp = new int[x.length + 1][y.length + 1];
     int result = 0;
 
-    for (int i = 1; i <= x.length; i++) {
-      for (int j = 1; j <= y.length; j++) {
-        if (x[i - 1] == y[j - 1]) {
-          dp[i][j] = dp[i - 1][j - 1] + 1;
-          result = Integer.max(result, dp[i][j]);
+    for (int row = 1; row <= x.length; row++) {
+      for (int col = 1; col <= y.length; col++) {
+        if (x[row - 1] == y[col - 1]) {
+          dp[row][col] = dp[row - 1][col - 1] + 1;
+          result = Integer.max(result, dp[row][col]);
         }
       }
     }

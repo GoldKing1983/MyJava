@@ -18,7 +18,7 @@ A combination is a selection of items from a collection, such that the order of 
 1) PermutationsBFS
 2) PermutationsII
 =============================================Subsets=============================================
-1) SubsetsBFS - dont' allow duplicates
+1) SubsetsBFS - don't allow duplicates
 2) SubsetsII
  */
 public class PermutationCombinationsSubsetInterviewPoint {

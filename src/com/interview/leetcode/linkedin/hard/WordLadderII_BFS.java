@@ -9,19 +9,31 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Set;
 
-/**
- * https://leetcode.com/problems/profitable-schemes/description/
- *
- * <p>Logic is same as WordLadder_BFS, but we need to maintain and return the path of ladder.
- *
- * <p>1) Save the path at each node from root, by using the call Path. Ex: "red" is beginWord.
- * "bed", "led", "rid", are child nodes found. Then I will push currentString as red and
- * pathList["bed", "led", "rid"]. 2) So each node maintains the path. 3) When a result found at
- * level(n or before), add the path to result. 4) There can be multiple result at that level.
- * So,Break the logic and return result at that path level by the flag lowestLevelResultFound
- *
- * <p>This code is throwing TimeLimitException for big input. But logically this is perfectly right.
- * Look into code "WordLadderII_BFSAndDFS" for alternate option
+/*
+https://leetcode.com/problems/profitable-schemes/description/
+===========================================================Requirement===========================================================
+1) Given two words, beginWord and endWord, and a dictionary wordList. 
+2) Return all the shortest transformation sequences from beginWord to endWord, or an empty list if no such sequence exists.
+============================================================Example1=============================================================
+Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
+Output: [["hit","hot","dot","dog","cog"],["hit","hot","lot","log","cog"]]
+
+Explanation: There are 2 shortest transformation sequences:
+"hit" -> "hot" -> "dot" -> "dog" -> "cog"
+"hit" -> "hot" -> "lot" -> "log" -> "cog"
+========================================================Solution Approach========================================================
+Logic is same as WordLadder_BFS, but we need to maintain and return the path of ladder.
+
+1) Save the path at each node from root, by using the call Path. Ex: "red" is beginWord. "bed", "led", "rid", are child nodes found. 
+Then I will push currentString as red and pathList["bed", "led", "rid"]. 
+
+2) So each node maintains the path. 
+3) When a result found at level(n or before), add the path to result. 
+4) There can be multiple result at that level.
+So,Break the logic and return result at that path level by the flag lowestLevelResultFound
+
+This code is throwing TimeLimitException for big input. But logically this is perfectly right. 
+Look into code "WordLadderII_BFSAndDFS" for alternate option
  */
 public class WordLadderII_BFS {
   class Path {
@@ -56,13 +68,11 @@ public class WordLadderII_BFS {
             String permutedString = beginWord.substring(0, i) + j + beginWord.substring(i + 1);
             if (permutedString.equals(endWord) && wordListSet.contains(permutedString)) {
               lowestLevelResultFound = true;
-              System.out.println(result);
               addResult(result, path, permutedString);
               break;
             }
             if (wordListSet.contains(permutedString) && !isVisited.contains(permutedString)) {
               q.offer(updatePath(path, permutedString));
-              System.out.println("isVisited" + isVisited);
             }
           }
         }
@@ -87,8 +97,7 @@ public class WordLadderII_BFS {
 
   public static void main(String[] args) {
     WordLadderII_BFS w = new WordLadderII_BFS();
-    System.out.println(
-        w.findLadders(
-            "red", "tax", Arrays.asList("ted", "tex", "red", "tax", "tad", "den", "rex", "pee")));
+    System.out.println(w.findLadders("red", "tax",
+        Arrays.asList("ted", "tex", "red", "tax", "tad", "den", "rex", "pee")));
   }
 }

@@ -59,8 +59,11 @@ Count all the values islandPerimeter=6
 public class IslandPerimeterSimple {
   public int islandPerimeter(int[][] grid) {
     int[][] dirs = new int[][] {{0, 1}, {1, 0}, {-1, 0}, {0, -1}};
+    
     int rowMax = grid.length, colMax = grid[0].length;
+    
     int islandPerimeter = 0;
+    
     for (int row = 0; row < rowMax; row++) {
       for (int col = 0; col < colMax; col++) {
         if (grid[row][col] == 1) {

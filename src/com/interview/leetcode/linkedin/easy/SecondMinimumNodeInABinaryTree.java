@@ -23,18 +23,14 @@ public class SecondMinimumNodeInABinaryTree {
   int min1;
   long min2 = Long.MAX_VALUE;
 
-  private boolean isCurrentFallsBetweenMIN1AndMIN2(int current) {
-    return min1 < current && min2 > current;
-  }
 
   public void dfs(TreeNode root) {
-    if (root != null) {
-      if (isCurrentFallsBetweenMIN1AndMIN2(root.val)) {
-        min2 = root.val;
-      }
-      dfs(root.right); // purposely made right as first. Changing line will still work
-      dfs(root.left);
+    if (root == null) return;
+    if (min1 < root.val && min2 > root.val) { //isCurrentFallsBetweenMIN1AndMIN2
+      min2 = root.val;
     }
+    dfs(root.left);
+    dfs(root.right);
   }
 
   public int findSecondMinimumValue(TreeNode root) {

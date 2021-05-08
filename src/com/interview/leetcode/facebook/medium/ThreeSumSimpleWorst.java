@@ -17,18 +17,29 @@ firstNumebr,secondNumber,thirdNumber. So this solution works.
 public class ThreeSumSimpleWorst {
 
   public List<List<Integer>> threeSum(int[] nums) {
+    // Below validates if 2 of same list comes, ignores the latest
     Set<List<Integer>> res = new HashSet<>();
+    
     if (nums.length == 0) return new ArrayList<>(res);
+    
     Arrays.sort(nums);
+    
     for (int outer = 0; outer < nums.length - 2; outer++) {
+      
       int left = outer + 1;
       int right = nums.length - 1;
       int firstNumber = nums[outer];
+      
       while (left < right) {
+        
         int secondNumber = nums[left], thirdNumber = nums[right];
+        
         int sum = firstNumber + secondNumber + thirdNumber;
+        
         if (sum == 0) res.add(Arrays.asList(firstNumber, secondNumber, thirdNumber));
+        
         else if (sum > 0) right--;
+        
         else if (sum < 0) left++;
       }
 

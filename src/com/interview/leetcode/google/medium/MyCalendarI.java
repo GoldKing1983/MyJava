@@ -59,13 +59,14 @@ public class MyCalendarI {
 
   public boolean book(int currentStart, int currentEnd) {
     Integer previousStart = map.lowerKey(currentEnd); // Time Complexity : O(log N)
-    if (previousStart == null) { // map is empty or current end is lower than all previous entry
+    if (previousStart == null) { // if map is empty or current end is lower than all previous entry
       map.put(currentStart, currentEnd); // Time Complexity : O(1)
       return true;
     }
+
     Integer previousEnd = map.get(previousStart);
-    if (previousEnd > currentStart) return false;
-    map.put(currentStart, currentEnd);
+    if (previousEnd > currentStart) return false; // Ex: [10,20] and current=[5,15]
+    map.put(currentStart, currentEnd); // Ex: [10,12] and current=[13,15]
     return true;
   }
 }

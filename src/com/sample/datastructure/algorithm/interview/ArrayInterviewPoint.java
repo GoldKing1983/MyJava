@@ -46,6 +46,7 @@ NextGreaterElementI
 BestTimeToBuyAndSellStock
 ===========FromLeftToRight and FromRightToLeft Problems===========
 NonDecreasingArray
+Candy
 ===========FastPtr and SlowPtr Problems or Hair and Tortoise Problems===========
 1) HappyNumber
 2) LinkedListCycle

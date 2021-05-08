@@ -22,7 +22,7 @@ Return the minimum number of minutes that must elapse until no cell has a fresh 
 4) Count total number of freshFruits. It is required for 2 cases.
 Case1: If there are no freshFruits, we can exit right away.
 Case2: Even after x days, freshFruits kept away from rottenFruits are always fresh. Ex: ["rotten", "empty", "fresh"]
-5) Push the rottenFruits into Queue.
+5) Push all the rottenFruits into Queue.
 6) For Each Minute, poll all the rottenFruits and offer corresponding freshFruits.
 7) Visited is avoided by updating grid[nextRow][nextCol] to 2. i.e if it is 2 already don't visit again.
  */

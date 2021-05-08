@@ -28,24 +28,50 @@ Ex: node1=1 and node2=2
 3) Else means p and q are on either side of the root, which means root is the answer. Therefore, we break loop at this point.
 Ex: node1=2 and node2=20
 
-Time Complexity: O(h) ---> h is height of tree
+Time Complexity: O(h) ---> h is height of tree.... Note: it is not O(log(n))
 =================================================================================================================================
  */
 public class LowestCommonAncestorOfABinarySearchTree {
 
-  // Root null check is not needed, because it will never touch leaf's left or right which is null.
-  // Because as per assumption node1 and node2 exists.
   public TreeNode lowestCommonAncestor(TreeNode root, TreeNode node1, TreeNode node2) {
+
+    // Root null check is not needed, because it will never touch leaf's left or right which is null. Because as per assumption "root", "node1" and "node2" all exists.
+    //if(root==null) return null;
+
     int rootValue = root.val;
     int node1Value = node1.val;
     int node2Value = node2.val;
 
+    // Both the values are greater than root value. So go right side
     if (rootValue < node1Value && rootValue < node2Value) {
       return lowestCommonAncestor(root.right, node1, node2);
     }
+
+    // Both the values are less than root value. So go left side
     if (rootValue > node1Value && rootValue > node2Value) {
       return lowestCommonAncestor(root.left, node1, node2);
     }
-    return root;
+            /*
+               node1= 5 and node2= 10
+                  5
+                   \
+                    10
+             */
+            
+    // root is the answer
+//    if (rootValue == node1Value || rootValue == node2Value) { ====> I don't need this code as below covers this case. 
+//      return root;
+//    }
+    
+        /*
+         node1=1 and node2=10. So one lies left and one lies right. So return root.
+                 5
+               /   \
+              4     10
+             /
+            1       
+         */
+
+    return root; // this case executes when rootValue==node1Value || rootValue==node2Value
   }
 }

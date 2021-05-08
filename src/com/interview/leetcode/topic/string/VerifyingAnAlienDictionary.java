@@ -9,21 +9,27 @@ package com.interview.leetcode.topic.string;
       case2) If word1 first character greater than word2 first character. return false
       case3) If word1 first character less    than word2 first character. We can move on comparing 2nd and 3rd word.
   
-
+============================================================Example1=============================================================
 Input: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz"
 Output: true
 Explanation: As 'h' comes before 'l' in this language, then the sequence is sorted.
-
+============================================================Example2=============================================================
+Input: words = ["app","apple","banana"], order = "abcdefghijklmnopqrstuvwxyz"
+Output: true
+============================================================Example3=============================================================
+Input: words = ["banana","app","apple"], order = "abcdefghijklmnopqrstuvwxyz"
+Output: false
 ========================================================Solution Approach========================================================
-=========Corner Case============
+=========Corner Case============Assume firstWord or previousWord is master always============
    1) If word1 and word2 are equal to certain index and word2 is finished then return false.
    Note: this doesn't mean word2 size should be greater than or equal to word1.
    Ex: (Consider a-z dictionary)
    "app" "apple" ==> true
    "apple" "app" ==> false... because till app both same, then nothing to match in word2
+   "a" "" ==> false
+   "" "a" ==> true
    "apple" "apq" ==> true
    "apple" "aq" ==> true
-   "a" "" ==> false
 
 */
 public class VerifyingAnAlienDictionary {
@@ -42,13 +48,15 @@ public class VerifyingAnAlienDictionary {
     }
 
     for (int i = 1; i < words.length; i++) {
-      String previousWord = words[i - 1];
+      String previousWord = words[i - 1]; // previousWord is the master
       String currentWord = words[i];
 
+      // previousWord is the master. So we end loop by previousWord. Ex: "" "a" ==> true
       for (int j = 0; j < previousWord.length(); j++) {
         int previousWordCharPosition = bucket[previousWord.charAt(j) - 'a'];
 
         if (j == currentWord.length()) return false;// Ex: [ab][a]"a-z"...false... Ex: [a][ab]"a-z"...true
+
         int currentWordCharPosition = bucket[currentWord.charAt(j) - 'a'];
 
         if (previousWordCharPosition == currentWordCharPosition) continue;
@@ -63,7 +71,8 @@ public class VerifyingAnAlienDictionary {
     }
     return true;
   }
-  
+
+  // Below is not recommended as indexOf takes O(n) times for each word.
   public boolean isAlienSortedAvoidMap(String[] words, String order) {
     for (int i = 1; i < words.length; i++) {
       String previousWord = words[i - 1];

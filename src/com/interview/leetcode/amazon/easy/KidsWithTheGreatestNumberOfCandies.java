@@ -1,6 +1,7 @@
 package com.interview.leetcode.amazon.easy;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -25,10 +26,9 @@ For 4th index. If i give 3 candies, it will reach 6. It is more than 5. So true.
  */
 public class KidsWithTheGreatestNumberOfCandies {
   public List<Boolean> kidsWithCandies(int[] candies, int extraCandies) {
-    int largestCandyCount = 0;
-    for (int currentCandyCount : candies) {
-      largestCandyCount = Math.max(currentCandyCount, largestCandyCount);
-    }
+
+    int largestCandyCount = Arrays.stream(candies).parallel().max().getAsInt();
+
     List<Boolean> result = new ArrayList<>(candies.length);
 
     for (int currentCandyCount : candies) {

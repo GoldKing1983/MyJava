@@ -31,8 +31,8 @@ public class SquareRoot {
     int mid = low + (high - low) / 2;
     // mid * mid == target ===> converted to  mid == target / mid ===> for overflow issue
     if (mid == target / mid) return mid;
-    // mid * mid > target ===> converted to  mid > target / mid ===> for overflow issue
     else if (mid > target / mid) return binSearch(low, mid - 1, target);
+
     else return binSearch(mid + 1, high, target);
   }
 }

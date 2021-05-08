@@ -51,12 +51,20 @@ source = 2
 5) Decrement inDegree.
 6) If the inDegree is zero. Then it can act as a source. So add this is queue.
 7) Go to Step 4.
+=======================================================Data Flow Analysis========================================================
 	Ex: [1,2] [1,3] [2,4][3,4]
 					 ------>2------>
 				    |				|
 			1------>				|------>4
 			        |				|
 			         ------>3------>
+			     q=[], sortedOrder=[], inDegree= [1->0][2->1][3->1][4->2]    
+			     q=[1], sortedOrder=[1], inDegree= [1->0][2->0][3->0][4->2]
+			     q=[2,3], sortedOrder=[1,2], inDegree= [1->0][2->0][3->0][4->1]
+			     q=[3], sortedOrder=[1,2,3], inDegree= [1->0][2->0][3->0][4->0]
+			     q=[4], sortedOrder=[1,2,3,4], inDegree= [1->0][2->0][3->0][4->0]
+			     q=[], 
+			         
 Note: sortedOrder saves only 1 possible output. Ex: either 1234 or 1324
 ========================================================================================================================
  */

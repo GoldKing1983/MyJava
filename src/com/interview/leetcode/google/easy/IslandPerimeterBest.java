@@ -28,8 +28,8 @@ See the video https://leetcode.com/problems/island-perimeter/solution/
  */
 public class IslandPerimeterBest {
   public int islandPerimeter(int[][] grid) {
-    //int[][] dirs = new int[][] {{0, 1}, {1, 0}}; // RIGHT AND DOWN
-    int[][] dirs = new int[][] {{-1, 0}, {0, -1}}; // UP And LEFT
+    //int[][] dirs = new int[][] {{1, 0}, {0, -1}}; // RIGHT AND DOWN
+    int[][] dirs = new int[][] {{0, 1}, {-1, 0}}; // UP And LEFT
     int rowMax = grid.length, colMax = grid[0].length;
     int islandPerimeter = 0;
     for (int row = 0; row < rowMax; row++) {

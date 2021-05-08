@@ -1,10 +1,9 @@
 package com.interview.leetcode.amazon.medium;
 
-import com.interview.leetcode.TreeNode;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import com.interview.leetcode.TreeNode;
 
 /*
 ===========================================================Requirement===========================================================
@@ -31,43 +30,73 @@ Output:
 When recursing back remove current node from currentPath.
 3) When adding currentResult to result, make a copy.
 ==========================Time Complexity====================================================
-We can argue Time Complexity is n(log(n)) or n^2.
-Below is argument about n(log(n))
-For binary trees, there exists only one path to reach any leaf node,
+1) Recursion takes O(n) times.
+2) Copying currentResult to result takes O(n/2) equivalent to n, atmost for a complete binary tree.
+3) So total of O(n^2)  
+
+
+For complete binary trees, there exists many path to reach any leaf node and all path can be result
+
+targetSum=3
 			   1
 		     /   \
-		    2     3
+		    1     1
 		   / \   / \
-		  4   5 6   7
-Ex: for a 7 node complete binary tree. 4 paths are possible
-path1  : 1 -> 2 -> 4
-path2  : 1 -> 2 -> 4
-path3  : 1 -> 3 -> 6
-path4  : 1 -> 3 -> 7
+		  1   1 1   1
+Ex: for a 7 node complete binary tree. 4(n/2) paths are possible
+path1  : 1 -> 1 -> 1
+path2  : 1 -> 1 -> 1
+path3  : 1 -> 1 -> 1
+path4  : 1 -> 1 -> 1
 
-A path will take log(n) times.
-Total number of leaf is n/2 equivalent to n.
-So total is n(log(n))
 
 */
 
 public class PathSumII {
-    public List<List<Integer>> findPaths(TreeNode root, int sum) {
-        List<List<Integer>> allPaths = new ArrayList<>();
-        LinkedList<Integer> currentPath = new LinkedList<>();
-        findPathsRecursive(root, sum, currentPath, allPaths);
-        return allPaths;
+
+  public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
+    List<List<Integer>> result = new ArrayList<>();
+    recur(root, result, new ArrayList<>(), targetSum);
+    return result;
+  }
+
+  private void recur(TreeNode root, List<List<Integer>> result, List<Integer> currResult,
+      int targetSum) {
+    if (root == null) return;
+
+    currResult.add(root.val);
+
+    targetSum -= root.val;
+
+    // if targetSum < 0... negative numbers can increment... so go all the way till leaf
+    if (targetSum == 0 && root.left == null && root.right == null) {
+      result.add(new ArrayList<>(currResult));
+      currResult.remove(currResult.size() - 1);
+      return;
+    }
+    recur(root.left, result, currResult, targetSum);
+    recur(root.right, result, currResult, targetSum);
+
+    currResult.remove(currResult.size() - 1);
+  }
+
+  // Simplified recursion approach....
+  private void findPathsRecursive(TreeNode root, int targetSum, LinkedList<Integer> currentPath,
+      List<List<Integer>> allPaths) {
+    if (root == null) return;
+
+    currentPath.add(root.val);
+
+    targetSum -= root.val;
+
+    if (0 == targetSum && root.left == null && root.right == null) {
+      allPaths.add(new ArrayList<>(currentPath));
+    } else {
+      findPathsRecursive(root.left, targetSum, currentPath, allPaths);
+      findPathsRecursive(root.right, targetSum, currentPath, allPaths);
     }
 
-    private void findPathsRecursive(TreeNode currentNode, int sum, LinkedList<Integer> currentPath, List<List<Integer>> allPaths) {
-        if (currentNode == null) return;
-        currentPath.add(currentNode.val);
-        if (currentNode.left == null && currentNode.right == null) {
-            if (currentNode.val == sum) allPaths.add(new ArrayList<>(currentPath));
-        } else {
-            findPathsRecursive(currentNode.left, sum - currentNode.val, currentPath, allPaths);
-            findPathsRecursive(currentNode.right, sum - currentNode.val, currentPath, allPaths);
-        }
-        currentPath.removeLast();
-    }
+    currentPath.removeLast();
+  }
+
 }

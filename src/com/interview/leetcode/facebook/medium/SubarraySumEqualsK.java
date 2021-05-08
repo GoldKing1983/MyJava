@@ -53,7 +53,7 @@ public class SubarraySumEqualsK {
       /*
        *  Add the Logic here.
        */
-      // Ex:[1,-1,1,5]... at index2, preSum 1 occurs 2 times
+      // Ex: [0,0,0]...target=0... at index1 dp=[0,2] This memoization will be used at index2
       dp.put(prefixSum, dp.getOrDefault(prefixSum, 0) + 1);
     }
     return resultCount;
@@ -63,14 +63,14 @@ public class SubarraySumEqualsK {
     int resultCount = 0, prefixSum = 0;
     HashMap<Integer, Integer> dp = new HashMap<>();
     for (int num : nums) {
-      prefixSum += num;
+      prefixSum += num; // step1
       // -------------------Logic Starts=================//
       if (prefixSum == target) resultCount++;
 
       if (dp.containsKey(prefixSum - target)) resultCount += dp.get(prefixSum - target);
       // -------------------Logic Ends=================//
-      // Ex:[1,-1,1,3] target=4... at index2, preSum 1 occurs 2 times. This memoization will be used 
-      dp.put(prefixSum, dp.getOrDefault(prefixSum, 0) + 1);
+      // Ex: [0,0,0]...target=0... at index1 dp=[0,2] This memoization will be used at index2 
+      dp.put(prefixSum, dp.getOrDefault(prefixSum, 0) + 1); // step2
     }
     return resultCount;
   }
