@@ -8,6 +8,7 @@ import org.junit.Test;
 
 public class SampleTest {
   /**
+   * RingCentral asked by Tommy Huang
   * Question 1: Get all unused keys in the array
   * @param allKeys, all unique keys we have
   * @param usedKeys, the keys which were used
@@ -18,14 +19,14 @@ public class SampleTest {
     // usedKeys = [1,3,5]
     // result = [2,4]
 
-    Set<Integer> set = new HashSet<>();
+    Set<Integer> usedSet = new HashSet<>();
     for (int usedKey : usedKeys) {
-      set.add(usedKey);
+      usedSet.add(usedKey);
     }
 
     List<Integer> result = new ArrayList<>();
     for (int allKey : allKeys) {
-      if (!set.contains(allKey)) result.add(allKey);
+      if (!usedSet.contains(allKey)) result.add(allKey);
     }
 
     int[] resultArray = new int[result.size()];

@@ -23,13 +23,13 @@ Ex2: Valid Input: a->b b->c c->d and d->c Ans: a->b->c->d->c
 				 |	   	  |
 				  ----<---
 
-Ex3:
+Ex3: Valid Input
 		a---->b---->c---->d
 
 Ex4:(Note: Valid Input... there can be 2 tickets with same "fromTo" (a---->b twice))
 	  a---->b---->c---->a---->b
 
-Ex5: In-Valid Input a->b, a->c, c->b, b->d... We miss path a->b to a->c anytime
+Ex5: In-Valid Input a->b, a->c, c->b, b->d... We miss path a->b or a->c and c->b anytime
 	       	   ---->-->-->b---->d
 		a---->|	 	 |
 			   ---->c

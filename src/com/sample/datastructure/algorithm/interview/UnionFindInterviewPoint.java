@@ -28,7 +28,7 @@ So if we want to add another element to group. It can be added to childOf3 or ch
 Algorithm that uses UnionFind- Kruskal Minimum Spanning Tree
 
 Problems on UnionFind
-1) NumberOfConnectedComponentsInAnUndirectedGraph
+1) NumberOfConnectedComponentsInAnUndirectedGraphUnionFind
 2) GraphValidTreeUnionFind
 3) ConnectingCitiesWithMinimumCost
 

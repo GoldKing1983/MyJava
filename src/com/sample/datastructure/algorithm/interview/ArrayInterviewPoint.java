@@ -50,6 +50,7 @@ Candy
 ===========FastPtr and SlowPtr Problems or Hair and Tortoise Problems===========
 1) HappyNumber
 2) LinkedListCycle
+3) FindTheDuplicateNumberSlowFastApproach
 ===========Compare one or more Arrays Style Problems===========
 IntersectionOfThreeSortedArrays
 ===========Increment/Increment Array Index- Problems===========

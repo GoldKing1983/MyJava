@@ -23,13 +23,13 @@ map key and value should be below
 3 - [2]
 4 - [1]
 
-Level Order Traversal in Graph is same as tree Level Order Traversal, only difference is tree has left and right whereas graph
+BFS in Graph is same as tree Level Order Traversal, only difference is tree has left and right whereas graph
 has n nodes. So inside for loop another for loop will come.
 
 ======================Regarding below problem=======
 1) Below problem expects to create graph structure and go to the specific level and print the count of nodes in that level.
 
-Refer /Users/chandrasekhar/projects/MyJava/resources/Graph1.jpg
+Refer Graph1.jpg
 
  */
 public class BFS {

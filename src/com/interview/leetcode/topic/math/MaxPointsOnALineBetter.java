@@ -20,10 +20,11 @@ public class MaxPointsOnALineBetter {
     String currentSlope = null;
     Map<String, Integer> slopeCountMap = null;
 
-    for (int i = 1; i < points.length; i++) {
+    for (int i = 0; i < points.length; i++) {
       currentSlopeCount = 0;
       slopeCountMap = new HashMap<>();
-      for (int j = 0; j < i; j++) {
+      
+      for (int j = i + 1; j < points.length; j++) {
         currentSlope = slope(points[i], points[j]);
         slopeCountMap.put(currentSlope, slopeCountMap.getOrDefault(currentSlope, 0) + 1);
         // repeat mistake. Dont count SAME here. it will be dup count. eg - [1,1][1,1][1,1] res = 3 vs 5

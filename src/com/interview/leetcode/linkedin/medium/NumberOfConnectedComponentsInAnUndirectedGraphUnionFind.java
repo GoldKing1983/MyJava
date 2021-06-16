@@ -30,6 +30,9 @@ Input: n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]]. Output:  1
 public class NumberOfConnectedComponentsInAnUndirectedGraphUnionFind {
 
   public int countComponents(int n, int[][] edges) {
+    // result is n if all are disconnected...
+
+
     // if (nodes[i] == i) then it is parent or root else current node is pointing parent
     int[] nodes = new int[n];
 

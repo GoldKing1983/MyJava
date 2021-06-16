@@ -9,7 +9,7 @@ import java.util.Map;
 https://leetcode.com/problems/shortest-word-distance-ii/description/
 ===========================================================Requirement===========================================================
 1) Same as ShortestWordDistance
-2) But here there will be query of word1 and word2.
+2) But here there will be multiple query of word1 and word2.
 =====================================Solution Approach=====================================
 1) Instead of iterating the words every-time for query, save the indexes in map.
 2) For each of query get the indexes and calculate minDistance. 

@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /*
- * https://leetcode.com/problems/knight-probability-in-chessboard/
- * https://www.youtube.com/watch?v=IV-KgAGIcxk
+https://leetcode.com/problems/knight-probability-in-chessboard/
+https://www.youtube.com/watch?v=IV-KgAGIcxk
 
 Requirement:
 1) On an NxN chessboard, a knight starts at the r-th row and c-th column and attempts to make exactly K moves.

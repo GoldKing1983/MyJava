@@ -57,11 +57,23 @@ public class PaintHouse {
     if (costs == null || costs.length == 0) return 0;
     int n = costs.length - 1; // for 1 row n=0. So loop will not execute.
 
-    for (int i = 1; i <= n; i++) {
-      costs[i][0] += Math.min(costs[i - 1][1], costs[i - 1][2]);
-      costs[i][1] += Math.min(costs[i - 1][0], costs[i - 1][2]);
-      costs[i][2] += Math.min(costs[i - 1][1], costs[i - 1][0]);
+    for (int row = 1; row <= n; row++) {
+      costs[row][0] += Math.min(costs[row - 1][1], costs[row - 1][2]);
+      costs[row][1] += Math.min(costs[row - 1][0], costs[row - 1][2]);
+      costs[row][2] += Math.min(costs[row - 1][1], costs[row - 1][0]);
     }
     return Math.min(Math.min(costs[n][0], costs[n][1]), costs[n][2]);
+  }
+
+  public int minCostDontChangeSource(int[][] costs) {
+    int n = costs.length;
+    int[][] dp = new int[n][3];
+    dp[0] = costs[0];
+    for (int row = 1; row < n; row++) {
+      dp[row][0] = costs[row][0] + Math.min(dp[row - 1][1], dp[row - 1][2]);
+      dp[row][1] = costs[row][1] + Math.min(dp[row - 1][0], dp[row - 1][2]);
+      dp[row][2] = costs[row][2] + Math.min(dp[row - 1][0], dp[row - 1][1]);
+    }
+    return Math.min(dp[n - 1][0], Math.min(dp[n - 1][1], dp[n - 1][2]));
   }
 }

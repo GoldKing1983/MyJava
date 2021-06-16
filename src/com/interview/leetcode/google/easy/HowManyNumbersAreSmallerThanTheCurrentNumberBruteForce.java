@@ -21,8 +21,7 @@ Output: [2,1,0,3]
 Input: nums = [7,7,7,7]
 Output: [0,0,0,0]
 ========================================Solution Approach - O(n^2) - Initial Thinking===========================================================
-1) Sort the data.
-2) For each of data get the count of numbers
+1) For each of data get the count of numbers
 ================================================================================================================================================
 
 

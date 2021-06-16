@@ -6,6 +6,10 @@ https://leetcode.com/problems/maximum-product-subarray/description/
 ===============================================Solution Approach=================================================
 1) Capture max from leftToRight.
 2) Capture max from rightToLeft.
+
+              [2,3,-2,4]
+
+leftToRight = 6 * -2 = -12*
  */
 public class MaximumProductSubarrayBest {
 

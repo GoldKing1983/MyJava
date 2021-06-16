@@ -15,7 +15,7 @@ So multiply atmost 1digit at a time. Save in array. Return the result.
 ==========================================Approach3============================================================================
 This problem test our coding skill. No logic or magic in problem.
 1) Just usual School Math.
-2) Multiply each number. Save it in array. From Left to Right
+2) Process each number from rightToLeft, multiply each number. Save it in array from rightToLeft
 3) Watch-out result positions.
  * See Image "MultiplyStrings.jpg"
 Ex:
@@ -35,7 +35,14 @@ Ex:
 	  =====
 
 =======================================POS Array value for above input=======================================
-		 		 5*123  = [0, 0, 6, 1, 5]
+                5*3     = [0, 0, 0, 1, 5]
+                5*2     = [0, 0, 1, 1, 5]
+		 		5*1     = [0, 0, 6, 1, 5]
+		 		 
+		 		4*3     = [0, 0, 7, 3, 5] 
+		 		4*2     = [0, 0, 7, 3, 5] 
+		 		4*1     = [0, 5, 5, 3, 5]  
+		 		
 PreviousResult + 4*123  = [0, 5, 5, 3, 5]
 
  */

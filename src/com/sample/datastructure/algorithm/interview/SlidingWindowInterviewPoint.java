@@ -4,6 +4,8 @@ package com.sample.datastructure.algorithm.interview;
 1) MaxConsecutiveOnesIIISlidingWindow
 2) MaximumWidthRampBest
 
+LongestSubstringWithoutRepeatingCharacters
+MinimumWindowSubstringSlidingWindow
 ==== Straight Forward Sliding Window====
 
 ==== Tricky Sliding Window====

@@ -21,7 +21,7 @@ Return any such choice as an array answer. It is guaranteed an answer exists.
 5) Condition: A garden will not be connected to more than 3 garden and there will be answer all the time.
 =====================================================================================================================
 So for below input.
-Input: N = 4, paths = [[1,2],[3,4]]
+Input: N = 4, paths = [[1,2],[3,4]] i.e 1and2 are connected, 3and4 are connected
 Output1: [1,2,1,2]
 Output2: [1,2,3,4]
 Output3: [1,2,3,1] and many more valid combinations are possible. Return anyone.
@@ -31,12 +31,17 @@ Output3: [1,2,3,1] and many more valid combinations are possible. Return anyone.
             return result;
 
 =======Solution Approach====Graph Coloring Approach====UnDirectedGraph====Greedy Approach=================
-1) In each Garden, plant 4 flowers. So create a set with 4 flowers named availableFlowers.
+0) Iterate each garden.
+1) Eagerly plant 4 flowers in each Garden. So create a set with 4 flowers named availableFlowers.
 2) If a garden's dependency garden has any of 4 flower remove that flower from the available flower.
 3) Now any of remaining flower can be planted on that garden.
 ======================================================================================================================
 1) Coloring logic is about creating possible options of output. Then removing the invalid output.
 2) So here I am planting all plants in garden. Then removing invalid plants.
+3) Greedy Approach works because one garden can connect to max of 3 gardens. There are 4plants. So each garden can get a flower.
+   Ex: I plant flower1(f1) in garden1(g1)... Assume g2,g3,g4 are connected. Each of remaining garden gets f2||f3||f4    
+
+   If there are more than 3, then we need backtrack. 
 ====================================================================================================
 
  */

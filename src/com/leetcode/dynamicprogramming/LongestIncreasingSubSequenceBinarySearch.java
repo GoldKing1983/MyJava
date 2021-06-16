@@ -44,13 +44,15 @@ public class LongestIncreasingSubSequenceBinarySearch {
       /*
        * returns index of the search key, if it is contained in the array within the specified range;
        * otherwise, (-(insertion point) - 1).
-       * Ex: If "dp" is empty. search for 1. will return -1. Stating it needs to be inserted at 0.
+       * Ex1: If "dp" is empty. search for 1. will return -1. Stating it needs to be inserted at index0.
+       * Ex2: "dp"=[1,3,5,7]. search for 4. will return -3. Stating it needs to be inserted at index2. 
        * The insertion point is defined as the point at which the key would be inserted into the array:
        */
       int indexToInsert = Collections.binarySearch(dp, num);
-      if (indexToInsert >= 0) continue; // Element already exists.
+      if (indexToInsert >= 0) continue; // Element already exists. ex:dp=[1,2,3] element to add is 1 or 2 or 3
       indexToInsert = -(indexToInsert + 1);
-      if (indexToInsert == dp.size()) dp.add(num); // dp is empty during first time. So just add.
+      // element to be added is lastIndex(case1: during dp isEmpty and case2:dp=[1,2,3] element to add is 4). So just add.
+      if (indexToInsert == dp.size()) dp.add(num);
       else dp.set(indexToInsert, num);
     }
     return dp.size();

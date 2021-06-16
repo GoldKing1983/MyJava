@@ -6,7 +6,26 @@ import java.util.Deque;
 import java.util.List;
 
 /*
-* https://leetcode.com/problems/exclusive-time-of-functions/description/
+https://leetcode.com/problems/exclusive-time-of-functions/description/
+
+1) Given a input sequenced as fuctionId:start||end:timestamp.
+2) Return the execution time of each functionId.
+
+
+Input: n = 2, logs = ["f0:start:0","f1:start:2","f1:end:5","f0:end:6"]
+Output: [3,4]
+
+Explanation:
+Function f0 starts at the beginning of time 0, then it executes 2 for units of time and reaches the end of time 1.
+Function f1 starts at the beginning of time 2, executes for 4 units of time, and ends at the end of time 5.
+Function f0 resumes execution at the beginning of time 6 and executes for 1 unit of time.
+
+So function 0 spends 2 + 1 = 3 units of total time executing, and function 1 spends 4 units of total time executing.
+
+
+1) currentfunction started end depends on nextEnd
+2) We don't know when currentStart ends.
+3) 
 
 1) But a same id can start and end and it can start again. See below example
 ["0:start:0","0:end:0","1:start:1","1:end:1","2:start:2","2:end:2","2:start:3","2:end:3"] n=3

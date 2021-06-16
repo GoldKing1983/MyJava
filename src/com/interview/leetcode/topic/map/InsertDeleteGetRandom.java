@@ -34,6 +34,7 @@ Option2: use 2 hashMap keyMap and valueMap.. But Option1 is best.
   =====================
  */
 public class InsertDeleteGetRandom {
+  // Key is actual data, value is index of list
   private Map<Integer, Integer> valueMap;
   private List<Integer> value;
   private Random rand = new Random();

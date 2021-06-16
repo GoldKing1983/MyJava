@@ -17,49 +17,61 @@ https://leetcode.com/problems/max-stack/description/
  	See also queue QueueUsingStack
 
  */
-public class MaxStackUsingPair {
+public class MaxStackUsingPair implements MaxStackInterface<Integer> {
 
-  private Deque<int[]> stack;
+  private Deque<Integer[]> stack;
 
   public MaxStackUsingPair() {
     stack = new ArrayDeque<>();
   }
 
-  public void push(int x) {
-    if (stack.isEmpty()) stack.push(new int[] {x, x});
+  public void push(Integer x) {
+    if (stack.isEmpty()) stack.push(new Integer[] {x, x});
     else {
-      int topMax = stack.peek()[1];
-      if (topMax > x) stack.push(new int[] {x, topMax});
-      else stack.push(new int[] {x, x});
+      int topMax = Math.max(x, stack.peek()[1]);
+      stack.push(new Integer[] {x, topMax});
     }
   }
 
-  public int pop() {
+  public Integer pop() {
     return stack.pop()[0];
   }
 
-  public int top() {
+  public Integer top() {
     return stack.peek()[0];
   }
 
-  public int peekMax() {
+  public Integer peekMax() {
     return stack.peek()[1];
   }
 
-  public int popMax() {
-    int max = stack.peek()[1];
+  public Integer popMax() {
+    Integer max = stack.peek()[1];
     popMax(max);
     return max;
   }
 
   /*
-   * 1) [Bottom 1,2,5,4,3 Top]. Data to be popped is 5.
-   * 2) 3 popped, 4 popped. for 5 base condition will return.
-   * 3) push 4, push 3.
-   * Max for 4 and 3 will be populated by push logic... Nice Trick
+   *
+   * 4 4
+   * 1 4
+   * 5 5
+   * 3 5
+   * 
+   * Assume Data to be popped is 5.
+   * 3 5 pair popped, 
+   * 5 5 pair popped. for 5 base condition will return.
+   * push of 3 call will happen.
+   * push logic will push 3 4 to stack... Nice Trick
+   * 
+   * updated stack is
+   * 4 4
+   * 1 4
+   * 3 4
+  
    */
-  private void popMax(int dataToPop) {
-    int stackTop = stack.pop()[0];
+  private void popMax(Integer dataToPop) {
+    Integer stackTop = stack.pop()[0];
     if (stackTop == dataToPop) return;
     popMax(dataToPop);
     push(stackTop);

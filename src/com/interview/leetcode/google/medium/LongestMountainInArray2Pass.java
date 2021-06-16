@@ -2,8 +2,11 @@ package com.interview.leetcode.google.medium;
 
 /*
 
-Given an array A of integers, return the length of the longest mountain.
-Data is considered Mountain if it goes up and comes down.
+https://leetcode.com/problems/longest-mountain-in-array/
+
+1) Given an array A of integers, return the length of the longest mountain.
+2) Data is considered Mountain if it goes up and comes down.
+3) Ex: [1,2,2,1] is not considered mountain or result is 0.
 
 Input: [2,1,4,7,3,2,5]
 Output: 5
@@ -21,6 +24,21 @@ Output: 5
 input       = [2, 1, 4, 7, 3, 2, 5]
 leftToRight = [0, 0, 1, 2, 0, 0, 1]
 rightToLeft = [1, 0, 0, 2, 1, 0, 0]
+
+==========================================================Data Flow Analysis==============================================
+Input: [1,2,2,1]
+Output: 0
+ 
+input       = [1, 2, 2, 1]
+leftToRight = [0, 1, 0, 0]
+rightToLeft = [0, 0, 1, 0]
+==========================================================Data Flow Analysis==============================================
+Input: [1,2,1]
+Output: 3
+
+input       = [1, 2, 1]
+leftToRight = [0, 1, 0]
+rightToLeft = [0, 1, 1]
 ==========================================================Data Flow Analysis==============================================
 Input: [1,2,3]
 Output: 0

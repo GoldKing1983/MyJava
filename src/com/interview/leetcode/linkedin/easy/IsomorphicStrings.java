@@ -18,21 +18,26 @@ No two characters may map to the same character but a character may map to itsel
 3) Do Step1 and Step2 for String1 as source and String2 as destination and vice versa.
 
 ===================Why we need to do for both sides==========================================
+compare str1, str2
 str1 = "ab"
 str2 = "aa"
 
- a a
-[0,0,0,0,0,0,0,0,0,0]
+ map[]
+ a alternate is a
+ map[a,a]
+ b alternate is b
+ map[b,a]
 
+true on comparing str1, str2 
 
+compare str1, str2 with reversed
 str1 = "aa"
 str2 = "ab"
 
- a ==> a cannot be changed to b.... So false.
-[0,0,0,0,0,0,0,0,0,0]
-
-
-Output: false
+ map[]
+ a alternate is a
+ map[a,a]
+ a alternate is a... b cannot come. return false.
 ===============================================================================================
  */
 public class IsomorphicStrings {

@@ -10,7 +10,7 @@ https://leetcode.com/problems/nested-list-weight-sum-ii/
 ======================================================Solution Approach==========================================================
 We can compare this problem to BinaryTreeLevelOrderTraversalDFS
 1) Consolidate sum for each level.
-2) Then do runningSum and resultSum calculation.
+2) Then multiply depth for eachLevel sum. 
 ============================================================Example1=============================================================
 input = [[1,1],2,[1,1]] Ans=8 
                   Depth1    Depth2         
@@ -28,13 +28,11 @@ input = [[1,1],2,[1,1]] Ans=8
        root-------->list
                      |
                       -------->1  
-    level1Sum = 2
-    level2Sum = 4
+    level1Sum = 2 * 2 = 4
+    level2Sum = 4 * 1 = 4
+                       ===
+                        8
     
-    runningSum = currentNumber+runningSum      resultSum = resultSum+runningSum
-    runningSum = 0+2=2                         resultSum = 0+2=2
-    runningSum = 2+4=6                         resultSum = 2+6=8
-
 
 ============================================================Example1=============================================================
 [1,[4],[[6]]] Ans=17
@@ -48,14 +46,11 @@ input = [[1,1],2,[1,1]] Ans=8
         
        root-------->list-------->list-------->6
 
-    level1Sum = 1
-    level2Sum = 4
-    level2Sum = 6
-    
-    runningSum = currentNumber+runningSum      resultSum = resultSum+runningSum
-    runningSum = 0+1=1                         resultSum = 0+1=1
-    runningSum = 1+4=5                         resultSum = 1+5=6
-    runningSum = 5+6=11                        resultSum = 11+6=17
+    level1Sum = 1 * 3 = 3
+    level2Sum = 4 * 2 = 8
+    level2Sum = 6 * 1 = 6
+                      ====
+                       17
 ============================================================Example=============================================================
 [1,[4,[6]]]   Ans=17
                   Depth1      Depth2      Depth3         
@@ -69,14 +64,11 @@ input = [[1,1],2,[1,1]] Ans=8
                      |
                       -------->list-------->6  
 
-    level1Sum = 1
-    level2Sum = 4
-    level2Sum = 6
-    
-    runningSum = currentNumber+runningSum      resultSum = resultSum+runningSum
-    runningSum = 0+1=1                         resultSum = 0+1=1
-    runningSum = 1+4=5                         resultSum = 1+5=6
-    runningSum = 5+6=11                        resultSum = 11+6=17
+    level1Sum = 1 * 3 = 3
+    level2Sum = 4 * 2 = 8
+    level2Sum = 6 * 1 = 6
+                      ====
+                       17
 
  */
 public class NestedListWeightSumIIDFS {
@@ -86,12 +78,10 @@ public class NestedListWeightSumIIDFS {
     for (NestedInteger root : nestedList) {
       dfs(root, 0, levelSum);
     }
-
+    int level = levelSum.size();
     int resultSum = 0;
-    int runningSum = 0;
     for (Integer sumAtLevel : levelSum) {
-      runningSum = sumAtLevel + runningSum;
-      resultSum = resultSum + runningSum;
+      resultSum = resultSum + (sumAtLevel * level--);
     }
     return resultSum;
 

@@ -35,12 +35,12 @@ public class FloodFill {
     
     if (sourceColor == newColor) return image;
     
-    recur(image, row, col, maxRow, maxCol, sourceColor, newColor);
+    dfs(image, row, col, maxRow, maxCol, sourceColor, newColor);
     
     return image;
   }
 
-  private void recur(int[][] image, int row, int col, int maxRow, int maxCol, int sourceColor,
+  private void dfs(int[][] image, int row, int col, int maxRow, int maxCol, int sourceColor,
       int newColor) {
 
     image[row][col] = newColor;
@@ -50,7 +50,7 @@ public class FloodFill {
       if (nextRow == maxRow || nextCol == maxCol || nextRow < 0 || nextCol < 0) continue;
       if (image[nextRow][nextCol] != sourceColor) continue;
 
-      recur(image, nextRow, nextCol, maxRow, maxCol, sourceColor, newColor);
+      dfs(image, nextRow, nextCol, maxRow, maxCol, sourceColor, newColor);
     }
   }
 }

@@ -36,6 +36,6 @@ public class SecondMinimumNodeInABinaryTree {
   public int findSecondMinimumValue(TreeNode root) {
     min1 = root.val;
     dfs(root);
-    return (min2 == Long.MAX_VALUE) ? -1 : (int) min2;
+    return (int) min2;
   }
 }

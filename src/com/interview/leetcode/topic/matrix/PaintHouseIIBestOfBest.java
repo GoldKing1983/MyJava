@@ -16,7 +16,7 @@ public class PaintHouseIIBestOfBest {
     int min1 = 0, min2 = 0, minIndex = -1;
 
     for (int row = 0; row < maxRow; row++) {
-      int curMin1 = Integer.MAX_VALUE, curMin2 = Integer.MAX_VALUE, curMinIndex = 0;
+      int curMin1 = Integer.MAX_VALUE, curMin2 = Integer.MAX_VALUE, curMinIndex = -1;
       for (int col = 0; col < maxCol; col++) {
         int cost = costs[row][col] + (col == minIndex ? min2 : min1);
         if (cost < curMin1) {

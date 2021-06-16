@@ -43,7 +43,7 @@ oldCombo [1, 2]
 public class PermutationsBFS {
 
   /*
-  Time Complexity : N*N! ---> i loop N times, j&k loop combinely N!
+  Time Complexity : N*N! ---> outer for loop N times, inner 2 loop combinely N!
   Space complexity N!
    */
   public List<List<Integer>> permute(int[] nums) {
@@ -59,9 +59,9 @@ public class PermutationsBFS {
 
         List<Integer> oldCombo = queue.poll();
 
-        for (int k = 0; k <= oldCombo.size(); k++) {
+        for (int i = 0; i <= oldCombo.size(); i++) {
           List<Integer> currentCombo = new LinkedList<>(oldCombo);
-          currentCombo.add(k, currentNumber); // This is costlier operation, because list moves element from left to right
+          currentCombo.add(i, currentNumber); // This is costlier operation, because list moves element from left to right
           queue.offer(currentCombo);
         }
       }

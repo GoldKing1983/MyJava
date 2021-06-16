@@ -37,7 +37,7 @@ In above example. "name1" and "name1" needs merge,   because id2 is  common in b
 					/     \
 				  id4     id11
 
-With Example1 above addition is not possible. Because id4 is associated with name2 in Example1.
+With Example1 above addition is not possible as per requirement. Because id4 is associated with name2 in Example1.
 But here it is name3.
 ========================================Solution Approach======================================================
 1) Create adjMap of email Address.

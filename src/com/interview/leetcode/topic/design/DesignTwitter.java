@@ -1,7 +1,5 @@
 package com.interview.leetcode.topic.design;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -29,6 +27,7 @@ every tweets even the tweet not related to userA.
 Because we save data in sortedOrder by time.   
  */
 public class DesignTwitter {
+
   class Tweet {
     int tweetId;
     int timestamp; // it is the global Id which manages time
@@ -49,17 +48,12 @@ public class DesignTwitter {
 
     public void addTweet(int tweetId, int timestamp) {
       tweets.add(new Tweet(tweetId, timestamp));
-      if (tweets.size() > 10) tweets.removeFirst(); // remove old tweet from that user
+      if (tweets.size() > 10) tweets.removeFirst(); // remove old tweet for that user
     }
   }
 
   Map<Integer, User> users = new HashMap<>();
 
-  public DesignTwitter() {
-
-  }
-
-  /** Compose a new tweet. */
   public void postTweet(int userId, int tweetId) {
     User user = users.get(userId);
     if (user == null) {
@@ -73,19 +67,19 @@ public class DesignTwitter {
 
 
   public List<Integer> getNewsFeed(int userId) {
-    List<Integer> result = new ArrayList<>();
+    LinkedList<Integer> result = new LinkedList<>();
     User user = users.get(userId);
     if (user == null) return result;
 
-    PriorityQueue<Tweet> pQ = new PriorityQueue<>((a, b) -> a.timestamp - b.timestamp);
-    // aggregation part
+    PriorityQueue<Tweet> pQ = new PriorityQueue<>((a, b) -> a.timestamp - b.timestamp); // ascending order
+    // aggregation part. Note this is not an DFS. We are fetching data from only 1 level of connection
     for (int follower : user.followers) {
       User followerUser = users.get(follower);
       if (followerUser == null) continue;
       LinkedList<Tweet> followerTweets = followerUser.tweets;
       for (Tweet tweet : followerTweets) {
         pQ.offer(tweet);
-        if (pQ.size() > 10) pQ.poll();
+        if (pQ.size() > 10) pQ.poll(); // Top will be floating with old tweet. So we can remove it.
       }
     }
 
@@ -94,8 +88,7 @@ public class DesignTwitter {
       if (pQ.size() > 10) pQ.poll();
     }
 
-    while (!pQ.isEmpty()) result.add(pQ.poll().tweetId);
-    Collections.reverse(result);
+    while (!pQ.isEmpty()) result.addFirst(pQ.poll().tweetId); // latest tweet on top. So call addFirst
     return result;
   }
 

@@ -13,6 +13,8 @@ GroupSumImportant
 GroupSum6
 HouseRobberRecursion
 MergeTwoSortedListsInPlace
+LongestPalindromicSubsequenceRecursion
+EditDistanceRecursion
 =====================Basics Binary Recursion With Memoization and BottomUp DP=====================
 FibonacciSeries/ClimbingStairs
 HouseRobberRecursion
@@ -26,4 +28,5 @@ right is the termination apart from base condition termination. Ex: BinaryTreeIn
 =======================================Straight forward (nested)recursion=======================================
 NestedListWeightSumDFS
  */
-public class RecursionInterviewPoint {}
+public class RecursionInterviewPoint {
+}

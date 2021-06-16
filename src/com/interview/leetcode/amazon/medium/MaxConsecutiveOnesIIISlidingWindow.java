@@ -7,6 +7,7 @@ Given an array A of 0s and 1s, we may change up to K values from 0 to 1.
 Return the length of the longest (contiguous) sub-array that contains only 1s.
 
 Input: A = [0,0,1,1,0,0,1,1,1,0,1,1,0,0,0,1,1,1,1], K = 3
+                    c c       c   --> changedIndex 
 Output: 10
 Explanation:
 [0,0,1,1,1,1,1,1,1,1,1,1,0,0,0,1,1,1,1]

@@ -15,23 +15,32 @@ https://www.youtube.com/watch?v=LPFhl65R7ww
 public class MedianOfTwoSortedArraysLinearSearchBetter {
 
   public double findMedianSortedArrays(int[] nums1, int[] nums2) {
-    double median1 = 0;
-    double median2 = 0;
-    int nums1Length = nums1.length, nums2Length = nums2.length;
-    int n = nums1Length + nums2Length;
+    double median1 = 0, median2 = 0;
+    int n1 = nums1.length, n2 = nums2.length, n = n1 + n2;
     int num1Ptr = 0, num2Ptr = 0;
+
     for (int i = 0; i <= n / 2; i++) {
-      if (num2Ptr == nums2Length || num1Ptr != nums1Length && nums1[num1Ptr] <= nums2[num2Ptr]) {
+      if (num2Ptr == n2) {
+        median2 = median1;
+        median1 = nums1[num1Ptr];
         num1Ptr++;
+      } else if (num1Ptr == n1) {
         median2 = median1;
-        median1 = nums1[num1Ptr - 1];
-      } else {
+        median1 = nums2[num2Ptr];
         num2Ptr++;
+      } else if (nums1[num1Ptr] <= nums2[num2Ptr]) {
         median2 = median1;
-        median1 = nums2[num2Ptr - 1];
+        median1 = nums1[num1Ptr];
+        num1Ptr++;
+      } else {
+        median2 = median1;
+        median1 = nums2[num2Ptr];
+        num2Ptr++;
       }
     }
-    if ((n & 1) == 0) return (median1 + median2) / 2; // even length
+
+    if (n % 2 == 0) return (median1 + median2) / 2; // even length
     else return median1;
   }
+
 }

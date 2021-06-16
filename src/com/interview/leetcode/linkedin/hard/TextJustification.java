@@ -4,14 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
- * https://leetcode.com/problems/text-justification/description/
- *
- * https://www.youtube.com/watch?v=RORuwHiblPc
- *
- * Brute Force:
- * 1) Go for greedy approach by taking maximum length that can accommodate in a line
- *
- * This question tests if the candidate is able to write maintainable and readable code that handles many cases.
+https://leetcode.com/problems/text-justification/description/
+https://www.youtube.com/watch?v=RORuwHiblPc
+
+Brute Force:
+1) Go for greedy approach by taking maximum length that can accommodate in a line
+
+This question tests if the candidate is able to write maintainable and readable code that handles many cases.
  */
 public class TextJustification {
   public List<String> fullJustify(String[] words, int maxWidth) {

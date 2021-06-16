@@ -1,5 +1,8 @@
 package com.interview.leetcode.topic.array;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 https://leetcode.com/problems/decompress-run-length-encoded-list/
 
@@ -21,8 +24,9 @@ public class DecompressRunLengthEncodedList {
 
     int resultN = 0, resultIndex = 0, n = nums.length;
     /*
+    How to move by 2 indexes
     [1,2,3,4,5,6,7,8]
-    i = 0 ... 2*0 =0
+    i = 0 ... 2*0 =0 
     i = 1 ... 2*1 =2
     i = 2 ... 2*2 =4
     i = 3 ... 2*3 =6
@@ -46,5 +50,21 @@ public class DecompressRunLengthEncodedList {
       }
     }
     return result;
+  }
+
+  // Use ArrayList as we don't the resultSize. Then convert the List<Integer> to int[]
+  public int[] decompressRLElistApproach2(int[] nums) {
+
+    List<Integer> result = new ArrayList<>();
+    for (int i = 0; i < nums.length; i++) {
+      int count = nums[i++];
+      int value = nums[i];
+      while (count-- >= 1) {
+        result.add(value);
+      }
+    }
+
+    return result.stream().mapToInt(i -> i).toArray();
+
   }
 }

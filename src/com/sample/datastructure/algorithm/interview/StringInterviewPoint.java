@@ -4,8 +4,11 @@ package com.sample.datastructure.algorithm.interview;
 =====================Basics=====================
 1) ReverseStringRecursion
 2) ShuffleStringBest
+3) HowManyNumbersAreSmallerThanTheCurrentNumber
+4) ReverseWordsInAStringExcludeSpacesBetter
 ================Hashing the String - charToInt - intToChar================
 1) GroupShiftedStrings
+2) GroupAnagramsWithOutSorting
 =====================Parentheses Problems=====================
 1) ValidParenthesisStringBest
 2) RemoveInvalidParentheses

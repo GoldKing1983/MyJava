@@ -37,12 +37,12 @@ public class FactorCombinationsOptimized {
   }
 
   void backtrack(int start, int target, List<Integer> currResult, List<List<Integer>> result) {
-    for (int i = start; i <= Math.sqrt(target); i++) {
-      if (target % i == 0) {
-        currResult.add(i);
+    for (int currentNumber = start; currentNumber <= Math.sqrt(target); currentNumber++) {
+      if (target % currentNumber == 0) {
+        currResult.add(currentNumber);
         result.add(new LinkedList<>(currResult));
-        result.get(result.size() - 1).add(target / i);
-        backtrack(i, target / i, currResult, result);
+        result.get(result.size() - 1).add(target / currentNumber);
+        backtrack(currentNumber, target / currentNumber, currResult, result);
         currResult.remove(currResult.size() - 1);
       }
     }

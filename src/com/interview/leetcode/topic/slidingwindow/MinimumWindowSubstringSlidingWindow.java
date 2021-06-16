@@ -35,7 +35,7 @@ Input: S = "ADOBECODEBANC", T = "ABC" Output: "BANC"
 
 ADOBEC ODEBANC
 ECODEBANC
-E CODEBANC
+CODEBANC
 BANC
 
 {A=1, B=1, C=1}
@@ -92,15 +92,16 @@ public class MinimumWindowSubstringSlidingWindow {
     if (inputString.length() < searchString.length() || inputString.length() == 0) return "";
 
     // initialize freqMap
-    for (char c : searchString.toCharArray()) freqMap.put(c, freqMap.getOrDefault(c, 0) + 1);
+    for (char c : searchString.toCharArray()) freqMap.put(c, freqMap.getOrDefault(c, 0) - 1);
 
 
     for (int right = 0; right < inputString.length(); right++) {
       char rightChar = inputString.charAt(right);
       if (freqMap.containsKey(rightChar)) {
-        freqMap.put(rightChar, freqMap.get(rightChar) - 1);
+        freqMap.put(rightChar, freqMap.get(rightChar) + 1);
 
-        if (freqMap.get(rightChar) >= 0) noOfMatchingChar++;
+        // adding if condition because it can go negative ex: input = AAB and pattern=AB.  
+        if (freqMap.get(rightChar) <= 0) noOfMatchingChar++;
         if (noOfMatchingChar != searchString.length()) continue;
 
         while (true) { // Capture Window and Shrink. 
@@ -112,8 +113,8 @@ public class MinimumWindowSubstringSlidingWindow {
 
           char leftChar = inputString.charAt(left++); //Left is moved when a window is found.
           if (freqMap.containsKey(leftChar)) {
-            freqMap.put(leftChar, freqMap.get(leftChar) + 1);
-            if (freqMap.get(leftChar) > 0) {
+            freqMap.put(leftChar, freqMap.get(leftChar) - 1);
+            if (freqMap.get(leftChar) < 0) {
               noOfMatchingChar--; // Shrink stops when noOfMatchingChar size changed
               break;
             }

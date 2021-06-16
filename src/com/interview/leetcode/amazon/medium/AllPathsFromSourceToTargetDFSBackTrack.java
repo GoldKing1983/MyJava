@@ -32,26 +32,21 @@ You can print different paths in any order, but you should keep the order of nod
  */
 public class AllPathsFromSourceToTargetDFSBackTrack {
   public List<List<Integer>> allPathsSourceTarget(int[][] graph) {
-    List<List<Integer>> result = new ArrayList<>();
-    List<Integer> currentPath = new ArrayList<>();
-
-    currentPath.add(0);
-    dfsSearch(graph, 0, result, currentPath);
-
-    return result;
+    return dfsSearch(graph, 0, graph.length - 1, new ArrayList<>(), new ArrayList<>(List.of(0)));
   }
 
-  private void dfsSearch(int[][] graph, int parent, List<List<Integer>> allPath,
-      List<Integer> currentPath) {
-    if (parent == graph.length - 1) {
-      allPath.add(new ArrayList<Integer>(currentPath));
-      return;
+  private List<List<Integer>> dfsSearch(int[][] graph, int source, int destination,
+      List<List<Integer>> allPath, List<Integer> currentPath) {
+    if (source == destination) {
+      allPath.add(new ArrayList<>(currentPath));
+      return allPath;
     }
 
-    for (int child : graph[parent]) {
+    for (int child : graph[source]) {
       currentPath.add(child);
-      dfsSearch(graph, child, allPath, currentPath);
+      dfsSearch(graph, child, destination, allPath, currentPath);
       currentPath.remove(currentPath.size() - 1);
     }
+    return allPath;
   }
 }

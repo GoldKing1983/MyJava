@@ -62,19 +62,16 @@ public class GroupShiftedStrings {
     int i = 0;
     for (char currentChar : string.toCharArray()) {
       int currentCharIndex = currentChar - 'a';
-      // Ex: string="b". shiftRequiredFromRightToLeft=1. updatedCurrentCharIndex=0
-      int shiftRequiredFromRightToLeftForCurrentChar =
-          currentCharIndex - shiftRequiredFromRightToLeft;
-      /*
-      Ex: string="ba". shiftRequiredFromRightToLeft=1. For "a". shiftRequiredFromRightToLeftForCurrentChar=-1
-      It should be 25. So adding 26 to -1, to make it 25.
-      hashedString = "az"
-      */
-      shiftRequiredFromRightToLeftForCurrentChar = shiftRequiredFromRightToLeftForCurrentChar >= 0
-          ? shiftRequiredFromRightToLeftForCurrentChar
-          : 26 + shiftRequiredFromRightToLeftForCurrentChar;
 
-      char updatedCurrentChar = (char) ('a' + shiftRequiredFromRightToLeftForCurrentChar);
+      //Ex: string="bc". hashedString = "ab"
+      int shiftRequiredForCurrentChar = currentCharIndex - shiftRequiredFromRightToLeft;
+
+      //Ex: string="ba". hashedString = "az". shiftRequiredFromRightToLeft=1. 
+      // For "a". shiftRequiredFromRightToLeftForCurrentChar=-1. It should be 25. 
+      // So adding 26 to 0, to make it 26. 26-1= 25 
+      if (shiftRequiredForCurrentChar < 0) shiftRequiredForCurrentChar += 26;
+
+      char updatedCurrentChar = (char) ('a' + shiftRequiredForCurrentChar);
       hashedString[i++] = updatedCurrentChar;
     }
     return String.valueOf(hashedString);

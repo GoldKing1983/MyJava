@@ -36,6 +36,7 @@ Output: false
 
 
 ======Solution Approach1========
+0) Solution using Hair and Tortoise or slow and fast pointers.
 1) Use slowPtr and fastPtr pointer approach to identify the loop.
 	Case1: If there is a loop, fastPtr will catch slowPtr.
 	Case2: If there is no loop, fastPtr will change into 1.

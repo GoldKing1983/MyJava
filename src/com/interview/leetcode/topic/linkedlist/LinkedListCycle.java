@@ -4,6 +4,11 @@ import java.util.HashSet;
 import java.util.Set;
 import com.interview.leetcode.ListNode;
 
+/*
+
+0) Solution using Hair and Tortoise or slow and fast pointers.
+
+ */
 public class LinkedListCycle {
   public boolean hasCycle(ListNode head) {
     if (head == null) return false;

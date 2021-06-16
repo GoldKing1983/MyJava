@@ -25,7 +25,7 @@ Output: 3
 Note: There is no bottom-up solution found/possible. 
  */
 public class KthSmallestElementInABST {
-  int k = 0;
+  int k = 0; // k should be global otherwise, it will not work
   int result = 0;
 
   public int kthSmallest(TreeNode root, int k) {
@@ -38,7 +38,10 @@ public class KthSmallestElementInABST {
     if (root == null || k == 0) return;
     recur(root.left);
     k--;
-    if (k == 0) result = root.val;
+    if (k == 0) {
+      result = root.val;
+      return;
+    }
     recur(root.right);
   }
 }

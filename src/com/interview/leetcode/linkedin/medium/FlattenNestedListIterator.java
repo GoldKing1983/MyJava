@@ -9,19 +9,21 @@ import com.interview.leetcode.NestedInteger;
 /*
 https://leetcode.com/problems/flatten-nested-list-iterator/description/
 
-This code reduces the space-complexity of q to maxSize of anyone of NestedInteger
+1) This code reduces the space-complexity of q to maxSize of anyone of NestedInteger
+2) Lets say nestedList size is 5. Initially 1st nestedList is loaded to q.
+3) Once q is empty. Then 2nd is loaded to q. Like that we load q on demand.
+4) Check for corner case test case : [[],[],[-1]]... nestedList can be empty.  
  */
 public class FlattenNestedListIterator implements Iterator<Integer> {
   private Queue<Integer> q;
   List<NestedInteger> nestedList;
+  int count = 0;
+  int n;
 
   public FlattenNestedListIterator(List<NestedInteger> nestedList) {
     q = new LinkedList<>();
     flatten(nestedList);
   }
-
-  int count = 0;
-  int n;
 
   private void flatten(List<NestedInteger> nestedList) {
     this.nestedList = nestedList;

@@ -1,8 +1,8 @@
 package com.interview.leetcode.topic.math;
 
-import com.interview.leetcode.Point;
 import java.util.HashMap;
 import java.util.Map;
+import com.interview.leetcode.Point;
 
 /*
 https://leetcode.com/problems/max-points-on-a-line/description/
@@ -57,19 +57,5 @@ public class MaxPointsOnALineMaths {
       max = Math.max(max, maxValue);
     }
     return max;
-  }
-
-  public static void main(String[] args) {
-    MaxPointsOnALineMaths m = new MaxPointsOnALineMaths();
-    Point p1 = new Point(1, 1);
-    Point p2 = new Point(1, 2);
-    Point p3 = new Point(1, 3);
-    Point p4 = new Point(2, 1);
-    Point p5 = new Point(3, 1);
-    Point p6 = new Point(2, 2);
-    Point p7 = new Point(3, 3);
-    Point points[] = {p1, p2, p3, p4, p5, p6, p7}; // 3
-
-    System.out.println(m.maxPoints(points));
   }
 }

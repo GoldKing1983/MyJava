@@ -11,29 +11,29 @@ https://leetcode.com/problems/insert-delete-getrandom-o1/description/
 2) Same logic as InsertDeleteGetRandom. Instead of list here another map is used.
 
 
-Before Remove     ---- keyMap = {10=1, 20=2, 30=3, 40=4}, valueMap = {1=10, 2=20, 3=30, 4=40}
-After Remove of 20---- keyMap = {10=1,       30=3, 40=2}, valueMap = {1=10, 2=40, 3=30}
+Before Remove     ---- keyMap = {10=1, 20=2, 30=3, 40=4}, indexMap = {1=10, 2=20, 3=30, 4=40}
+After Remove of 20---- keyMap = {10=1,       30=3, 40=2}, indexMap = {1=10, 2=40, 3=30}
 
 delete operation:
 Ex: delete 20.
 
 3Step for keyMap
 	Step1: Remove 20 . Cache the value. i.e 2
-	Step2: get the size of valueMap. i.e 4. get value of 4 from valueMap. i.e 40
+	Step2: get the size of indexMap. i.e 4. get value of 4 from indexMap. i.e 40
 	Step3: Update keyMap 40 with 2
 
-2Step for valueMap
-	StepA: Remove 4 where 4 is the size of valueMap.
+2Step for indexMap
+	StepA: Remove 4 where 4 is the size of indexMap.
 	StepB: Update 2 with 40. 2 is already cached in step1. 4 is already cached in step2
  */
 public class InsertDeleteGetRandomUsing2HashMap {
   private Map<Integer, Integer> keyMap;
-  private Map<Integer, Integer> valueMap;
+  private Map<Integer, Integer> indexMap;
   int count;
 
   public InsertDeleteGetRandomUsing2HashMap() {
     keyMap = new HashMap<>();
-    valueMap = new HashMap<>();
+    indexMap = new HashMap<>();
   }
 
   /**
@@ -46,23 +46,22 @@ public class InsertDeleteGetRandomUsing2HashMap {
     }
     count++;
     keyMap.put(val, count);
-    valueMap.put(count, val);
+    indexMap.put(count, val);
     return true;
   }
 
   /** Removes a value from the set. Returns true if the set contained the specified element. */
   public boolean remove(int valueToRemove) {
     if (keyMap.containsKey(valueToRemove)) {
-      int keyMapValue = keyMap.get(valueToRemove);
-      keyMap.remove(valueToRemove); // Remove 20
-      // If the size is 1 or valueToRemove is at top, then just remove. No swap needed.
-      if (count == 1 || keyMapValue == count) {
-        valueMap.remove(keyMapValue);
+      int indexToRemove = keyMap.remove(valueToRemove); // Remove 20
+      // If the size is 1 or indexToRemove is at top, then just remove. No swap needed.
+      if (count == 1 || indexToRemove == count) {
+        indexMap.remove(indexToRemove);
       } else {
-        int valueMapValue = valueMap.get(count);
-        keyMap.put(valueMapValue, keyMapValue); // Update 40 with 2
-        valueMap.remove(count); // Remove 4
-        valueMap.put(keyMapValue, valueMapValue); // Update 2 with 40
+        int indexMapValue = indexMap.get(count);
+        keyMap.put(indexMapValue, indexToRemove); // Update 40 with 2
+        indexMap.remove(count); // Remove 4
+        indexMap.put(indexToRemove, indexMapValue); // Update 2 with 40
       }
       count--;
       return true;
@@ -76,6 +75,6 @@ public class InsertDeleteGetRandomUsing2HashMap {
   public int getRandom() {
     // Ex: for 10 size. random generates between 0 to 9. Since we use from 1 to 10. Adding 1.
     int n = random.nextInt(count) + 1;
-    return valueMap.get(n);
+    return indexMap.get(n);
   }
 }
