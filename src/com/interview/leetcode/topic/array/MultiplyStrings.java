@@ -42,9 +42,8 @@ Ex:
 		 		4*3     = [0, 0, 7, 3, 5] 
 		 		4*2     = [0, 0, 7, 3, 5] 
 		 		4*1     = [0, 5, 5, 3, 5]  
-		 		
-PreviousResult + 4*123  = [0, 5, 5, 3, 5]
-
+To multiply 123*45 above is the step... just code for it... 
+During interview, it is important to visualize and explain to interviewer rather than the actual coding itself...
  */
 public class MultiplyStrings {
   public String multiply(String num1, String num2) {
