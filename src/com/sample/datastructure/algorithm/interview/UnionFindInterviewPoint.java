@@ -21,7 +21,9 @@ Problems on UnionFind
 2) GraphValidTreeUnionFind
 3) ConnectingCitiesWithMinimumCost
 4) NumberOfIslandsUnionFind
-5) NumberOfProvincesUnionFind
+5) NumberOfProvincesUnionFind or FriendsCircles
+6) TheEarliestMomentWhenEveryoneBecomeFriends
 
  */
-public class UnionFindInterviewPoint {}
+public class UnionFindInterviewPoint {
+}

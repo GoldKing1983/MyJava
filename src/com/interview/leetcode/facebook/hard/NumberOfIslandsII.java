@@ -1,7 +1,6 @@
 package com.interview.leetcode.facebook.hard;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /*
@@ -119,12 +118,12 @@ public class NumberOfIslandsII {
 
   public List<Integer> numIslands2(int maxRow, int maxCol, int[][] positions) {
     List<Integer> result = new ArrayList<>();
-    if (maxRow <= 0 || maxCol <= 0) return result;
 
-    int numberOfIslands = 0;
+    int numberOfIslands = 0, n = maxRow * maxCol;
     // flatten the grid matrix to array for Union-Find Traversal
-    int[] nodes = new int[maxRow * maxCol];
-    Arrays.fill(nodes, -1);
+    int[] root = new int[n];
+    for (int i = 0; i < root.length; i++) root[i] = i;
+
     boolean[][] visited = new boolean[maxRow][maxCol];
     for (int[] position : positions) {
       int currentRow = position[0];
@@ -134,26 +133,26 @@ public class NumberOfIslandsII {
         continue;
       }
       visited[currentRow][currentCol] = true;
+
       // converted "position of island" in flat array
-      int sourceNodeGroup = maxCol * currentRow + currentCol;
-      nodes[sourceNodeGroup] = sourceNodeGroup; // change -1 to current nodeId
+      int sourceNodeId = currentRow * maxCol + currentCol;
+      int sourceNodeGroup = find(root, sourceNodeId);
+
       numberOfIslands++;
 
       for (int[] dir : DIRECTIONS) {
         int nextRow = currentRow + dir[0];
         int nextCol = currentCol + dir[1];
-        if (nextRow < 0 || nextRow >= maxRow || nextCol < 0 || nextCol >= maxCol) continue;
 
-        int nextNode = maxCol * nextRow + nextCol;
-        if (nodes[nextNode] == -1) continue;
+        if (nextRow < 0 || nextRow == maxRow || nextCol < 0 || nextCol == maxCol) continue;
+        if (!visited[nextRow][nextCol]) continue; // only if adjacent is 1 then process. 
 
-        int targetNodeGroup = find(nodes, nextNode);
-        // sourceNode and targetNode are already in the same group. So no operation needed.
-        if (sourceNodeGroup == targetNodeGroup) continue;
+        int nextNodeId = maxCol * nextRow + nextCol;
+        int targetNodeGroup = find(root, nextNodeId);
 
-        // Update targetNodeGroup to sourceNodeGroup or union it. Note: Reversing will not work
-        nodes[targetNodeGroup] = sourceNodeGroup;
+        if (sourceNodeGroup == targetNodeGroup) continue; // sourceNode and targetNode are already in the same group. So no operation needed.
 
+        root[targetNodeGroup] = sourceNodeGroup; // Update targetNodeGroup to sourceNodeGroup or union it. Note: Reversing will not work
         numberOfIslands--;
       }
 
@@ -162,11 +161,11 @@ public class NumberOfIslandsII {
     return result;
   }
 
-  public int find(int[] roots, int id) {
-    while (id != roots[id]) {
-      roots[id] = roots[roots[id]]; // path compression
-      id = roots[id];
+  public int find(int[] nodes, int id) {
+    while (true) {
+      //nodes[id] = nodes[nodes[id]]; // path compression
+      if (id == nodes[id]) return id;
+      id = nodes[id];
     }
-    return id;
   }
 }

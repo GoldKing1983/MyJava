@@ -109,28 +109,28 @@ Both the nodes are pointing 3. So returning false
 public class GraphValidTreeUnionFind {
 
   public boolean validTree(int n, int[][] edges) {
-    int[] nodes = new int[n]; // initialize n isolated islands
+    int[] root = new int[n]; // initialize n isolated islands
 
-    for (int i = 0; i < n; i++) nodes[i] = i;// initially assign each node to to point itself.
+    for (int i = 0; i < n; i++) root[i] = i;// initially assign each node to to point itself.
 
     for (int[] edge : edges) {
-      int sourceNodeGroup = find(nodes, edge[0]);
-      int targetNodeGroup = find(nodes, edge[1]);
+      int sourceNodeGroup = find(root, edge[0]);
+      int targetNodeGroup = find(root, edge[1]);
 
       // if two vertices happen to be in the same set then there's a cycle
       if (sourceNodeGroup == targetNodeGroup) return false;
 
       // union
-      nodes[sourceNodeGroup] = targetNodeGroup;
+      root[sourceNodeGroup] = targetNodeGroup;
       n--;
     }
     return n == 1;
   }
 
-  public int find(int[] roots, int id) {
+  public int find(int[] root, int id) {
     while (true) {
-      if (roots[id] == id) return id;
-      id = roots[id];
+      if (root[id] == id) return id;
+      id = root[id];
     }
 
   }

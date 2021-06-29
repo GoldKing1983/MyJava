@@ -47,6 +47,7 @@ BestTimeToBuyAndSellStock
 ===========FromLeftToRight and FromRightToLeft Problems===========
 NonDecreasingArray
 Candy
+NumberOfGoodWaysToSplitAString
 ===========FastPtr and SlowPtr Problems or Hair and Tortoise Problems===========
 1) HappyNumber
 2) LinkedListCycle

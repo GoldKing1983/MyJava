@@ -84,11 +84,11 @@ public class NumberOfIslandsUnionFind {
     return numberOfIslands;
   }
 
-  public int find(int[] nodes, int id) {
+  public int find(int[] root, int id) {
     while (true) {
-      //nodes[id] = nodes[nodes[id]]; // path compression
-      if (id == nodes[id]) return id;
-      id = nodes[id];
+      //root[id] = root[root[id]]; // path compression
+      if (id == root[id]) return id;
+      id = root[id];
     }
   }
 }

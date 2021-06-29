@@ -30,11 +30,11 @@ public class NumberOfProvincesUnionFind {
     return provinceCount;
   }
 
-  public int findRoot(int[] roots, int id) {
+  public int findRoot(int[] root, int id) {
     while (true) {
-      if (roots[id] == id) return id;
+      if (root[id] == id) return id;
       //roots[id] = roots[roots[id]]; //performance...
-      id = roots[id];
+      id = root[id];
     }
   }
 }

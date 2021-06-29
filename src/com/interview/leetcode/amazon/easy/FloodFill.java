@@ -32,11 +32,12 @@ public class FloodFill {
 
   public int[][] floodFill(int[][] image, int row, int col, int newColor) {
     int sourceColor = image[row][col], maxRow = image.length, maxCol = image[0].length;
-    
+
+    // this condition is important without this condition dfs will go infinite 
     if (sourceColor == newColor) return image;
-    
+
     dfs(image, row, col, maxRow, maxCol, sourceColor, newColor);
-    
+
     return image;
   }
 
