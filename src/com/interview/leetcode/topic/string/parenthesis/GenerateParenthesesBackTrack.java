@@ -1,4 +1,4 @@
-package com.interview.leetcode.topic.backtrack;
+package com.interview.leetcode.topic.string.parenthesis;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +30,17 @@ Above condition is achieved if "openCount>n" return.
 
 3) BackTrack happens at 2 places.
 ==================================================Data Flow Approach======================================================
+
+                      "empty"
+                  /       |
+                 (
+                / \
+               (   )
+              / \
+             (   )  
+            / \
+               )
+               
 n = 3 OutputSize:5
 (
 ((
@@ -55,7 +66,7 @@ n = 3 OutputSize:5
 
 */
 
-public class GenerateParentheses {
+public class GenerateParenthesesBackTrack {
 
   public List<String> generateParenthesis(int n) {
     return generateParenthesis(n, new StringBuilder(), new ArrayList<>(), 0, 0);
@@ -64,12 +75,13 @@ public class GenerateParentheses {
   // backtracking
   private List<String> generateParenthesis(int n, StringBuilder currResult, List<String> result,
       int openCount, int closeCount) {
-    if (closeCount > openCount || openCount > n || closeCount > n) return result;
 
     if (openCount == n && closeCount == n) {
       result.add(currResult.toString());
       return result;
     }
+
+    if (openCount > n || closeCount > openCount) return result;
 
     //include open
     generateParenthesis(n, currResult.append("("), result, openCount + 1, closeCount);

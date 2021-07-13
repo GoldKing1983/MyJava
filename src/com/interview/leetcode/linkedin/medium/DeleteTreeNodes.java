@@ -28,8 +28,11 @@ Output: 2
 public class DeleteTreeNodes {
   public int deleteTreeNodes(int n, int[] parent, int[] value) {
     List<List<Integer>> graph = new ArrayList<>(n); // Create graph for the tree
+    
     for (int i = 0; i < n; i++) graph.add(new ArrayList<>());
+    
     for (int i = 0; i < n; i++) if (parent[i] != -1) graph.get(parent[i]).add(i);
+    
     return dfs(graph, value, 0)[1];
   }
 

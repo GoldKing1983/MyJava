@@ -10,10 +10,9 @@ import java.util.Queue;
 /*
 https://leetcode.com/problems/course-schedule/
 https://www.educative.io/collection/page/5668639101419520/5671464854355968/6010387461832704
-========================================================================================================================
+===========================================================Requirement===========================================================
 1) There are "n" number of courses you have to take, labeled from 0 to numCourses-1.
-2) Some courses may have prerequisites, for example to take course 0 you have to first take
-course 1, which is expressed as a pair: [0,1]
+2) Some courses may have prerequisites, for example [0,1] 1 is parent and 0 is child. course1 must be completed before course0
 3) Verify, for a given total number of courses and a list of prerequisite pairs, is it possible for you to finish all courses?
 ========================================================================================================================
 Input: numCourses = 2, prerequisites = [[1,0]]
@@ -29,12 +28,12 @@ Explanation: There are a total of 2 courses to take.
 Ex:
 [[0,1],
  [0,2],
- [1,2]] --- valid with cycle --- Output: True
+ [1,2]] ------ Output: True
 
  								    -->0<--
  								  /         \
  								 1<----------2
- 		It looks like cycle. But valid topological sort is 2 --> 1 --> 0
+ 		Above is not a cycle. Valid topological sort is 2 --> 1 --> 0 or 2 --> 0 --> 1 
 
  1) Because initially 2 doesn't have any in-degree. So it is the source.
  2) Only 2 was pointing 1. Which is traversed. So 1 doesn't have any in-degree. So 1 is the source.

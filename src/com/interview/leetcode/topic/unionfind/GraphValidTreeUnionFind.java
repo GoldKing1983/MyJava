@@ -1,7 +1,7 @@
 package com.interview.leetcode.topic.unionfind;
 
 /*
- * https://leetcode.com/problems/graph-valid-tree/discuss/69018/AC-Java-Union-Find-solution
+https://leetcode.com/problems/graph-valid-tree/discuss/69018/AC-Java-Union-Find-solution
 
 Requirement: Verify given graph is a valid tree.
 

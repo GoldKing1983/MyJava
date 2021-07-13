@@ -4,59 +4,58 @@ import java.util.HashMap;
 import java.util.Map;
 
 /*
- * https://leetcode.com/problems/longest-repeating-character-replacement/
- *
-==========================Problem Description===============================================================
-Given a string s that consists of only uppercase English letters, you can perform at most k operations on that string.
-In one operation, you can choose any character of the string and change it to any other uppercase English character.
-Find the length of the longest sub-string containing all repeating letters you can get after performing the above operations.
-=========================================================================================================
+https://leetcode.com/problems/longest-repeating-character-replacement/
+===========================================================Requirement===========================================================
+1) Given a string s that consists of only uppercase English letters, 
+2) You are allowed replace at most k characters on that string.
+3) Find the length of longestSubString that all characters are same.
+============================================================Example1=============================================================
 Input:
 s = "ABAB", k = 2
 Output:4
-
+============================================================Example2=============================================================
 Input:
 s = "AABABBA", k = 1
 Output:4
-====================================================Key Note on Solution========================================================
-Make all letter as same letter(change all letters to mostFreqLetter or longest-repeating-character)
-or in the current window or I need to "replace all letter other than" "mostFreqLetter".
-If "replace count" or "letter count other than max freq letter" is <=k, Then window length can be max answer.
-==========================================Logical Thinking on Solution===========================================================
-1) Use a HashMap to count the frequency of each letter.
-2) Iterate through the string to add one letter at a time to the window(window = right - left + 1)
-3) Calculate windowCount and mostFreqLetterCount.
-4) So "OtherLetterCount = windowCount-mostFreqLetterCount".
-5) If "OtherLetterCount <= K" then current window is the answer.
-6) Else Move Left(Shrink the Window.)
+========================================================Logical Thinking=========================================================
+1) In the current window, make all letter as same letter(change otherLetterCount to mostFreqLetter)
+2) If "otherLetterCount" is <=k. Then window length can be max answer.
+========================================================Solution Approach========================================================
+Expand         : Always by 1. 
+Shrink         : when OtherLetterCount > K.  Shrink by 1 only. 
+Capture Result : when OtherLetterCount <= K
+
+1) Find mostFreqLetterCount at each step.
+2) So "OtherLetterCount = currentWindowSize-mostFreqLetterCount".
+3) If "OtherLetterCount <= K" then current window is the answer.
+4) Else Move Left(Shrink the Window.)
+=======================================================Data Flow Analysis========================================================
+Input: "aabccbb", k=2 Ans:5
+
+for a, currentWindowSize = 1(a),     otherLetterCount=0. resultCount=1
+for a, currentWindowSize = 2(aa),    otherLetterCount=0. resultCount=2
+for b, currentWindowSize = 3(aab),   otherLetterCount=1. resultCount=3
+for c, currentWindowSize = 4(aabc),  otherLetterCount=2. resultCount=4
+
+for c, currentWindowSize = 5(aabcc), otherLetterCount=3. 
+Shrink Window by moving left. currentWindowSize =4(abcc).
+
+for b, currentWindowSize = 5(abccb), otherLetterCount=3.
+Shrink Window by moving left. currentWindowSize =4 (bccb). 
+
+for b, currentWindowSize = 5(bccbb), otherLetterCount=2. resultCount=5
 ========================See Also MaxConsecutiveOnesIII=================================================================
 Input: "ABC" K=50
 for A, window = 1,  (1-1>50) = false.  longestRepeatingCharAfterReplacement=1
 for B, window = 2,  (2-1>50) = false.  longestRepeatingCharAfterReplacement=2
 for C, window = 3,  (3-1>50) = false.  longestRepeatingCharAfterReplacement=3
 =========================================================================================================================
-Input: "aabccbb", k=2 Ans:5
-for a, window = 1(a),  (1-1>2) = false.  longestRepeatingCharAfterReplacement=window=1
-		===mostFreqLetter = 2 ======
-for a, window = 2(aa),    (2-2>2) = false.  longestRepeatingCharAfterReplacement=window=2
-for b, window = 3(aab),   (3-2>2) = false.  longestRepeatingCharAfterReplacement=window=3
-for c, window = 4(aabc),  (4-2>2) = false.  longestRepeatingCharAfterReplacement=window=4
-
-for c, window = 5(aabcc), (5-2>2) = true.   Shrink Window by moving left.
-Shrunk window = 4 (abcc).
-
-for b, window = 5(abccb), (5-2>2) = true.
-Shrunk window = 4 (bccb) longestRepeatingCharAfterReplacement=4.
-
-       ===mostFreqLetter = 3 ======
-for b, window = 5(bccbb), (5-3>2) = false.   longestRepeatingCharAfterReplacement=5
-=========================================================================================================================
  */
 public class LongestRepeatingCharacterReplacement {
   public int characterReplacement(String s, int k) {
     Map<Character, Integer> freq = new HashMap<>();
     int mostFreqLetterCount = 0;
-    int longestRepeatingCharAfterReplacement = 0;
+    int resultCount = 0;
     for (int left = 0, right = 0; right < s.length(); right++) {
       char rightChar = s.charAt(right);
       int rightCharCount = freq.getOrDefault(rightChar, 0) + 1;
@@ -64,17 +63,16 @@ public class LongestRepeatingCharacterReplacement {
 
       mostFreqLetterCount = Math.max(mostFreqLetterCount, rightCharCount);
 
-      int window = right - left + 1;
-      int otherLetterCount = window - mostFreqLetterCount;
-      if (otherLetterCount <= k) {
-        longestRepeatingCharAfterReplacement =
-            Math.max(longestRepeatingCharAfterReplacement, window);
-      } else {
+      int currentWindowSize = right - left + 1;
+      int otherLetterCount = currentWindowSize - mostFreqLetterCount; // replaceCount
+      if (otherLetterCount <= k) { // Shrink
+        resultCount = Math.max(resultCount, currentWindowSize);
+      } else { // Shrink
         char leftChar = s.charAt(left);
         freq.put(leftChar, freq.get(leftChar) - 1);
         left++;
       }
     }
-    return longestRepeatingCharAfterReplacement;
+    return resultCount;
   }
 }

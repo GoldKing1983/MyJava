@@ -5,27 +5,39 @@ import java.util.Map;
 
 /*
 https://leetcode.com/problems/strobogrammatic-number/
-
-==================================Solution using Two Pointer Approach========================================
+===========================================================Requirement===========================================================
+1) Given a number. return true if number is a strobogrammatic number.
+2) A strobogrammatic number is a number that looks the same when rotated 180 degrees (looked at upside down).
+============================================================Example1=============================================================
+Input: num = "69"
+Output: true
+============================================================Example2=============================================================
+Input: num = "88"
+Output: true
+============================================================Example3=============================================================
+Input: num = "962"
+Output: false
+============================================================Example4=============================================================
+Input: num = "1"
+Output: true
+========================================================Solution Approach========================================================
 1) Take actual number on "left side". Take rotated number on "right side".
 2) If both matches then continue matching next. Else return false.
 3) Rotated number for "0,1,8" is "0,1,8" itself
 4) Rotated number for "6,9" is "9,6".
 5) For rest of chars, save any dummy char. Because if it occurs, it can never be Strobogrammatic.
-
 6) Last trick is, for odd number of input, only '0','1' and '8' can pass.
-The loop runs till "left<=right". i.e for 1 input loop runs 1 time. and 3 for input loop runs 2 times.
+So run loop till "left<=right". i.e for 1 input loop runs 1 time. and 3 for input loop runs 2 times.
+
 Ex: 6. In this case run loop 1 time. 6 compared with 9. So fails
 Ex: 699. In this case run loop 2 times. Middle 9 compared with 6. So fails
 Ex: 619. In this case run loop 2 times. Middle 1 compared with 1. So it succeeds.
-==========================================================================================================================
-Input: "619". Output: True
+=================================================================================================================================
 */
 
 public class StrobogrammaticNumber {
 
   private Map<Character, Character> map = new HashMap<>();
-
   {
     map.put('0', '0');
     map.put('1', '1');

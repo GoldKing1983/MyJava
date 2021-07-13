@@ -36,9 +36,7 @@ public class CoinChange1MinimalWaysForLoopRecursion {
 
     for (int i = index; i < n; i++) {
       sum += nums[i];
-      count++;
-      recur(nums, n, i, target, sum, count);
-      count--;
+      recur(nums, n, i, target, sum, count + 1);
       sum -= nums[i];
     }
   }

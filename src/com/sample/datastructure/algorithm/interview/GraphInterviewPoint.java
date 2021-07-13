@@ -23,6 +23,10 @@ BFS always finds the shortest path, assuming the graph is undirected and unweigh
 DFS does not always find the shortest path.
 ===================================================Graph Must See Problem========================================================
 AllPathsFromSourceToTarget - 3Solutions. BFS/DFS/Backtracking
+NumberOfConnectedComponentsInAnUndirectedGraphDFS
+CourseScheduleDFS
+Find Cycle in directed-graph : CourseScheduleDFS
+Find Cycle in un-directed-graph : GraphValidTreeDFS
 =======================================================Grouping Nodes============================================================
 Graph Coloring - FlowerPlantingWithNoAdjacent/PossibleBipartition
 Group or MergeNodes - AccountsMergeGraphDFS

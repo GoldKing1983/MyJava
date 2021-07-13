@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.hard;
+package com.interview.leetcode.topic.backtrack;
 
 /*
 https://leetcode.com/problems/n-queens-ii/

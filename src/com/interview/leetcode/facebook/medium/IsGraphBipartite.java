@@ -57,11 +57,11 @@ public class IsGraphBipartite {
   4) If a node is visited check its color, different than current
   
   */
-  public boolean solve(int[][] graph) {
+  public boolean isBipartite(int[][] graph) {
     int maxRow = graph.length;
     Boolean[] dp = new Boolean[maxRow];
     for (int row = 0; row < maxRow; row++) {
-      if (dp[row] != null) continue; // already colred
+      if (dp[row] != null) continue; // already colored
       dp[row] = true; // set default color as red
       if (!isBiPartite(graph, dp, row, true)) return false;
     }
@@ -73,15 +73,14 @@ public class IsGraphBipartite {
 
     for (int neighbor : graph[sourceRow]) {
       // we don't need to do anything dp[neighbor]==null.. because it is not colored and recursion must run..
-      if (dp[neighbor] != null) { // not colored
-
-        // if currentColor and neighborColr same return false
-        if (currentColor == dp[neighbor]) return false;
-        continue; // already colored... 
+      if (dp[neighbor] == null) { // not colored
+        // Assign neighbor node with opposite of parentColor
+        dp[neighbor] = !currentColor;
+        if (!isBiPartite(graph, dp, neighbor, !currentColor)) return false;
+      } else { // already colored. 
+        if (currentColor == dp[neighbor]) return false; // if currentColor and neighborColr same return falsefos
       }
-      // Assign neighbor node with opposite of parentColor
-      dp[neighbor] = !currentColor;
-      if (!isBiPartite(graph, dp, neighbor, !currentColor)) return false;
+
     }
     return true;
   }

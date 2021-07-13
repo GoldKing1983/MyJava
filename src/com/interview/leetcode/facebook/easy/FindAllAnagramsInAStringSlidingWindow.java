@@ -11,7 +11,8 @@ https://leetcode.com/problems/find-all-anagrams-in-a-string/description/
 
 Same code as PermutationInStringSlidingWindow. Instead of returning true, it finds "allIndexOfStartPattern".
 
-1) Initially for "patternString" do decrement in Map. We are doing decrement instead of increment, because when I
+1) Initially for "patternString" do decrement in Map. 
+2) We are doing decrement instead of increment, because when I
 form/do initialWindow/slidingWindow i can remove/decrement on leftSide and add/increment on rightSide.
 
  

@@ -19,13 +19,15 @@ search(word) can search
 								/
 							   t
 							  /
-							 .
+							 e
 							/ \
 						   e   a
 						  /		\
 						 s		 s
 2) For the "." character, (DFS) recursively call for all the character in Map with the corresponding node
-	Ex: t.es
+	Ex: t.as...First dfs will try "tees" then "teas".
+
+3) The DFS logic is similar to "WordBreakRecursion" for "." case.	
  */
 public class AddAndSearchWordTRIE {
 
@@ -53,33 +55,31 @@ public class AddAndSearchWordTRIE {
 
   public boolean search(String word) {
     Trie tempRoot = root;
-    return searchFromLevel(word, tempRoot);
+    return searchFromLevel(word, word.length(), tempRoot);
   }
 
-  public boolean searchFromLevel(String word, Trie tempRoot) {
-    for (int i = 0; i < word.length(); i++) {
+  public boolean searchFromLevel(String word, int n, Trie tempRoot) {
+    //System.out.println("currentWord:" + word);
+
+    for (int i = 0; i < n; i++) {
       Character c = word.charAt(i);
-      // for the case input=["a"] and searchString=["a."] --> return false
-      if (tempRoot.children.size() == 0) return false;
-      // Below recursion logic is similar to WordBreakRecursion
+
       if (c == '.') {
-        // For the "." character, recursively call for all the character in Map with the
-        // corresponding node
+        // For the "." character, recursively call for all the character in Map with the corresponding node
         for (Map.Entry<Character, Trie> m : tempRoot.children.entrySet()) {
-          // There could be multiple path going from "." Only one path will succeed if the
-          // "searchWord" is found, rest all path will return false.
-          if (searchFromLevel(word.substring(i + 1, word.length()),
+          String suffixString = word.substring(i + 1, n); // Similar to "WordBreakRecursion"
+
+          if (searchFromLevel(suffixString, suffixString.length(),
               tempRoot.children.get(m.getKey()))) {
             return true;
           }
         }
         return false;
-      } else if (tempRoot.children.containsKey(c)) {
-        tempRoot = tempRoot.children.get(c); // Move to next Node
-      } else {
-        return false;
       }
+      if (!tempRoot.children.containsKey(c)) return false;
+      tempRoot = tempRoot.children.get(c); // Move to next Node
     }
-    return tempRoot.isLeaf; // once all characters are matched. finally trie should say it is leaf, then only return true. 
+    return tempRoot.isLeaf;
+
   }
 }

@@ -1,8 +1,3 @@
-import java.text.ParseException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-
 /*
 com.interview.leetcode.topic.
 
@@ -26,24 +21,34 @@ com.interview.leetcode.topic.
  */
 public class Sample {
 
-  public static void main(String[] args) throws ParseException {
+  public int longestValidParentheses(String s) {
+    if (s.length() == 0) return 0;
 
-    String dateString = "11-Jan-2000";
-    
-    DateTimeFormatter dTF = new DateTimeFormatterBuilder()
-        .appendPattern("d-MMM-yyyy").toFormatter();
-    
-    try
-    {
-        LocalDate ddd = LocalDate.parse(dateString,dTF);
-        System.out.println(ddd.toString());
+    int leftToRightMax = getMax(s);
+    int rightToLeftMax = getMax(new StringBuilder(s).reverse().toString());
+
+    return Math.max(leftToRightMax, rightToLeftMax);
+
+
+
+  }
+
+  private int getMax(String s) {
+    int sum = 0, max = 0, currMax = 0;
+
+    for (Character c : s.toCharArray()) {
+      if (c == '(') sum++;
+      else sum--;
+
+      if (sum < 0) {
+        sum = 0;
+        currMax = 0;
+      } else {
+        currMax++;
+        if (sum == 0) max = Math.max(max, currMax);// Only when balanced calculate max.
+      }
     }
-    catch (Exception e)
-    {
-        e.printStackTrace();
-    }
 
-    
-
+    return currMax;
   }
 }

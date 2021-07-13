@@ -74,7 +74,7 @@ public class AlienDictionaryTopologicalSort {
     for (String word : words) {
       for (char character : word.toCharArray()) {
         inDegree.put(character, 0);
-        adjMap.put(character, new ArrayList<Character>());
+        adjMap.put(character, new ArrayList<>());
       }
     }
 

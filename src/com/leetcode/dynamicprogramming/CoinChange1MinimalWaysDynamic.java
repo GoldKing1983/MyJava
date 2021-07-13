@@ -15,6 +15,8 @@ Explanation: 11 = 5 + 5 + 1
 Input: coins = [2], amount = 3
 Output: -1
 =============================================================Theory Notes========================================================
+See image CoinChange1.png
+
 Here the subProblem is individual coins to make the sum.
 Ex: {2,3,6} sum=12
 2 alone to make sum 12.
@@ -32,8 +34,8 @@ Ex: {2,3,6} sum=12
 	        0  1  2  3  4  5  6  7  8  9  10  11  12 ======P for Previous
 	        ========================================
 	 {2} || 0  0  1  0  2  0  3  0  4  0  5   0  6   	 ==> For 1 Coin --> {2}
-   {2,4} || 0P 0P 1P 1P 1  0  2  0  2  0  3   0  3   	 ==> For 2 Coin --> {2,4}
- {2,4,6} || 0P 0P 1P 1P 1P 0P 1  0  2  0  2   0  2   	 ==> For 3 Coin --> {2,4,6}
+   {2,4} || 0P 0P 1P 0P 1  0  2  0  2  0  3   0  3   	 ==> For 2 Coin --> {2,4}
+ {2,4,6} || 0P 0P 1P 0P 1P 0P 1  0  2  0  2   0  2   	 ==> For 3 Coin --> {2,4,6}
 ============================================================= Why Math.min=======================================================
 		input = [2,1] target= 5 ans=3 
 		---------dp array, without math.min---------
@@ -69,10 +71,9 @@ public class CoinChange1MinimalWaysDynamic {
 
         int dpPrevAmount = dp[i - currentCoin];
         if (dpPrevAmount == 0) continue;
-
-        int dpCurrAmount = dp[i];
         int dpPrevAmountPlus1 = dpPrevAmount + 1;
 
+        int dpCurrAmount = dp[i];
         if (dpCurrAmount == 0) dp[i] = dpPrevAmountPlus1;
         else dp[i] = Math.min(dpCurrAmount, dpPrevAmountPlus1);
 

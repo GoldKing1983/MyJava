@@ -31,7 +31,7 @@ FindAllDuplicatesInAnArray - which occurs exactly twice in array
 FindDuplicate
 ShortestUnsortedContinuousSubarray
 ==============================PrefixSum(preSum) Problems==============================
-1) SubarraySumEqualsK
+1) SubarraySumEqualsK vs NumberOfNonOverlappingSublistsWithSumOfTarget
 2) ContiguousArray
 3) NumberOfGoodPairs
 ===========================

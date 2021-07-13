@@ -1,4 +1,4 @@
-package com.interview.leetcode.amazon.hard;
+package com.interview.leetcode.topic.backtrack;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -7,6 +7,9 @@ import java.util.Set;
 https://leetcode.com/problems/n-queens-ii/
 https://www.youtube.com/watch?v=xouin83ebxE
 ========================================Requirement==============================================================================
+1) Given an n x n chess-board.
+2) Return the number of distinct count where queen can be placed without killing each other.
+
 A valid move is possible, if no queen present horizontally, vertically and diagonally
  				   \   |   /
  					 \ | /
@@ -14,18 +17,17 @@ A valid move is possible, if no queen present horizontally, vertically and diago
  					 / | \
                    /   |   \
 ========================================Approach1================================================================================
-Keep the first queen in (0,0). Try placing next queen in next-row column-wise.
-Ex: Next 1,0 ==> 1,1 ==> 1,2 ==> 1,3... Row stays, column increments
+1) Keep the first queen in (0,0). 
+2) Keep subsequent queens vertically.
 ========================================Approach2================================================================================
-Keep the first queen in (0,0). Try placing next queen in row-wise.
-Ex: Next 1,0 ==> 2,0 ==> 3,0 ==> 4,0... Column stays, row increments
-
+1) Keep the firstQueen in (0,0). 
+2) Keep subsequent queens horizontally.
 ========================================Solution Based on Approach1==============================================================
-Note: 2d board is not used and only list is used. because list index taken as row.
+Note: 2d board is not needed. Set is enough to save allPreviousQueensPosition.
 
 1) Here in this problem requirement, no need to generate the board with queen. All we need is possible count.
 2) For each row, try to place queen without violation on col/ Diagonal/ AntiDiagonal.
-If row reached "n". Then we found a combination.
+If row reached "n" without violation. Then we found a combination.
 
 Note: Try to understand/imagine point3. It is very important
 3) Row check not needed, because when I place a queen, I move to next row. Previous rows are filled properly.
@@ -78,6 +80,7 @@ public class NQueensII {
       dpAntiDiagonals.add(antiDiagonal);
       dpDiagonals.add(diagonal);
 
+      // placed a queen in a row/col, move on to next row
       totalNQueensHelper(row + 1, n);
 
       dpColumns.remove(col);

@@ -3,7 +3,7 @@ package com.interview.leetcode.facebook.medium;
 import java.util.HashMap;
 
 /*
- * https://leetcode.com/problems/subarray-sum-equals-k/
+https://leetcode.com/problems/subarray-sum-equals-k/
 https://www.youtube.com/watch?v=HbbYPQc-Oo4
 See Also problem ContiguousArray
 =========================================================Requirement=============================================================
@@ -35,13 +35,12 @@ Output : 4 (3,4--> 7 --> 7,2,-3,1 --> 1,4,2)
 =================================================Solution Approach O(n)==========================================================
 1) Understand SubarraySumEqualsKSlidingWindowBruteForce.
 2) In above solution, we calculate sum from 0ton-1, then, we move left by 1 and do same calculation again.
-3) We can optimize it. If we memoize the preSum with count of occurrence. 
-   Ex:[1,-1,1,4] target=4... at index2, preSum 1 occurs 2 times. 
-   This memoization will be used at index3. 
-   At index3 preSum=5. 5-target(4) = 1. 1 occurs 2times. So resultCount = 2.
-
-4) Like 2 sum, how I look for "target-currentNumber" present in map, here look for difference.
-5) Here key point is "difference(preSum-target)". If the "difference" exists in map, then a result found.
+3) We can optimize it. If we memoize the preSum with resultCount. 
+   
+=======================================================Data Flow Analysis========================================================
+resultCountMap  =  1 2 3 
+prefixSum       =  0 0 0   
+nums            = [0,0,0], target = 0  
 
  */
 public class SubarraySumEqualsK {
@@ -61,16 +60,16 @@ public class SubarraySumEqualsK {
 
   public int subarraySum(int[] nums, int target) {
     int resultCount = 0, prefixSum = 0;
-    HashMap<Integer, Integer> dp = new HashMap<>();
+    HashMap<Integer, Integer> resultCountMap = new HashMap<>();
     for (int num : nums) {
       prefixSum += num; // step1
       // -------------------Logic Starts=================//
       if (prefixSum == target) resultCount++;
 
-      if (dp.containsKey(prefixSum - target)) resultCount += dp.get(prefixSum - target);
+      if (resultCountMap.containsKey(prefixSum - target)) resultCount += resultCountMap.get(prefixSum - target);
       // -------------------Logic Ends=================//
       // Ex: [0,0,0]...target=0... at index1 dp=[0,2] This memoization will be used at index2 
-      dp.put(prefixSum, dp.getOrDefault(prefixSum, 0) + 1); // step2
+      resultCountMap.put(prefixSum, resultCountMap.getOrDefault(prefixSum, 0) + 1); // step2
     }
     return resultCount;
   }

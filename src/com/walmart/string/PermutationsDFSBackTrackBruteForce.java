@@ -10,7 +10,15 @@ https://leetcode.com/problems/permutations/
 
 Similar to Standard "code" of FactorCombinations. Time Complexity O(n^2).
 
-1) This is not an efficient solution, as the contains method runs every-time.
+                            "empty"
+                    /           |          \
+                   1            2           3
+                  / \          / \         / \
+                 2   3        3   1       2   1
+                /     \      /     \     /     \
+               3       2    1       3   1       2
+
+1) This is not an efficient solution, as the contains "method" runs every-time.
 
 2) Without contains backTrack solution is not possible. Because after "3" "2" has to to come.
  	1	2	3

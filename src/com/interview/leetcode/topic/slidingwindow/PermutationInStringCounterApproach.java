@@ -24,15 +24,15 @@ Ex: s1="abc" s2="abxc" Output: false
 public class PermutationInStringCounterApproach {
   public boolean checkInclusion(String searchString, String inputString) {
     if (searchString.length() > inputString.length()) return false; // ex: searchString:"ab" inputString:"a"
-    int[] bucket = new int[26];
-    for (int i = 0; i < searchString.length(); i++) {
+    int bucket[] = new int[26], n = searchString.length();
+    for (int i = 0; i < n; i++) {
       bucket[inputString.charAt(i) - 'a']++;
       bucket[searchString.charAt(i) - 'a']--;
     }
+
     if (allZero(bucket)) return true;
 
-    for (int left = 0, right = searchString.length(); right < inputString
-        .length(); left++, right++) {
+    for (int left = 0, right = n; right < inputString.length(); left++, right++) {
       bucket[inputString.charAt(left) - 'a']--;
       bucket[inputString.charAt(right) - 'a']++;
       if (allZero(bucket)) return true;

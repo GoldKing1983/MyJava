@@ -40,7 +40,7 @@ Output: false
 
 invalidDict = [catsandog, andog, og, sandog]
             
-1) We can see that "og" is called 2 times. 
+1) We can see that "og" is called 2 times. See WordBreakMemoize.png for Memoize details
 2) There are so many cases, which will call itself. Ex: "s="aaaaaaaaac"   wordDict = ["a","b"].
 For each "a" recursion will split, but we see with "a" starting result cannot be formed. Memo avoid all unnecessary combo.               
 =====================================================Time Complexity=============================================================

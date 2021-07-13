@@ -22,9 +22,7 @@ Given word = "SEE", return true.
 Given word = "ABCB", return false.
 =============================================Solution Approach============================================================
 1) For each character search recursively in all 4 directions
-          ===isVisited does 2 tricks====
-2) To avoid forming circle in search.
-3) BackTracking - IsVisited will be set to true for path1 and set to false for path2.
+2) visited  avoid forming circle in search.
 ===========================================Understanding Backtracking======================================================
 [["H","E","L","L"],
  ["L","L","A","O"]]
@@ -38,36 +36,39 @@ word : HELLOALL.
  */
 public class WordSearchBackTrackBoggle {
   // right,down,left,top
-  private int[][] dir = new int[][] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+  private static final int[][] DIRECTIONS = {{0, 1}, {0, -1}, {1, 0}, {-1, 0}};
 
   public boolean exist(char[][] board, String word) {
+    int maxRow = board.length, maxCol = board[0].length, n = word.length();
+    boolean[][] visited = new boolean[maxRow][maxCol];
     for (int row = 0; row < board.length; row++) {
       for (int col = 0; col < board[0].length; col++) {
-        boolean[][] isVisited = new boolean[board.length][board[0].length];
-        if (word.charAt(0) == board[row][col]) {
-          if (recur(board, row, col, word, 0, isVisited)) {
-            return true;
-          }
+        if (board[row][col] == word.charAt(0)) {
+          visited[row][col] = true;
+          if (backTrack(board, word, 1, n, row, maxRow, col, maxCol, visited)) return true;
+          visited[row][col] = false;
         }
       }
     }
     return false;
   }
 
-  public boolean recur(
-      char[][] board, int row, int col, String word, int index, boolean[][] isVisited) {
-    if (index == word.length()) return true;
+  public boolean backTrack(char[][] board, String word, int wordIndex, int n, int row, int maxRow,
+      int col, int maxCol, boolean[][] visited) {
+    if (wordIndex == n) return true;
 
-    if (row == board.length || row < 0 || col == board[0].length || col < 0) return false;
-    if (isVisited[row][col] || board[row][col] != word.charAt(index)) return false;
+    for (int[] DIRECTION : DIRECTIONS) {
+      int nextRow = row + DIRECTION[0];
+      int nextCol = col + DIRECTION[1];
 
-    isVisited[row][col] = true;
-
-    for (int i = 0; i < dir.length; i++)
-      if (recur(board, dir[i][0] + row, dir[i][1] + col, word, index + 1, isVisited)) return true;
-
-    isVisited[row][col] = false;
-
+      if (nextRow == maxRow || nextRow < 0 || nextCol == maxCol || nextCol < 0) continue;
+      if (visited[nextRow][nextCol]) continue;
+      if (board[nextRow][nextCol] != word.charAt(wordIndex)) continue;
+      visited[nextRow][nextCol] = true;
+      if (backTrack(board, word, wordIndex + 1, n, nextRow, maxRow, nextCol, maxCol, visited))
+        return true;
+      visited[nextRow][nextCol] = false;
+    }
     return false;
   }
 }

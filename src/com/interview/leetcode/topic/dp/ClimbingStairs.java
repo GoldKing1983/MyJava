@@ -4,10 +4,14 @@ package com.interview.leetcode.topic.dp;
 https://leetcode.com/problems/climbing-stairs/description/
 https://www.geeksforgeeks.org/count-ways-reach-nth-stair/
 ===========================================================Requirement===========================================================
-You are climbing a stair case. It takes n steps to reach to the top.
-Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+1) You are climbing a stair case. It takes n steps to reach to the top.
+2) Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
 
 On analyzing the result, solution is based on Fibonacci Series
+============================================================DP Terms=============================================================
+See picture ClimbingStairsDP.png and ClimbinStairsRecursionMemoization.png and ClimbinStairsBottomUpDPTable.png
+1) Solution for 5 can be arrived from Solution3 and Solution4...
+2) Solution for 4 can be arrived from Solution2 and Solution3... 
 ============================================================Example1=============================================================
    Example: if number of step is 3. I can code below.
 

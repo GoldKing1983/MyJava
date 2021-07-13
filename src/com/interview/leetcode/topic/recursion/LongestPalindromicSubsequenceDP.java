@@ -2,15 +2,17 @@ package com.interview.leetcode.topic.recursion;
 
 /*
 https://leetcode.com/problems/longest-palindromic-subsequence/description/
-========================================================Requirement=====================================================================
-Given a string s, find the longest palindromic subsequence's length in s. You may assume that the maximum length of s is 1000.
-
+===========================================================Requirement===========================================================
+1) Given a string s
+2) find the longest palindromic subsequence's length in s. You may assume that the maximum length of s is 1000.
+============================================================Example1=============================================================
 Input: "bbbab"
 Output: 4.  One possible longest palindromic subsequence is "bbbb".
-
+============================================================Example2=============================================================
 Input:"cbbd"
 Output: 2
 ==============================================Solution Approach - O(n^2)================================================================
+Here DP is filled from rightToLeft. In wordBreakDP DP is filled from leftToRight
 1) Create 2d dp matrix.
 2) From last ---- compare from leftToRight.
 Ex: "bxyb"
@@ -22,8 +24,8 @@ Compare Index: 0,1(b,x), Compare Index: 0,2(b,y), Compare Index: 0,3(b,b)
 					=====
 					z | a
 
-	If equal. a = 2+ Pick diagonal(x).
-	Else. a = Math.max(z,y)
+	If equal.... a = 2+ Pick diagonal(x).
+	Else    .... a = Math.max(z,y)
 =======================================================================================================================================
 Input: "bxyb" Output:3
 
@@ -50,8 +52,7 @@ DP Array at End of Loop: [1, 1, 1, 3]
 public class LongestPalindromicSubsequenceDP {
 
   public int longestPalindromeSubseq(String str) {
-    int maxRow = str.length();
-    int maxCol = str.length();
+    int maxRow = str.length(), maxCol = maxRow;
     int[][] dp = new int[maxRow][maxCol];
     int currentCol = maxCol - 1;
     for (int row = 0; row < maxRow; row++) {

@@ -1,7 +1,6 @@
 package com.interview.leetcode.facebook.hard;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -54,17 +53,15 @@ Optimization Part: Trie could be pruned from leaf. See "WordSearch2trie_prune.pn
  */
 public class WordSearchIIEfficientTRIEOption1 {
   // right,down,left,top
-  private int[][] dir = new int[][] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+  private static final int[][] DIRECTIONS = new int[][] {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
 
   public List<String> findWords(char[][] board, String[] words) {
     Set<String> result = new HashSet<>();
-    if (board == null || board.length == 0) return Arrays.asList("");
-
     TrieNode root = new TrieNode();
     buildTrie(root, words);
-    for (int i = 0; i < board.length; i++) {
-      for (int j = 0; j < board[i].length; j++) {
-        dfs(board, i, j, root, result, new boolean[board.length][board[0].length]);
+    for (int row = 0; row < board.length; row++) {
+      for (int col = 0; col < board[row].length; col++) {
+        dfs(board, row, col, root, result, new boolean[board.length][board[0].length]);
       }
     }
 
@@ -77,12 +74,7 @@ public class WordSearchIIEfficientTRIEOption1 {
     String word;
   }
 
-  private void dfs(
-      char[][] board,
-      int row,
-      int col,
-      TrieNode trieRoot,
-      Set<String> result,
+  private void dfs(char[][] board, int row, int col, TrieNode trieRoot, Set<String> result,
       boolean[][] visited) {
     if (row < 0 || col < 0 || row >= board.length || col >= board[0].length) return;
 
@@ -96,8 +88,8 @@ public class WordSearchIIEfficientTRIEOption1 {
 
     visited[row][col] = true;
 
-    for (int i = 0; i < dir.length; i++)
-      dfs(board, dir[i][0] + row, dir[i][1] + col, trieRoot, result, visited);
+    for (int i = 0; i < DIRECTIONS.length; i++)
+      dfs(board, DIRECTIONS[i][0] + row, DIRECTIONS[i][1] + col, trieRoot, result, visited);
 
     visited[row][col] = false;
   }

@@ -39,7 +39,7 @@ you will delete its left child and its right child before you delete the node it
 =====================================Problem that depend on tree index===============================================
 IndexingNode at each level....MaximumWidthOfBinaryTree
 ShuffleTheArray/DecompressRunLengthEncodedList -->similar indexing like binaryTree
-
+CompleteBinaryTreeInserter
 =============BST Problems - must see - very basics======
 1) TrimABinarySearchTreeRecursionMust
 2) ConvertSortedArrayToBinarySearchTree
