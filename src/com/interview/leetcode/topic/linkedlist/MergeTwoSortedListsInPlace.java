@@ -8,10 +8,24 @@ See Also ReverseLinkedListBottomUp
 =================Solution Note=======================================
 1) Solution is based on bottom-up recursion and not forward recursion.
 2) See the picture "MergeTwoSortedLists.jpg" for understanding.
-3) Nodes are connected from last to first and first small value node is returned.
+3) Nodes are connected from last to first and first smallValueNode is returned.
 
   Input : 1->3->5, 2->4->6
   Output: 1->2->3->4->5->6
+========================================================Solution Approach========================================================
+Below four case is enough to explain the entire Solution Approach
+=======================================================Data Flow Analysis========================================================
+  Input : 1->null, null
+
+  mergeTwoLists((l1)1,null)
+          |
+  return l1 --> baseCondition if (l2==null) return l1 satisfied        
+=======================================================Data Flow Analysis========================================================
+  Input : null, 1->null
+
+  mergeTwoLists(null, (l2)1)
+          |
+  return l2 --> baseCondition if (l1==null) return l2 satisfied        
 =======================================================Data Flow Analysis========================================================
   Input : 1->null, 2->null
 
@@ -22,8 +36,7 @@ See Also ReverseLinkedListBottomUp
           |
        return 2
           |
-     l1.next = 2
-     1.next  = 2
+     l1.next = 2 (i.e) 1.next  = 2
      return l1.... 1->2
 
 =======================================================Data Flow Analysis========================================================
@@ -36,8 +49,7 @@ See Also ReverseLinkedListBottomUp
           |
        return 2
           |
-     l2.next = 2
-     1.next  = 2
+     l2.next = 2 (i.e) 1.next  = 2 
      return l2.... 1->2
  */
 

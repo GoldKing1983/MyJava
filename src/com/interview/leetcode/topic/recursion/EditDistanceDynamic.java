@@ -3,7 +3,7 @@ package com.interview.leetcode.topic.recursion;
 /*
 https://leetcode.com/problems/edit-distance/description/
 https://www.youtube.com/watch?v=We3YDTzNXEk
-==============================================================Requirement==============================================================
+===========================================================Requirement===========================================================
 Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.
 
 You have the following 3 operations permitted on a word:
@@ -41,7 +41,7 @@ Input: word1 = "abc", word2 = "ac" Output=1
 			   =====
 		  0	|| 0 1 2
 		  a	|| 1 0 1
-		  b	|| 2 1 2
+		  b	|| 2 1 1
 		  c	|| 3 2 1
 ==============================================================Data Flow Analysis - Replace=============================================
 Input: word1 = "adc", word2 = "abc" Output=2

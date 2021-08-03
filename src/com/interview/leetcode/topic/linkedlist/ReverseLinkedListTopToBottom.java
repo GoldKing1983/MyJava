@@ -20,7 +20,7 @@ public class ReverseLinkedListTopToBottom {
     ListNode next = null;
     while (current != null) {
       next = current.next; // ------next = b,            next = c,         next= null
-      current.next = previous; // --current.next = null, current.next = a, current.next = b
+      current.next = previous; // --a -> null,           b -> a,           c -> b
       previous = current; // -------previous = a,        previous = b,     previous = c
       current = next; // -----------current = b,         current = c,      current = null
     }

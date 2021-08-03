@@ -40,7 +40,7 @@ Input: nums = [4,2,1]
 verifyLeftToRightAscending: false. verifyRightToLeftDescending: false. Answer: false
 
  */
-public class NonDecreasingArray {
+public class NonDecreasingArray2Pass {
 
   public boolean checkPossibility(int[] nums) {
     return verifyLeftToRightAscending(nums) || verifyRightToLeftDescending(nums);

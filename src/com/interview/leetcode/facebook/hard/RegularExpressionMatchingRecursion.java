@@ -43,59 +43,15 @@ package com.interview.leetcode.facebook.hard;
  */
 public class RegularExpressionMatchingRecursion {
 
-  // Base Condition Alone.
-  public boolean isMatchStep1(String s, String p) {
-    if (p.length() == 0) {
-      if (s.length() == 0) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  }
-
-  // Base Condition with check for "." or s[0]==p[0]
-  public boolean isMatchStep2(String s, String p) {
-    if (p.length() == 0) {
-      return s.length() == 0;
-    } else if (p.charAt(1) == '*') { // second char is '*'
-
-    } else { // second char is not '*'
-      if (p.charAt(0) == '.' || s.charAt(0) == p.charAt(0)) {
-        return isMatch(s.substring(1), p.substring(1));
-      }
-      return false;
-    }
-    return false;
-  }
-
-  // Base Condition, with check for '*"
-  public boolean isMatchStep3(String s, String p) {
-    if (p.length() == 0) {
-      return s.length() == 0;
-    } else if (p.charAt(1) == '*') { // second char is '*'
-      if (isMatch(s, p.substring(2))) {
-        return true;
-      }
-      if (p.charAt(0) == '.' || s.charAt(0) == p.charAt(0)) {
-        return isMatch(s.substring(1), p); // Note we are sending p and not p.substring(1)
-      }
-      return false;
-    } else { // second char is . or alpha
-
-    }
-    return false;
-  }
-
   public boolean isMatch(String s, String p) {
     if (p.length() == 0) {
       return s.length() == 0;
     } else if (p.length() > 1 && p.charAt(1) == '*') { // second char is '*'
-      if (isMatch(s, p.substring(2))) {
+      if (isMatch(s, p.substring(2))) { // case: s=a p=a*a
         return true;
       }
       if (s.length() > 0 && (p.charAt(0) == '.' || s.charAt(0) == p.charAt(0))) {
-        return isMatch(s.substring(1), p);
+        return isMatch(s.substring(1), p); // case: s=aaaaaaaaa p=a*a
       }
       return false;
     } else { // second char is . or alpha

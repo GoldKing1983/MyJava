@@ -12,6 +12,26 @@ algorithm Image is Present on US Problems folder "Quick Select.jpg"
 3) This logic picks last element.
 4) Then it rearranges the list in a way that all elements greater than pivot are on left side of pivot and others on right.
 5) It then returns index of the element upto which is sorted.
+=======================================================Data Flow Analysis========================================================
+[5,4,3,2,1] k=2 output=4
+
+left=0 right=4
+[5,4,3,2,1] 
+1 and 5 are swapped.
+[1, 4, 3, 2, 5]
+
+left=1 right=4
+[1, 4, 3, 2, 5]
+5 already stays in the right location. So decrement right.
+
+left=1 right=3
+[1, 4, 3, 2, 5]
+2 and 4 are swapped
+[1, 2, 3, 4, 5]
+
+left=2 right=3
+[1, 2, 3, 4, 5]
+
  */
 public class KthLargestElementInAnArrayQuickSelect {
   public int findKthLargest(int[] nums, int k) {

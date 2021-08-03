@@ -1,7 +1,6 @@
 package com.interview.leetcode.amazon.medium;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import com.interview.leetcode.TreeNode;
 
@@ -52,36 +51,17 @@ path4  : 1 -> 1 -> 1
 
 */
 
-public class PathSumII {
+public class PathSumIIBackTracking {
 
   public List<List<Integer>> pathSum(TreeNode root, int targetSum) {
     List<List<Integer>> result = new ArrayList<>();
-    recur(root, result, new ArrayList<>(), targetSum);
+    findPathsRecursive(root, targetSum, new ArrayList<>(), result);
     return result;
   }
 
-  private void recur(TreeNode root, List<List<Integer>> result, List<Integer> currResult,
-      int targetSum) {
-    if (root == null) return;
-
-    currResult.add(root.val);
-
-    targetSum -= root.val;
-
-    // if targetSum < 0... negative numbers can increment... so go all the way till leaf
-    if (targetSum == 0 && root.left == null && root.right == null) {
-      result.add(new ArrayList<>(currResult));
-      currResult.remove(currResult.size() - 1);
-      return;
-    }
-    recur(root.left, result, currResult, targetSum);
-    recur(root.right, result, currResult, targetSum);
-
-    currResult.remove(currResult.size() - 1);
-  }
 
   // Simplified recursion approach....
-  private void findPathsRecursive(TreeNode root, int targetSum, LinkedList<Integer> currentPath,
+  private void findPathsRecursive(TreeNode root, int targetSum, ArrayList<Integer> currentPath,
       List<List<Integer>> allPaths) {
     if (root == null) return;
 
@@ -89,6 +69,7 @@ public class PathSumII {
 
     targetSum -= root.val;
 
+    // if targetSum < 0... negative numbers can increment... so go all the way till leaf
     if (0 == targetSum && root.left == null && root.right == null) {
       allPaths.add(new ArrayList<>(currentPath));
     } else {
@@ -96,7 +77,7 @@ public class PathSumII {
       findPathsRecursive(root.right, targetSum, currentPath, allPaths);
     }
 
-    currentPath.removeLast();
+    currentPath.remove(currentPath.size()-1);
   }
 
 }

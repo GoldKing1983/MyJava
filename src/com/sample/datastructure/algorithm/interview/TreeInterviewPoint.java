@@ -32,9 +32,12 @@ you will delete its left child and its right child before you delete the node it
 2) SymmetricTreeBottomUp
 3) SumRootToLeafNumbersBottomUp
 4) PathSum and PathSumII
-5) FindLeavesOfBinaryTreeBottomUpRecurse and BinaryTreeLevelOrderTraversalDFS
-1) BinaryTreePathsBackTrack/BinaryTreePathsClone
-2) LowestCommonAncestorOfABinaryTreeOrLCADetail
+5) FindLeavesOfBinaryTreeBottomUpRecurse 
+6) BinaryTreeLevelOrderTraversalDFS
+7) BinaryTreePathsBackTrack/BinaryTreePathsClone
+8) LowestCommonAncestorOfABinaryTreeOrLCADetail
+9) ConstructBinarySearchTreeFromPreorderTraversal
+10) ConstructBinaryTreeFromPreorderAndInorderTraversal
 
 =====================================Problem that depend on tree index===============================================
 IndexingNode at each level....MaximumWidthOfBinaryTree

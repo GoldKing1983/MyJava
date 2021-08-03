@@ -2,35 +2,8 @@ package com.interview.leetcode.topic.string;
 
 /*
  https://leetcode.com/problems/verifying-an-alien-dictionary/
-===========================================================Requirement===========================================================
-1) If there are 2 word in input. Compare word1 and word2.... for 3 words. compare word1&word2, then word2&word3....
-2) On comparing 2 word characters, 3 cases can arrive. 
-      case1) If word1 first character equals       word2 first character. Then compare continues for next char in word1 and word2
-      case2) If word1 first character greater than word2 first character. return false
-      case3) If word1 first character less    than word2 first character. We can move on comparing 2nd and 3rd word.
-  
-============================================================Example1=============================================================
-Input: words = ["hello","leetcode"], order = "hlabcdefgijkmnopqrstuvwxyz"
-Output: true
-Explanation: As 'h' comes before 'l' in this language, then the sequence is sorted.
-============================================================Example2=============================================================
-Input: words = ["app","apple","banana"], order = "abcdefghijklmnopqrstuvwxyz"
-Output: true
-============================================================Example3=============================================================
-Input: words = ["banana","app","apple"], order = "abcdefghijklmnopqrstuvwxyz"
-Output: false
-========================================================Solution Approach========================================================
-=========Corner Case============Assume firstWord or previousWord is master always============
-   1) If word1 and word2 are equal to certain index and word2 is finished then return false.
-   Note: this doesn't mean word2 size should be greater than or equal to word1.
-   Ex: (Consider a-z dictionary)
-   "app" "apple" ==> true
-   "apple" "app" ==> false... because till app both same, then nothing to match in word2
-   "a" "" ==> false
-   "" "a" ==> true
-   "apple" "apq" ==> true
-   "apple" "aq" ==> true
 
+Using array and indexof instead of map... 
 */
 public class VerifyingAnAlienDictionary {
 

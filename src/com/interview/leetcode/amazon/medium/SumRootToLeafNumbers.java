@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
 /*
- * https://leetcode.com/problems/sum-root-to-leaf-numbers/
- *
- * Similar to PathSumII2.java
+https://leetcode.com/problems/sum-root-to-leaf-numbers/
+
+Similar to PathSumII2.java
 
 ====================================Solution Approach=============================================
 1) Simple Forward Recursion from root to leaf.

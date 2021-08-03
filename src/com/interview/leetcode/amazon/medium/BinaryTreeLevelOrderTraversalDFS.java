@@ -5,12 +5,22 @@ import java.util.List;
 import com.interview.leetcode.TreeNode;
 
 /*
- * https://leetcode.com/problems/binary-tree-level-order-traversal/description/
- *
- * ======================================Solution Approach======================================
- * 
- * DFS is best and faster.
- *
+https://leetcode.com/problems/binary-tree-level-order-traversal/description/
+                                1
+                               / \
+                              2   3
+                             /     \
+                            4       6
+                           /
+                          5     
+
+Output : [1] [2,3] [4,6] [5]                         
+======================================Solution Approach======================================
+1) Record currentNodeValue during pre-order traversal.
+2) In pre-order we go by root,left and right. 
+3) So for the above example.... [1][2][4][5] will be saved.
+4) Then [2,3] [4,6] will be updated.
+
  */
 public class BinaryTreeLevelOrderTraversalDFS {
   public List<List<Integer>> levelOrderDFS(TreeNode root) {

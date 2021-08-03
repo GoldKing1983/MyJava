@@ -7,9 +7,9 @@ import java.util.List;
 /*
 https://leetcode.com/problems/combination-sum/description/
 ====================================================Requirement==================================================================
-Given a set of positive numbers(no negative) (candidates) (without duplicates) and a target number (target),
-find all unique combinations in candidates where the candidate numbers sums to target.
-The same repeated number may be chosen from candidates unlimited number of times.
+1) Given a set of positive numbers(no negative) (candidates) (without duplicates) and a target number (target),
+2) find all unique combinations in candidates where the candidate numbers sums to target.
+3) The same repeated number may be chosen from candidates unlimited number of times.
 
 Note: All numbers (including target) will be positive integers. The solution set must not contain duplicate combinations.
 ====================================================Example1=====================================================================

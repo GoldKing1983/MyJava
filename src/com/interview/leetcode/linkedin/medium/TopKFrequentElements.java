@@ -1,8 +1,12 @@
 package com.interview.leetcode.linkedin.medium;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.TreeMap;
 
 /*
 https://leetcode.com/problems/top-k-frequent-elements/description/
@@ -20,19 +24,45 @@ Step2 can be QuickSelect which beats 100% beats.
 public class TopKFrequentElements {
   public int[] topKFrequent(int[] nums, int k) {
     Map<Integer, Integer> map = new HashMap<>();
-    for (int num : nums) map.put(num, map.getOrDefault(num, 0) + 1);
+    // [1->3][2->2][3->1]
+    for (Integer n : nums) map.put(n, map.getOrDefault(n, 0) + 1);
 
-    // 0thIndex holds Number... 1stIndex holds Count
-    PriorityQueue<int[]> pQ = new PriorityQueue<>((a, b) -> a[1] - b[1]);
+    //return getTopKImplementedUsingTreeMap(map,k);
+    return getTopKImplementedUsingPriorityQueue(map, k);
+  }
+
+  // PriorityQueue n(log(k))
+  private int[] getTopKImplementedUsingPriorityQueue(Map<Integer, Integer> map, int k) {
+    PriorityQueue<int[]> pQ = new PriorityQueue<>((a, b) -> a[0] - b[0]); // minHeap
     for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-      pQ.offer(new int[] {entry.getKey(), entry.getValue()});
-      if (pQ.size() > k) pQ.poll(); // optimization
+      pQ.offer(new int[] {entry.getValue(), entry.getKey()});
+      if (pQ.size() > k) pQ.poll();
     }
 
-    int size = pQ.size();
-    int[] result = new int[size];
-    while (size-- > 0) result[size] = pQ.poll()[0];
+    int[] result = new int[k];
+    int resultIndex = 0;
+    while (!pQ.isEmpty()) {
+      result[resultIndex++] = pQ.poll()[1];
+    }
+    return result;
 
+  }
+
+  // TreeMap n(log(n))
+  private int[] getTopKImplementedUsingTreeMap(Map<Integer, Integer> map, int k) {
+    Map<Integer, List<Integer>> tMap = new TreeMap<>(Collections.reverseOrder());
+    for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+      tMap.computeIfAbsent(entry.getValue(), v -> new ArrayList<>()).add(entry.getKey());
+    }
+
+    int[] result = new int[k];
+    int resultIndex = 0;
+    for (Map.Entry<Integer, List<Integer>> entry : tMap.entrySet()) {
+      for (int v : entry.getValue()) {
+        result[resultIndex++] = v;
+        if (resultIndex == k) return result;
+      }
+    }
     return result;
   }
 }

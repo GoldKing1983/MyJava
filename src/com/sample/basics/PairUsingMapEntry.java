@@ -7,7 +7,7 @@ import java.util.Map;
 Available on Java8. So safe to use in leetcode.
 But do "import java.util.*;"
  */
-public class UseMapAsPair {
+public class PairUsingMapEntry {
   public static void main(String[] args) {
       Map.Entry<Integer, String> entry
               = new AbstractMap.SimpleEntry<>(1, "one");

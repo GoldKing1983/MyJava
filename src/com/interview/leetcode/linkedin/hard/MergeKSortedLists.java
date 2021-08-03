@@ -29,9 +29,16 @@ We don't need to maintain array index to poll "next data" specifically from part
 It is done implicitly because of node data structure "node.next"
 If the node is not having the "next" attribute itself, then solution would be more tricky.
 
-====Solution Approach for Array of Integers(Not for below problem, because below problem is based on Array of connected node)====
-1) The data should be offered as pair<data, row, col> in priority queue
-2) First time fill priority queue with 0th index of pair<data, row, col>  from all array.
+====Solution Approach for matrix of numbers(Not for below problem, because below problem is based on Array of connected node)====
+1) Assume there are 5*6 matrix of sorter numbers where each row is sorted.
+2) Add each rows first data to pQ. The data should be offered as pair<data, row, col> in pQ.
+3) Poll a data pair from queue, which is the least value and 1st result.
+4) from the pair load the next go to the specific row and load next column.
+3) If the row is not fully traversed, offer the next element. Else poll next element from queue.
+====Solution Approach for array of numbers(Not for below problem, because below problem is based on Array of connected node)====
+0) Assume there are 5 of sorted arrays.
+1) The data should be offered as pair<data, arrayId, arrayIndex> in priority queue
+2) First time fill priority queue with 0th index of pair<data, arrayId, arrayIndex>  from all array.
 3) Poll a data pair from queue, which is the least value and 1st result.
 4) from the pair load the next go to the specific row and load next column.
 3) If the array is not empty, offer the next element. Else poll next element from queue.
@@ -41,18 +48,18 @@ O(nlogk).
 */
 public class MergeKSortedLists {
   public ListNode mergeKLists(ListNode[] lists) {
-    Queue<ListNode> q = new PriorityQueue<>((list1, list2) -> list1.val - list2.val);
+    Queue<ListNode> pQ = new PriorityQueue<>((list1, list2) -> list1.val - list2.val);
     ListNode result = new ListNode(0);
     ListNode dummyResult = result;
     for (ListNode list : lists) {
-      if (list != null) q.offer(list);
+      if (list != null) pQ.offer(list);
     }
-    while (!q.isEmpty()) {
-      ListNode list = q.poll();
+    while (!pQ.isEmpty()) {
+      ListNode list = pQ.poll();
       ListNode temp = new ListNode(list.val);
       result.next = temp;
       result = result.next;
-      if (list.next != null) q.offer(list.next);
+      if (list.next != null) pQ.offer(list.next);
     }
     return dummyResult.next;
   }

@@ -34,14 +34,15 @@ public class ReverseLinkedListRecursion {
 
   ListNode cacheLastNode = null;
 
+  // Ex: a->b->c->null
   private void reverse(ListNode head) {
-    if (head.next == null) {
+    if (head.next == null) { // on seeing c.. set c in result and return
       cacheLastNode = head;
       return;
     }
 
-    reverse(head.next);
-    head.next.next = head; // reverse. Link "Child to Parent".
-    head.next = null; // Cut "Parent to Child" Link.
+    reverse(head.next); // current is still b
+    head.next.next = head; // reverse. Link "Child to Parent". Connect c->b
+    head.next = null; // Cut "Parent to Child" Link. b->null
   }
 }

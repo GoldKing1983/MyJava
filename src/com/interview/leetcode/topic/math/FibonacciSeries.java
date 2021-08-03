@@ -5,7 +5,7 @@ import java.util.Map;
 
 /*
 
-https://leetcode.com/problems/fibonacci-number/submissions/
+https://leetcode.com/problems/fibonacci-number/
 
   n  =	0	1	2	3	4	5	6	7	8	9	10	11	12	13	14	...
 f(n) =	0	1	1	2	3	5	8	13	21	34	55	89	144	233	377	...
@@ -21,7 +21,7 @@ public class FibonacciSeries {
     return (fibRecursive(n - 1) + fibRecursive(n - 2));
   }
 
-  //========================================fibMemoization-Map========================================//
+  //========================================fibMemoization-Map - 100.00% faster========================================//
   private Map<Integer, Integer> cache = new HashMap<>();
 
   // Time Complexity is O(n) with memoization
@@ -29,6 +29,18 @@ public class FibonacciSeries {
     if (n <= 1) return n;
     if (cache.containsKey(n)) return cache.get(n);
     Integer result = fibMemoization(n - 1) + fibMemoization(n - 2);
+    cache.put(n, result);
+    return result;
+  }
+
+  //========================================fibMemoization-TreeStyle - 100.00% faster========================================//
+  public int fib(int n) {
+    if (n <= 1) return n;
+    if (cache.containsKey(n)) return cache.get(n);
+    int left = fib(n - 1);
+    int right = fib(n - 2);
+
+    int result = left + right;
     cache.put(n, result);
     return result;
   }

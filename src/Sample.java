@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /*
 com.interview.leetcode.topic.
 
@@ -10,6 +13,7 @@ com.interview.leetcode.topic.
 =========================================================InvalidExample==========================================================
 ========================================================Solution Approach========================================================
 =================================================Solution Approach - Not Optimal=================================================
+======================================================Case By Case Analysis======================================================
 =======================================================Data Flow Analysis========================================================
 ========================================================Logical Thinking=========================================================
 =========================================================Time Complexity=========================================================
@@ -18,37 +22,27 @@ com.interview.leetcode.topic.
 ==========================================================Deep Thinking==========================================================
 =================================================================================================================================
 =========================================================Layman's terms==========================================================
+============================================================Formula==============================================================
  */
 public class Sample {
 
-  public int longestValidParentheses(String s) {
-    if (s.length() == 0) return 0;
-
-    int leftToRightMax = getMax(s);
-    int rightToLeftMax = getMax(new StringBuilder(s).reverse().toString());
-
-    return Math.max(leftToRightMax, rightToLeftMax);
-
-
-
+  public static void main(String[] args) {
+    System.out.println(backTrack(5, new ArrayList<>(), new ArrayList<>()));
   }
 
-  private int getMax(String s) {
-    int sum = 0, max = 0, currMax = 0;
-
-    for (Character c : s.toCharArray()) {
-      if (c == '(') sum++;
-      else sum--;
-
-      if (sum < 0) {
-        sum = 0;
-        currMax = 0;
-      } else {
-        currMax++;
-        if (sum == 0) max = Math.max(max, currMax);// Only when balanced calculate max.
-      }
+  private static List<List<Integer>> backTrack(final int target, final List<List<Integer>> result,
+      final List<Integer> currResult) {
+    if (target == 0) {
+      result.add(new ArrayList<>(currResult));
+      return result;
     }
-
-    return currMax;
+    if (target < 0) return result;
+    for (int i = target; i >= 1; i--) {
+      if(i%2==0) continue;
+      currResult.add(i);
+      backTrack(target - i, result, currResult);
+      currResult.remove(currResult.size() - 1);
+    }
+    return result;
   }
 }

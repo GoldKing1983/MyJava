@@ -13,6 +13,7 @@ condition (current.next != null && current.next.next != null) work.
 
 Ex: 1-> 2-> 3-> 4
 Itereation1: d -> 2-> 1 -> 3 -> 4->null
+
 Itereation2: d -> 2-> 1 -> 4 -> 3->null
 
 */
@@ -23,14 +24,15 @@ class SwapNodesInPairs {
     dummy.next = head;
     ListNode current = dummy;
     while (current.next != null && current.next.next != null) {
-      ListNode nextNode = current.next;
-      ListNode nextNextNode = nextNode.next;
+      ListNode nextNode = current.next; // point 1
+      ListNode nextNextNode = nextNode.next; // point 2
 
-      current.next = nextNextNode;
-      nextNode.next = nextNextNode.next;
-      current.next.next = nextNode;
+      // Standard Swap logic.
+      current.next = nextNextNode; // Connect d -> 2
+      nextNode.next = nextNextNode.next; // Connect 1 -> 3
+      current.next.next = nextNode; // Connect 2 -> 1 
 
-      current = current.next.next;
+      current = current.next.next; // move current to 1
     }
     return dummy.next;
   }

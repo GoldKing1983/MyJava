@@ -21,7 +21,7 @@ package com.sample.datastructure.algorithm.interview;
 1) ValidParenthesisStringBest
 2) RemoveInvalidParentheses
 3) LongestValidParenthesesBest
-
+4) MinimumAddToMakeParenthesesValidBest
 
 ================Hashing the String - charToInt - intToChar================
 1) GroupShiftedStrings

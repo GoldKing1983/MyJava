@@ -1,7 +1,22 @@
 package com.interview.leetcode.topic.recursion;
 
 /*
- * https://leetcode.com/problems/edit-distance/description/
+https://leetcode.com/problems/edit-distance/description/
+===========================================================Requirement===========================================================
+Given two words word1 and word2, find the minimum number of operations required to convert word1 to word2.
+
+You have the following 3 operations permitted on a word:
+
+Insert a character
+Delete a character
+Replace a character
+
+Input: word1 = "horse", word2 = "ros"
+Output: 3
+Explanation:
+horse -> rorse (replace 'h' with 'r')
+rorse -> rose (remove 'r')
+rose -> ros (remove 'e')
 ====================================Solution Approach - Exponential O(3^m+n)===========================================================
 1) A basic brute-force solution could be to try all operations (one by one) on each character of s1.
 2) We can iterate through s1 and s2 together.

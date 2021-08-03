@@ -20,7 +20,7 @@ Output: 0
 Explanation: There is no such common subsequence, so the result is 0.
 =============================================Initial Thinking====================================================================
 Similar to "GroupSum6" and not "GroupSum".
- 		i.e GroupSum ==> Go in 2path(left&right) vs GroupSum ==> Go in 1path If 6 Else Go in 2path(left&right)
+ 		i.e GroupSum ==> Go in 2path(left&right) vs GroupSum6 ==> Go in 1path If 6 Else Go in 2path(left&right)
 ==========================================Solution Approach Dp - O(n^2)=================================================
 See Also LongestPalindromicSubsequenceRecursion
 
@@ -28,21 +28,22 @@ See Also LongestPalindromicSubsequenceRecursion
 2) If both matches. increment both index. Add +1. recurse.
 3) Else left = increment inputIndex recur, right = increment patternIndex recur. return Math.max(left, right);
 =========================================================================================================================
-"algorithm"
-"altruistic"
-output: 5
+"alalg"
+"alg"
+Important Note: Here output is formed by index0,1,4 and not by index2,3,4
+output: 3
 */
 public class LongestCommonSubsequenceRecursionMemo {
 
   public int longestCommonSubsequence(String input, String pattern) {
 
     int inputLength = input.length(), patternLength = pattern.length();
-    return longestCommonSubsequence(
-        input.toCharArray(), pattern.toCharArray(), 0, 0, new Integer[inputLength][patternLength]);
+    return longestCommonSubsequence(input.toCharArray(), pattern.toCharArray(), 0, 0,
+        new Integer[inputLength][patternLength]);
   }
 
-  public static int longestCommonSubsequence(
-      char[] input, char[] pattern, int inputIndex, int patternIndex, Integer[][] dp) {
+  public static int longestCommonSubsequence(char[] input, char[] pattern, int inputIndex,
+      int patternIndex, Integer[][] dp) {
     if (inputIndex == input.length || patternIndex == pattern.length) return 0;
     if (dp[inputIndex][patternIndex] != null) return dp[inputIndex][patternIndex];
     if (input[inputIndex] == pattern[patternIndex])

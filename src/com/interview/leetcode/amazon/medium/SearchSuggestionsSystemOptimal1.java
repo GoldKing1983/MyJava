@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeSet;
 
 /*
-* https://leetcode.com/problems/search-suggestions-system/
+https://leetcode.com/problems/search-suggestions-system/
 
 Requirement: For the given list of "products", find top3 products in lexicographical order that matches the "searchWord"s
 each character's like auto-complete or auto-suggest.

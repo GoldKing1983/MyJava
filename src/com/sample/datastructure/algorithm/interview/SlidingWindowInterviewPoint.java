@@ -21,7 +21,7 @@ SlidingWindowMaximumOptimum
 ==== Others====
 1) MaxConsecutiveOnesIIISlidingWindow
 2) MaximumWidthRampBest
-
+3) ShortestWayToFormStringSlidingWindow
 
 ==== Straight Forward Sliding Window====
 MinimumSizeSubarraySumSlidingWindow

@@ -23,11 +23,11 @@ Output: 262
        ====
 ===================================================Data Flow Analysis==============================================================
 Top-To-Bottom - gather the whole number
-											   1(1)
-										     /   \
-										(12)2     3(13)
-										   / \
-									 (124)4   5(125)
+                                           0*10 + 1 = 1
+                                            //      \\
+                                        1*10+2=12   1*10+13=13
+                                         //      \\
+                                    12*10+4=124  12*10+5=125
 
 Bottom-To-Top - traverse back the sum 
 											   1(262)
@@ -58,7 +58,7 @@ public class SumRootToLeafNumbersBottomUp {
 
   private int recur(TreeNode root, int currentNumber) {
     if (root == null) return 0;
-    
+
     currentNumber = currentNumber * 10 + root.val;
 
     if (root.left == null && root.right == null) return currentNumber;
