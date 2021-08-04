@@ -1,5 +1,7 @@
 package com.interview.leetcode.google.hard;
 
+import com.interview.leetcode.topic.array.LargestRectangleInHistogramStackApproach;
+
 /*
  * https://leetcode.com/problems/maximal-rectangle/
 https://www.youtube.com/watch?v=g8bSdXCG-lA&t=203s

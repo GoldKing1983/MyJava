@@ -19,7 +19,8 @@ sort has to be like ==> Arrays.sort(points, (a, b) -> Integer.compare(a[0], b[0]
 Assume Integer.MIN_VALUE=-5 and Integer.MAX_VALUE=5
 Ex: [[-5,-4],[5,6]]... a[0]-b[0]... -5-(5)=-10.... We can see clear overflow, and sorting is unexpected
 So don't use a-b to compare when sorting. Use Integer.compare(a,b) instead!!!
-==============================================================================================================
+=========================================Tricky Sorting in PriorityQueue===============================================================
+See TopKFrequentElements --> getTopKImplementedUsingPriorityQueueOptimized method
                                                      
  */
 public class CodingInterviewPart {

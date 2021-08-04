@@ -44,9 +44,9 @@ If the node is not having the "next" attribute itself, then solution would be mo
 3) If the array is not empty, offer the next element. Else poll next element from queue.
 
 
-O(nlogk).
+Time Complexity: O(n(log(k))) n is allElementsSize, k is listsSize
 */
-public class MergeKSortedLists {
+public class MergeKSortedListsApproach1MergeVertically {
   public ListNode mergeKLists(ListNode[] lists) {
     Queue<ListNode> pQ = new PriorityQueue<>((list1, list2) -> list1.val - list2.val);
     ListNode result = new ListNode(0);
@@ -56,7 +56,7 @@ public class MergeKSortedLists {
     }
     while (!pQ.isEmpty()) {
       ListNode list = pQ.poll();
-      ListNode temp = new ListNode(list.val);
+      ListNode temp = new ListNode(list.val); // Clone the data instead of changing source... 
       result.next = temp;
       result = result.next;
       if (list.next != null) pQ.offer(list.next);

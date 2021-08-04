@@ -45,7 +45,23 @@ public class TopKFrequentElements {
       result[resultIndex++] = pQ.poll()[1];
     }
     return result;
+  }
 
+  // PriorityQueue n(log(k))
+  private int[] getTopKImplementedUsingPriorityQueueOptimized(Map<Integer, Integer> map, int k) {
+    // Important : When I place the key, get value(count) from map and sort. 
+    PriorityQueue<Integer> pQ = new PriorityQueue<>((a, b) -> map.get(a) - map.get(b)); // minHeap
+    for (Integer key : map.keySet()) {
+      pQ.offer(key);
+      if (pQ.size() > k) pQ.poll();
+    }
+
+    int[] result = new int[k];
+    int resultIndex = 0;
+    while (!pQ.isEmpty()) {
+      result[resultIndex++] = pQ.poll();
+    }
+    return result;
   }
 
   // TreeMap n(log(n))

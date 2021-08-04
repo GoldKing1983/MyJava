@@ -11,31 +11,29 @@ https://leetcode.com/problems/reverse-string/
 public class ReverseStringRecursion {
 
   public void reverseString(char[] s) {
-    recur(s, 0, s.length - 1);
+    recurPreOrder(s, 0, s.length - 1);
   }
 
-  public void recur(char[] str, int startIndex, int endIndex) {
+  public void recurPreOrder(char[] str, int startIndex, int endIndex) {
     if (startIndex >= endIndex) return;
-
-    // recur(str, startIndex + 1, endIndex - 1); Pre-Order or PostOrder both will work
 
     char temp = str[startIndex];
     str[startIndex] = str[endIndex];
     str[endIndex] = temp;
 
-    recur(str, startIndex + 1, endIndex - 1); // recur can be below or above swap. Both works.
+    recurPreOrder(str, startIndex + 1, endIndex - 1); // recur can be below or above swap. Both works.
   }
 
 
 
-  private void recurPostOder(char[] s, int start, int end) {
-    if (start < end) {
-      
-      recur(s, start + 1, end - 1);
-      
-      char temp = s[start];
-      s[start] = s[end];
-      s[end] = temp;
-    }
+  private void recurPostOder(char[] s, int startIndex, int endIndex) {
+    if (startIndex >= endIndex) return;
+
+    recurPostOder(s, startIndex + 1, endIndex - 1);
+
+    char temp = s[startIndex];
+    s[startIndex] = s[endIndex];
+    s[endIndex] = temp;
+
   }
 }

@@ -50,7 +50,7 @@ Because it will increase the size of index[0] and will consume more space/time.
 See MergeKSortedListsRecursionWrongWay.java
 =================================================================================================================================
  */
-public class MergeKSortedListsRecursion {
+public class MergeKSortedListsApproach2MergeHorizontally {
   MergeTwoSortedListsInPlace m = new MergeTwoSortedListsInPlace();
 
   public ListNode mergeKLists(ListNode[] lists) {

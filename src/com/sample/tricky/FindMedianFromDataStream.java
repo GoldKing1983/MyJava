@@ -13,18 +13,23 @@ What is Median?
 3) If the input size is even, we pick two elements in middle and average the 2 numbers.
 ============================================================Solution Approach =============================================
 1) Save the data like "n" shape in to queue. Ex: below
-					3
+
+					3        ---> this goes to lowToHigh
  				2      4
  				1      5
+ 		 highToLow	 lowToHigh
+ 		 
 2) Insert data into both queue equally, starting from lowToHigh.
 3) If highToLow top is bigger than lowToHigh top, then swap them.
 Ex: 10,20,30
 
-		Push1:		lowToHigh=[10] 		highToLow=[]
-		Push2:		lowToHigh=[10] 		highToLow[20]
-		Push3:		lowToHigh=[10,30] 		highToLow[20]
-		Now we need swap like below.
-					lowToHigh=[10,20] 		highToLow[30]
+		Offer10:		lowToHigh=[10] 		    highToLow=[]
+		
+		Offer20:		lowToHigh=[10] 		    highToLow[20]
+		
+		Offer30:		lowToHigh=[10,30] 		highToLow[20]
+		Now swap lowToHigh and highToLow "topValue"
+					    lowToHigh=[10,20] 		highToLow[30]
 ================
 Note: To return float. do the type casting or divide the number by 2.0
 */

@@ -1,9 +1,5 @@
 package com.sample.tricky;
 
-import java.util.Collections;
-import java.util.PriorityQueue;
-import java.util.Queue;
-
 /*
 https://leetcode.com/problems/find-median-from-data-stream/description/
 ===========================================================Requirement===========================================================
